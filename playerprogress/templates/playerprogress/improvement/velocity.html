@@ -1,0 +1,56 @@
+{% extends 'base_leaderboard.html' %}
+
+{% block title %}
+	Velocity Improvement Leaderboards - Hempfield Baseball
+{% endblock %}
+
+{% block leaderboards %}
+	
+	{% for velocity_name, top_improvements in velocity_improvement_leader_data.items %}
+		{% if top_improvements %}
+			<br>
+
+			<div class="container">
+				<h2 class="display-4 text-center">{{ velocity_name }} Velocity</h2>
+		   		<table class="table table-striped table-bordered shadow">
+		      		<thead class="thead-dark">
+		   				<tr class="text-center">
+		  					<th>Player</th>
+		      				<th>Improvement</th>
+		      				<th>Period</th>
+		      			</tr>
+		   			</thead>
+		   			<tbody>
+						{% for improvement in top_improvements %}
+							<tr class="text-center">
+								<td class="align-middle">
+									<h5>
+										<a href="/roster/{{improvement.player.player_link}}" class="text-danger">
+											{{ improvement.player.full_name }}
+										</a>
+									</h5>
+								</td>
+								<td class="align-middle text-success">
+									{{ improvement.improvement }} mph
+									<small class="text-muted d-block">
+										{{ improvement.baseline.velocity }} mph
+										-
+										{{ improvement.latest.velocity }} mph
+									</small>
+								</td>
+								<td class="align-middle">
+									{{ improvement.baseline.date }}
+									-
+									{{ improvement.latest.date }}
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+
+			<br>
+		{% endif %}
+	{% endfor %}
+
+{% endblock %}

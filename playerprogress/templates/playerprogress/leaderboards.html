@@ -1,0 +1,178 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+	Performance Leaderboards - Hempfield Baseball
+{% endblock %}
+
+{% block stylesheet %}
+<style>
+	.category-header {
+		text-shadow: 1px 1px 2px #222629;
+	}
+</style>
+{% endblock %}
+
+{% block content %}
+
+	{% if lift_data_exists %}
+		<div class="container text-center mt-5">
+
+			<hr>
+			<h2 class="category-header display-4">Lifting</h2>
+			<div class="row">
+				<div class="col-md mb-5">
+					<div class="card shadow border border-dark">
+					  <img class="card-img-top" src="{% static 'img/lifting-card-img-1.jpeg' %}" alt="Card image cap">
+					  <div class="card-body">
+					    <h3 class="card-title">Performance</h3>
+					    <a href="/performance/leaderboards/lifting" class="btn btn-danger shadow">
+					    	View Leaderboards
+					    </a>
+					  </div>
+					</div>
+				</div>
+
+				<div class="col-md mb-5">
+					<div class="card shadow border border-dark">
+					  <img class="card-img-top" src="{% static 'img/lifting-card-img-2.jpeg' %}" alt="Card image cap">
+					  <div class="card-body">
+					    <h3 class="card-title">Improvement</h3>
+					    <a href="/improvement/leaderboards/lifting" class="btn btn-danger shadow">
+					    	View Leaderboards
+					    </a>
+					  </div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	{% endif %}
+
+	{% if velocity_data_exists %}
+		<div class="container text-center mt-4">
+			
+			<hr>
+			<h2 class="category-header display-4">Velocity</h2>
+			<div class="row">
+				<div class="col-md mb-5">
+					<div class="card shadow border border-dark">
+					  <img class="card-img-top" src="{% static 'img/velocity-card-img-1.jpeg' %}" alt="Card image cap">
+					  <div class="card-body">
+					    <h3 class="card-title">Performance</h3>
+					    <a href="/performance/leaderboards/velocity" class="btn btn-danger">
+					    	View Leaderboards
+					    </a>
+					  </div>
+					</div>
+				</div>
+
+				<div class="col-md mb-5">
+					<div class="card shadow border border-dark">
+					  <img class="card-img-top" src="{% static 'img/velocity-card-img-2.jpeg' %}" alt="Card image cap">
+					  <div class="card-body">
+					    <h3 class="card-title">Improvement</h3>
+					    <a href="/improvement/leaderboards/velocity" class="btn btn-danger">
+					    	View Leaderboards
+					    </a>
+					  </div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	{% endif %}
+
+	{% if time_data_exists %}
+		<div class="container text-center mt-4">
+			
+			<hr>
+			<h2 class="category-header display-4">Time</h2>
+			<div class="row">
+				<div class="col-md mb-5">
+					<div class="card shadow border border-dark">
+					  <img class="card-img-top" src="{% static 'img/time-card-img-1.jpeg' %}" alt="Card image cap">
+					  <div class="card-body">
+					    <h3 class="card-title">Performance</h3>
+					    <a href="/performance/leaderboards/time" class="btn btn-danger">
+					    	View Leaderboards
+					    </a>
+					  </div>
+					</div>
+				</div>
+
+				<div class="col-md mb-5">
+					<div class="card shadow border border-dark">
+					  <img class="card-img-top" src="{% static 'img/time-card-img-2.jpeg' %}" alt="Card image cap">
+					  <div class="card-body">
+					    <h3 class="card-title">Improvement</h3>
+					    <a href="/improvement/leaderboards/time" class="btn btn-danger">
+					    	View Leaderboards
+					    </a>
+					  </div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	{% endif %}
+
+	{% if distance_data_exists %}
+		<div class="container text-center mt-4">
+			
+			<hr>
+			<h2 class="category-header display-4">Distance</h2>
+			<div class="row">
+				<div class="col-md mb-5">
+					<div class="card shadow border border-dark">
+					  <img class="card-img-top" src="{% static 'img/distance-card-img-1.jpeg' %}" alt="Card image cap">
+					  <div class="card-body">
+					    <h3 class="card-title">Performance</h3>
+					    <a href="/performance/leaderboards/distance" class="btn btn-danger">
+					    	View Leaderboards
+					    </a>
+					  </div>
+					</div>
+				</div>
+
+				<div class="col-md mb-5">
+					<div class="card shadow border border-dark">
+					  <img class="card-img-top" src="{% static 'img/distance-card-img-2.jpeg' %}" alt="Card image cap">
+					  <div class="card-body">
+					    <h3 class="card-title">Improvement</h3>
+					    <a href="/improvement/leaderboards/distance" class="btn btn-danger">
+					    	View Leaderboards
+					    </a>
+					  </div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	{% endif %}
+
+	{% if distance_data_exists %}
+		<div class="container text-center mt-4">
+			
+			<hr>
+			<h2 class="category-header display-4">Misc.</h2>
+			<div class="row">
+				<div class="col-md-3"></div>
+				<div class="col-md-6 mb-5">
+					<div class="card shadow border border-dark">
+					  <img class="card-img-top" src="{% static 'img/bodyweight-card-img.jpeg' %}" alt="Card image cap">
+					  <div class="card-body">
+					    <h3 class="card-title">Improvement</h3>
+					    <a href="/improvement/leaderboards/misc" class="btn btn-danger">
+					    	View Leaderboards
+					    </a>
+					  </div>
+					</div>
+				</div>
+				<div class="col-md-3"></div>
+			</div>
+
+		</div>
+	{% endif %}
+
+{% endblock %}

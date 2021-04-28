@@ -1,0 +1,601 @@
+{% extends 'base.html' %}
+{% load playerprogress_extras %}
+
+{% block title %}
+	{{ player.info.full_name }} - Hempfield Baseball
+{% endblock %}
+
+{% block stylesheet %}
+<style>
+	.nav-tabs > li > a.active, .nav-tabs > li > a.active:hover, .nav-tabs > li > a.active:focus {
+    	color: #fff !important;
+    	background-color: #111 !important;
+	}
+
+	.nav-tabs > li > a {
+    	color: red !important;
+	}
+
+	.nav-tabs > li > a:hover {
+    	color: #222 !important;
+	}
+
+	.card-header > .btn-link:hover, .card-header > .btn-link:active, .card-header > .btn-link:focus {
+    	text-decoration: none !important;
+	}
+
+</style>
+{% endblock %}
+
+{% block content %}
+	<br>
+
+	<div class="container mt-3">
+		<div class="row">
+			<div class="col-sm-4 text-center mb-3">
+				{% if player.roster_photo %}
+                      <img src="{{ player.roster_photo.url }}" width="175px" class="rounded border border-dark">
+                {% endif %}
+			</div>
+
+			<div class="col-sm-8">
+				<h1>
+					{{ player.number }}
+					{{ player.info.full_name|upper }}
+				</h1>
+
+				<hr>
+
+				<div class="row">
+					<div class="col-sm-6">
+						<p>
+							<b>CLASS:</b> {{ player.info.graduation_year }} ({{ player.info.class_standing }})
+						</p>
+						<hr>
+						<p>
+							<b>POSITION:</b> {{ player.position }}
+						</p>
+						<hr>
+						<p>
+							<b>BATS/THROWS:</b> {{ player.info.bats }}/{{ player.info.throws }}
+						</p>
+						<hr>
+					</div>
+					<div class="col-sm-6">
+						<p>
+							<b>HEIGHT:</b> {{ player.height }}
+						</p>
+						<hr>
+							<p>
+								<b>WEIGHT:</b> {{ player.weight }} lbs
+							</p>
+							<hr>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<br>
+
+	{% if has_data %}
+		<div class="text-center text-dark">
+			<h2 class>Player Progress</h2>
+		</div>
+	{% endif %}
+
+
+	<div class="container" id="accordion">
+		{% for lift_name, lifts in lift_data.items %}
+			{% if lifts %}
+				<div class="card">
+
+					<div class="card-header text-center" id="{{ lift_name|id_format }}Heading">
+							<button id="{{ lift_name|id_format }}Button" class="btn btn-link collapsed text-danger" data-toggle="collapse" data-target="#{{ lift_name|id_format }}Content" aria-expanded="true" aria-controls="{{ lift_name|id_format }}Content">
+								<h3>
+									<span>
+										{{ lift_name }}
+									</span>
+									<span>
+								    	<i class="text-dark fa fa-plus-square"></i>
+								    </span>
+								</h3>
+							</button>
+					</div>
+
+					
+					<div id="{{ lift_name|id_format }}Content" class="collapse" aria-labelledby="{{ lift_name|id_format }}Heading" data-parent="#accordion">
+						<div class="card-body">
+
+							<ul class="nav nav-tabs justify-content-center" id="{{ lift_name|id_format }}-tab" role="tablist">
+  								
+  								<li class="nav-item" role="presentation">
+    								<a class="nav-link active" id="{{ lift_name|id_format }}-chart-tab" data-toggle="tab" href="#{{ lift_name|id_format }}-chart" role="tab" aria-controls="{{ lift_name|id_format }}-chart" aria-selected="true">Graph</a>
+  								</li>
+
+  								<li class="nav-item" role="presentation">
+    								<a class="nav-link" id="{{ lift_name|id_format }}-table-tab" data-toggle="tab" href="#{{ lift_name|id_format }}-table" role="tab" aria-controls="{{ lift_name|id_format }}-table" aria-selected="false">Table</a>
+  								</li>
+
+							</ul>
+
+							<br>
+
+							<div class="tab-content" id="{{ lift_name|id_format }}-tabContent">
+
+								<div class="tab-pane fade show active" id="{{ lift_name|id_format }}-chart" style="height: 50vh; width: 100%" role="tabpanel" aria-labelledby="{{ lift_name|id_format }}-chart-tab">
+									<canvas id="{{ lift_name|id_format }}Chart"></canvas>
+								</div>
+
+								 <div class="container tab-pane fade" id="{{ lift_name|id_format }}-table" role="tabpanel" aria-labelledby="{{ lift_name|id_format }}-table-tab">
+								  	<table class="table table-striped table-bordered">
+										<thead class="thead-dark">
+											<tr class="text-center">
+												<th>Date</th>
+												<th>Lift Sets</th>
+												<th>Strength Points</th>
+											</tr>
+										</thead>
+										<tbody>
+											{% for lift in lifts %}
+												<tr class="text-center">
+													<td class="align-middle">
+														{{ lift.date }}
+													</td>
+													<td class="align-middle">
+														{{ lift.sets }}
+													</td>
+													<td class="align-middle">
+														{{ lift.strength_points }} SP
+													</td>
+												</tr>
+											{% endfor %}
+											<tr class="text-success text-center">
+												<td>
+													<b>Improvement:</b>
+												</td>
+												<td></td>
+												<td>
+													<b>{{ lifts.last.strength_points|subtract:lifts.first.strength_points }} SP</b>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+
+							</div>	
+						</div>
+					</div>
+				</div>
+			{% endif %}
+		{% endfor %}
+
+
+		{% for velocity_name, velocities in velocity_data.items %}
+			{% if velocities %}
+				<div class="card">
+
+					<div class="card-header text-center" id="{{ velocity_name|id_format }}Heading">
+							<button class="btn btn-link collapsed text-danger" data-toggle="collapse" data-target="#{{ velocity_name|id_format }}Content" aria-expanded="true" aria-controls="{{ velocity_name|id_format }}Content">
+								<h3>
+									<span>
+										{{ velocity_name }} Velocity
+									</span>
+									<span>
+								    	<i class="text-dark fa fa-plus-square"></i>
+								    </span>
+								</h3>
+							</button>
+					</div>
+
+					
+					<div id="{{ velocity_name|id_format }}Content" class="collapse" aria-labelledby="{{ velocity_name|id_format }}Heading" data-parent="#accordion">
+						<div class="card-body">
+
+							<ul class="nav nav-tabs justify-content-center" id="{{ velocity_name|id_format }}-tab" role="tablist">
+  								
+  								<li class="nav-item" role="presentation">
+    								<a class="nav-link active" id="{{ velocity_name|id_format }}-chart-tab" data-toggle="tab" href="#{{ velocity_name|id_format }}-chart" role="tab" aria-controls="{{ velocity_name|id_format }}-chart" aria-selected="true">Graph</a>
+  								</li>
+
+  								<li class="nav-item" role="presentation">
+    								<a class="nav-link" id="{{ velocity_name|id_format }}-table-tab" data-toggle="tab" href="#{{ velocity_name|id_format }}-table" role="tab" aria-controls="{{ velocity_name|id_format }}-table" aria-selected="false">Table</a>
+  								</li>
+
+							</ul>
+
+							<br>
+
+							<div class="tab-content" id="{{ velocity_name|id_format }}-tabContent">
+
+								<div class="container tab-pane fade show active" id="{{ velocity_name|id_format }}-chart" style="height: 50vh; width: 100%" role="tabpanel" aria-labelledby="{{ velocity_name|id_format }}-chart-tab">
+									<canvas id="{{ velocity_name|id_format }}Chart"></canvas>
+								 </div>
+
+								 <div class="container tab-pane fade" id="{{ velocity_name|id_format }}-table" role="tabpanel" aria-labelledby="{{ velocity_name|id_format }}-table-tab">
+								  	<table class="table table-striped table-bordered">
+										<thead class="thead-dark">
+											<tr class="text-center">
+												<th>Date</th>
+												<th>Velocity</th>
+											</tr>
+										</thead>
+										<tbody>
+											{% for velocity in velocities %}
+												<tr class="text-center">
+													<td class="align-middle">
+														{{ velocity.date }}
+													</td>
+													<td class="align-middle">
+														{{ velocity.velocity }} mph
+													</td>
+												</tr>
+											{% endfor %}
+											<tr class="text-success text-center">
+												<td>
+													<b>Improvement:</b>
+												</td>
+												<td>
+													<b>{{ velocities.last.velocity|subtract:velocities.first.velocity }} mph</b>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>	
+						</div>
+					</div>
+				</div>
+			{% endif %}
+		{% endfor %}
+
+
+		{% for time_name, times in time_data.items %}
+			{% if times %}
+				<div class="card">
+
+					<div class="card-header text-center" id="{{ time_name|time_id_format }}Heading">
+							<button class="btn btn-link collapsed text-danger" data-toggle="collapse" data-target="#{{ time_name|time_id_format }}Content" aria-expanded="true" aria-controls="{{ time_name|time_id_format }}Content">
+								<h3>
+									{{ time_name }} Time
+									<span>
+								    	<i class="text-dark fa fa-plus-square"></i>
+								    </span>
+								</h3>
+							</button>
+					</div>
+
+					
+					<div id="{{ time_name|time_id_format }}Content" class="collapse" aria-labelledby="{{ time_name|time_id_format }}Heading" data-parent="#accordion">
+						<div class="card-body">
+
+							<ul class="nav nav-tabs justify-content-center" id="{{ time_name|time_id_format }}-tab" role="tablist">
+  								
+  								<!--li class="nav-item" role="presentation">
+    								<a class="nav-link active" id="{{ time_name|id_format }}-chart-tab" data-toggle="tab" href="#{{ time_name|id_format }}-chart" role="tab" aria-controls="{{ time_name|id_format }}-chart" aria-selected="true">Graph</a>
+  								</li-->
+
+  								<li class="nav-item" role="presentation">
+    								<a class="nav-link active" id="{{ time_name|time_id_format }}-table-tab" data-toggle="tab" href="#{{ time_name|time_id_format }}-table" role="tab" aria-controls="{{ time_name|time_id_format }}-table" aria-selected="true">Table</a>
+  								</li>
+
+							</ul>
+
+							<br>
+
+							<div class="tab-content" id="{{ time_name|time_id_format }}-tabContent">
+
+								<!--div class="container tab-pane fade show active" id="{{ time_name|id_format }}-chart" role="tabpanel" aria-labelledby="{{ time_name|id_format }}-chart-tab">
+									<canvas id="{{ time_name|id_format }}Chart" width="50%"></canvas>
+								 </div-->
+
+								 <div class="container tab-pane fade show active" id="{{ time_name|time_id_format }}-table" role="tabpanel" aria-labelledby="{{ time_name|time_id_format }}-table-tab">
+								  	<table class="table table-striped table-bordered">
+										<thead class="thead-dark">
+											<tr class="text-center">
+												<th>Date</th>
+												<th>Time</th>
+											</tr>
+										</thead>
+										<tbody>
+											{% for time in times %}
+												<tr class="text-center">
+													<td class="align-middle">
+														{{ time.date }}
+													</td>
+													<td class="align-middle">
+														{{ time.formatted_time }} 
+													</td>
+												</tr>
+											{% endfor %}
+											<!--tr class="text-success text-center">
+												<td>
+													<b>Improvement:</b>
+												</td>
+												<td>
+													<b></b>
+												</td>
+											</tr-->
+										</tbody>
+									</table>
+								</div>
+							</div>	
+						</div>
+					</div>
+				</div>
+			{% endif %}
+		{% endfor %}
+
+
+		{% for distance_name, distances in distance_data.items %}
+			{% if distances %}
+				<div class="card">
+
+					<div class="card-header text-center" id="{{ distance_name|id_format }}Heading">
+							<button class="btn btn-link collapsed text-danger" data-toggle="collapse" data-target="#{{ distance_name|id_format }}Content" aria-expanded="true" aria-controls="{{ distance_name|id_format }}Content">
+								<h3>
+									{{ distance_name }}
+									<span>
+								    	<i class="text-dark fa fa-plus-square"></i>
+								    </span>
+								</h3>
+							</button>
+					</div>
+
+					
+					<div id="{{ distance_name|id_format }}Content" class="collapse" aria-labelledby="{{ distance_name|id_format }}Heading" data-parent="#accordion">
+						<div class="card-body">
+
+							<ul class="nav nav-tabs justify-content-center" id="{{ distance_name|id_format }}-tab" role="tablist">
+  								
+  								<li class="nav-item" role="presentation">
+    								<a class="nav-link active" id="{{ distance_name|id_format }}-chart-tab" data-toggle="tab" href="#{{ distance_name|id_format }}-chart" role="tab" aria-controls="{{ distance_name|id_format }}-chart" aria-selected="true">Graph</a>
+  								</li>
+
+  								<li class="nav-item" role="presentation">
+    								<a class="nav-link" id="{{ distance_name|id_format }}-table-tab" data-toggle="tab" href="#{{ distance_name|id_format }}-table" role="tab" aria-controls="{{ distance_name|id_format }}-table" aria-selected="false">Table</a>
+  								</li>
+
+							</ul>
+
+							<br>
+
+							<div class="tab-content" id="{{ distance_name|id_format }}-tabContent">
+
+								<div class="container tab-pane fade show active" id="{{ distance_name|id_format }}-chart" style="height: 50vh; width: 100%" role="tabpanel" aria-labelledby="{{ distance_name|id_format }}-chart-tab">
+									<canvas id="{{ distance_name|id_format }}Chart"></canvas>
+								 </div>
+
+								 <div class="container tab-pane fade" id="{{ distance_name|id_format }}-table" role="tabpanel" aria-labelledby="{{ distance_name|id_format }}-table-tab">
+								  	<table class="table table-striped table-bordered">
+										<thead class="thead-dark">
+											<tr class="text-center">
+												<th>Date</th>
+												<th>Distance</th>
+											</tr>
+										</thead>
+										<tbody>
+											{% for distance in distances %}
+												<tr class="text-center">
+													<td class="align-middle">
+														{{ distance.date }}
+													</td>
+													<td class="align-middle">
+														{{ distance.distance }} ft
+													</td>
+												</tr>
+											{% endfor %}
+											<tr class="text-success text-center">
+												<td>
+													<b>Improvement:</b>
+												</td>
+												<td>
+													<b>{{ distances.last.distance|subtract:distances.first.distance }} ft</b>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>	
+						</div>
+					</div>
+				</div>
+			{% endif %}
+		{% endfor %}
+
+
+	{% if body_weights %}
+			<div class="card">
+
+				<div class="card-header text-center" id="bodyweightHeading">
+						<button class="btn btn-link collapsed text-danger" data-toggle="collapse" data-target="#bodyweightContent" aria-expanded="true" aria-controls="bodyweightContent">
+							<h3>
+								Body Weight
+								<span>
+								    <i class="text-dark fa fa-plus-square"></i>
+								</span>
+							</h3>
+						</button>
+				</div>
+
+				
+				<div id="bodyweightContent" class="collapse" aria-labelledby="bodyweightHeading" data-parent="#accordion">
+					<div class="card-body">
+
+						<ul class="nav nav-tabs justify-content-center" id="bodyweight-tab" role="tablist">
+								
+								<li class="nav-item" role="presentation">
+									<a class="nav-link active" id="bodyweight-chart-tab" data-toggle="tab" href="#bodyweight-chart" role="tab" aria-controls="bodyweight-chart" aria-selected="true">Graph</a>
+								</li>
+
+								<li class="nav-item" role="presentation">
+									<a class="nav-link" id="bodyweight-table-tab" data-toggle="tab" href="#bodyweight-table" role="tab" aria-controls="bodyweight-table" aria-selected="false">Table</a>
+								</li>
+
+						</ul>
+
+						<br>
+
+						<div class="tab-content" id="bodyweight-tabContent">
+
+							<div class="container tab-pane fade show active" id="bodyweight-chart" style="height: 50vh; width: 100%" role="tabpanel" aria-labelledby="bodyweight-chart-tab">
+								<canvas id="bodyweightChart"></canvas>
+							 </div>
+
+							 <div class="container tab-pane fade" id="bodyweight-table" role="tabpanel" aria-labelledby="bodyweight-table-tab">
+							  	<table class="table table-striped table-bordered">
+									<thead class="thead-dark">
+										<tr class="text-center">
+											<th>Date</th>
+											<th>Body Weight</th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for body_weight in body_weights %}
+											<tr class="text-center">
+												<td class="align-middle">
+													{{ body_weight.date }}
+												</td>
+												<td class="align-middle">
+													{{ body_weight.weight }} lbs
+												</td>
+											</tr>
+										{% endfor %}
+										<tr class="text-success text-center">
+											<td>
+												<b>Improvement:</b>
+											</td>
+											<td>
+												<b>{{ body_weights.last.weight|subtract:body_weights.first.weight }} lbs</b>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>	
+					</div>
+				</div>
+			</div>
+		{% endif %}
+
+	</div>
+
+{% endblock %}
+
+
+
+{% block javascript %}
+<script>
+	async function getDataAndDates(metricName, dataType)
+	{
+		let result;
+
+		try {
+			result = await $.ajax({
+				url: "{% url 'get_player_data_and_dates' %}",
+				type: 'GET',
+		        data: {
+		          'data_type': dataType,
+		          'player_id': "{{ player.info.player_id }}",
+		          'metric_name': metricName
+		        },
+		        dataType: 'json',
+			});
+
+			return result;
+		} catch (error) {
+			console.error(error);
+		}
+	}
+
+	async function generateChart(chartId, metricName, dataType, label)
+	{
+		if ($("#".concat(chartId).concat("Chart")).length)
+		{
+			const ajaxResponse = await getDataAndDates(metricName, dataType);
+
+			const dates = ajaxResponse.dates;
+			const data = ajaxResponse.data;
+
+			var line_chart_options = {
+				maintainAspectRatio: false,
+	      		scales: {
+	        		x: {
+	        			type: 'time',
+	        			distribution: 'linear',
+	        			time: {
+	        				parser: 'MM/DD/YYYY',
+	        				unit: 'month'
+	        			},
+	        			bounds: 'labels'
+	          		},
+	          		yAxes: [{
+	          			scaleLabel: {
+	          				display: true,
+	          				labelString: label
+	          			}
+	          		}]
+	      		},
+	      		legend: {
+	      			display: false
+	      		}
+	    	}
+	    	var line_chart_data = {
+				labels: dates,
+				datasets: [
+					{
+						label: label,
+						backgroundColor: 'transparent',
+						borderColor: 'rgb(199, 44, 58)',
+						borderWidth: 2,
+						pointBackgroundColor: 'rgb(199, 44, 58)',
+						data: data,
+						fill: false,
+						lineTension: 0
+					}
+				]
+			}
+
+			var ctx = document.getElementById(chartId.concat("Chart")).getContext('2d');
+			var chart = new Chart(ctx, {
+						type: 'line',
+						data: line_chart_data,
+						options: line_chart_options
+					});
+		}
+	}
+
+	{% for lift_name in lift_data %}
+		generateChart("{{ lift_name|id_format }}", "{{lift_name}}", "lift", "Strength Points");
+	{% endfor %}
+
+	{% for velocity_name in velocity_data %}
+		generateChart("{{ velocity_name|id_format }}", "{{ velocity_name }}", "velocity", "Velocity (MPH)");
+	{% endfor %}
+
+	{% for distance_name in distance_data %}
+		generateChart("{{ distance_name|id_format }}", "{{ distance_name }}", "distance", "Distance (ft)");
+	{% endfor %}
+
+	generateChart("bodyweight", "Body Weight", "weight", "Weight (lbs)")
+
+	$("#accordion").on("hide.bs.collapse show.bs.collapse", e => {
+  		$(e.target)
+    	.prev()
+    	.find("i:last-child")
+    	.toggleClass("fa-minus-square fa-plus-square");
+	});
+
+	$("#accordion").on("shown.bs.collapse", e => {
+  		$("html, body").animate(
+    		{
+      			scrollTop: $(e.target)
+        		.prev()
+        		.offset().top
+    		},
+    		400
+  		);
+	});
+</script>
+{% endblock %}

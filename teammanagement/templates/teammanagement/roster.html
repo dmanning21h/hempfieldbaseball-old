@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Roster - Hempfield Baseball
+{% endblock %}
+
+{% block stylesheet %}
+<style>
+  .short-text { display: none; }
+
+  @media (max-width: 576px) {
+    .short-text { display: inline-block; }
+    .full-text { display: none; }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+  <br>
+  <div class="container">
+    <h2 class="text-center">
+      {{ team.year }} HEMPFIELD BASEBALL
+    </h2>
+  </div>
+
+  {% if team.team_photo %}
+    <div class="container text-center mb-4 mt-3">
+      <img src="{{ team.team_photo.url }}" width="99%" class="rounded">
+    </div>
+  {% endif %}
+
+  <div class="container">
+    <table class="table table-striped">
+      <tbody>
+        {% for player in team.players.all %}
+            <tr class="row">       
+              
+                <td class="col-3 text-right" style="max-width: 125px">
+                  {% if player.roster_photo %}
+                    <img src="{{ player.roster_photo.url }}" width="85" class="rounded">
+                  {% else %}
+                    Picture?
+                  {% endif %}
+                </td>
+
+                <td class="col-6 text-left py-4">
+                  <p>
+                    <b>
+                      <span class="full-text">{{ player.position.name|upper }}</span>
+                      <span class="short-text">{{ player.position.abbr|upper }}</span>
+                    </b>
+                    / {{ player.height }}
+                    / {{ player.weight }} LBS
+                    / {{ player.info.bats }}/{{ player.info.throws }}
+                  </p>
+                  <h4>
+                    {{ player.number }}
+                    <a href="/roster/{{ player.info.player_link }}" class="text-danger">
+                      {{ player.info.full_name|upper }}
+                    </a>
+                  </h4>
+                </td>
+
+             
+                <td class="col-3 text-center py-5">
+                  <p class="text-muted">
+                    <span class="full-text">{{ player.info.class_standing|upper }}</span>
+                    <span class="short-text">{{ player.info.class_standing_abbr|upper }}</span>
+                  </p>
+                </td>
+
+            </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+
+  <h2 class="text-center">
+    COACHING STAFF
+  </h2>
+
+  <div class="container">
+    <table class="table table-striped">
+      <tbody>
+        {% for coach in team.coaches.all %}
+            <tr class="row">
+          
+                <td class="col-3 text-right" style="max-width: 125px">
+                  {% if coach.roster_photo %}
+                    <img src="{{ coach.roster_photo.url }}" width="85" class="rounded">
+                  {% else %}
+                    Picture?
+                  {% endif %}
+                </td>
+
+                <td class="col-9 text-left py-4">
+                  <p>
+                    <b>{{ coach.role.name|upper }} COACH</b>
+                  </p>
+                  <h4>
+                    <a href="/roster" class="text-danger">
+                      {{ coach.info.full_name|upper }}
+                    </a>
+                  </h4>
+                </td>
+
+            </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+{% endblock %}

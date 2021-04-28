@@ -1,0 +1,52 @@
+{% extends 'base_leaderboard.html' %}
+
+{% block title %}
+	Lifting Leaderboards - Hempfield Baseball
+{% endblock %}
+
+{% block leaderboards %}
+
+	{% for lift_name, top_lifts in lift_leader_data.items %}
+		{% if top_lifts %}
+			<br>
+
+			<div class="container">
+				<h2 class="display-4 text-center">{{ lift_name }} Leaders</h2>
+		   		<table class="table table-striped table-bordered shadow">
+		      		<thead class="thead-dark">
+		   				<tr class="text-center">
+		  					<th>Player</th>
+		      				<th>Lift</th>
+		      				<th>Date</th>
+		      			</tr>
+		   			</thead>
+		   			<tbody>
+						{% for lift in top_lifts %}
+							<tr class="text-center">
+								<td class="align-middle">
+									<h5>
+										<a href="/roster/{{lift.player.player_link}}" class="text-danger">
+											{{ lift.player.full_name }}
+										</a>
+									</h5>
+								</td>
+								<td class="align-middle">
+									{{ lift.strength_points }} SP
+									<small class="text-muted d-block">
+										{{ lift.sets }}
+									</small>
+								</td>
+								<td class="align-middle">
+									{{ lift.date }}
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+
+			<br>
+		{% endif %}
+	{% endfor %}
+
+{% endblock %}

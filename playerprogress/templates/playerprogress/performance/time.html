@@ -1,0 +1,49 @@
+{% extends 'base_leaderboard.html' %}
+
+{% block title %}
+	Time Leaderboards - Hempfield Baseball
+{% endblock %}
+
+{% block leaderboards %}
+	
+	{% for time_name, top_times in time_leader_data.items %}
+		{% if top_times %}
+			<br>
+
+			<div class="container">
+				<h2 class="display-4 text-center">{{ time_name }} Time Leaders</h2>
+		   		<table class="table table-striped table-bordered shadow">
+		      		<thead class="thead-dark">
+		   				<tr class="text-center">
+		  					<th>Player</th>
+		      				<th>Time</th>
+		      				<th>Date</th>
+		      			</tr>
+		   			</thead>
+		   			<tbody>
+						{% for time in top_times %}
+							<tr class="text-center">
+								<td class="align-middle">
+									<h5>
+										<a href="/roster/{{time.player.player_link}}" class="text-danger">
+											{{ time.player.full_name }}
+										</a>
+									</h5>
+								</td>
+								<td class="align-middle">
+									{{ time.formatted_time }}
+								</td>
+								<td class="align-middle">
+									{{ time.date }}
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+
+			<br>
+		{% endif %}
+	{% endfor %}
+
+{% endblock %}

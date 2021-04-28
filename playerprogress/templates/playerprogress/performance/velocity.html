@@ -1,0 +1,49 @@
+{% extends 'base_leaderboard.html' %}
+
+{% block title %}
+	Velocity Leaderboards - Hempfield Baseball
+{% endblock %}
+
+{% block leaderboards %}
+
+	{% for velocity_name, top_velocities in velocity_leader_data.items %}
+		{% if top_velocities %}
+			<br>
+
+			<div class="container">
+				<h2 class="display-4 text-center">{{ velocity_name }} Velocity Leaders</h2>
+		   		<table class="table table-striped table-bordered shadow">
+		      		<thead class="thead-dark">
+		   				<tr class="text-center">
+		  					<th>Player</th>
+		      				<th>Velocity</th>
+		      				<th>Date</th>
+		      			</tr>
+		   			</thead>
+		   			<tbody>
+						{% for velocity in top_velocities %}
+							<tr class="text-center">
+								<td class="align-middle">
+									<h5>
+										<a href="/roster/{{velocity.player.player_link}}" class="text-danger">
+											{{ velocity.player.full_name }}
+										</a>
+									</h5>
+								</td>
+								<td class="align-middle">
+									{{ velocity.velocity }} mph
+								</td>
+								<td class="align-middle">
+									{{ velocity.date }}
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+
+			<br>
+		{% endif %}
+	{% endfor %}
+
+{% endblock %}

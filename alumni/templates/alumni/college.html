@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  College Alumni - Hempfield Baseball
+{% endblock %}
+
+{% block stylesheet %}
+  <style>
+  	.card-columns {
+  	  @include media-breakpoint-only(md) {
+        column-count: 3;
+      }
+      @include media-breakpoint-only(lg) {
+        column-count: 4;
+      }
+	}
+
+	@media (max-width: 768px) {
+		.card {
+			max-width: 50%;
+		}
+	}
+
+    .card {
+      transition: transform 0.2s ease;
+      border: 4px solid black;
+      width: 100%;
+      height: 100%;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    a, a:hover {
+    	text-decoration: none;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <br>
+
+  <div class="container">
+  	<h2 class="text-center">
+  		HEMPFIELD BASEBALL COLLEGE ALUMNI
+  	</h2>
+    <p class="text-center text-muted">
+      (click card to visit college roster page)
+    </p>
+  </div>
+
+  {% for class in alumni_classes %}
+    <div class="container">
+  	  <hr>
+  	  <h2 class="text-center">
+  	    CLASS OF {{ class.year }}
+  	  </h2>
+    </div>
+
+    <div class="container">
+  	  <div class="row">
+  	    {% for player in class.players.all %}
+  	      <div class="col-lg-3 col-md-4 col-sm-3 mx-auto mt-3 mb-4">
+
+  	        <div class="card shadow-lg mx-auto">
+  	  	      <a href="{{ player.college_roster_link }}" target="_blank">
+		        <img class="card-img-top img-thumbnail" src="{{ player.college_roster_photo.url }}" alt="College Roster Photo">
+		        <div class="card-body text-danger">
+		          <h4 class="card-title text-center">{{ player.first_name }} {{ player.last_name }}</h4>
+		          <p class="card-text text-center">{{ player.college }}</p>
+		        </div>
+	          </a> 
+		    </div>
+
+		  </div>
+  	    {% endfor %}
+	  </div>
+    </div> 
+  {% endfor %}
+{% endblock %}
+
