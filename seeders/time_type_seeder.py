@@ -15,7 +15,8 @@ cursor = conn.cursor()
 print("Seeding Time Types. . .")
 
 # Generate Time Types
-time_types = ["60-yd Dash", "Pop", "Mile", "Plank", "40-yd Dash", "Figure Eight", "Shuttle Run"]
+time_types = ["Plank", "60-yd Dash", "40-yd Dash", "Mile",
+              "Pop", "Figure Eight", "Shuttle Run"]
 for time_type in time_types:
     try:
         cursor.execute(

@@ -24,8 +24,6 @@ def roster(request, year=None):
     return render(request, 'teammanagement/roster.html', context)
 
 
-# Player Name, Class, Weight, Exit Velo, 60yd Time
-# Lifting Charts, Exit Velo Chart, Weight Chart, 60yd Chart
 def player(request, player_link):
     player_id = tms.get_player_id_from_link(player_link)
 

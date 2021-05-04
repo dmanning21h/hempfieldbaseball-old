@@ -1,0 +1,46 @@
+<div class="container mt-3">
+	<div class="row">
+		<div class="col-sm-4 text-center mb-3">
+			{% if player.roster_photo %}
+                  <img src="{{ player.roster_photo.url }}" width="175px" class="rounded border border-dark">
+            {% endif %}
+		</div>
+
+		<div class="col-sm-8">
+			<h1>
+				{{ player.number }}
+				{{ player.info.full_name|upper }}
+			</h1>
+
+			<hr>
+
+			<div class="row">
+				<div class="col-sm-6">
+					<p>
+						<b>CLASS:</b> {{ player.info.graduation_year }} ({{ player.info.class_standing }})
+					</p>
+					<hr>
+					<p>
+						<b>POSITION:</b> {{ player.position }}
+					</p>
+					<hr>
+					<p>
+						<b>BATS/THROWS:</b> {{ player.info.bats }}/{{ player.info.throws }}
+					</p>
+					<hr>
+				</div>
+				<div class="col-sm-6">
+					<p>
+						<b>HEIGHT:</b> {{ player.height }}
+					</p>
+					<hr>
+						<p>
+							<b>WEIGHT:</b> {{ player.weight }} lbs
+						</p>
+						<hr>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>

@@ -23,10 +23,11 @@ class Player(models.Model):
                             default='R')
     throws = models.CharField(max_length=1, choices=THROWS_CHOICES,
                               default='R')
+    is_active = models.BooleanField(default=True)
 
     class Meta:
         db_table = "Player"
-        ordering = ['last_name']
+        ordering = ['-graduation_year', 'last_name']
 
     def full_name(self):
         return f"{self.first_name} {self.last_name}"
@@ -53,7 +54,7 @@ class Player(models.Model):
         if current_month > 6:
             year_diff -= 1
 
-        class_standings = ["Senior", "Junior", "Sophomore", "Freshman", "8th"]
+        class_standings = ["Senior", "Junior", "Sophomore", "Freshman"]
 
         return class_standings[year_diff]
 
@@ -68,7 +69,7 @@ class Player(models.Model):
         if current_month > 6:
             year_diff -= 1
 
-        class_standings = ["SR.", "JR.", "SO.", "FR.", "8th"]
+        class_standings = ["SR.", "JR.", "SO.", "FR."]
 
         return class_standings[year_diff]
 

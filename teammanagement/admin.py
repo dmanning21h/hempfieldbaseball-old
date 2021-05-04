@@ -5,7 +5,7 @@ from .models import Position, CoachRole, Height
 
 
 class PlayerAdmin(admin.ModelAdmin):
-    list_display = ('full_name', 'graduation_year')
+    list_display = ('full_name', 'graduation_year', 'is_active')
     list_filter = ['graduation_year']
 
     fieldsets = [
@@ -13,7 +13,8 @@ class PlayerAdmin(admin.ModelAdmin):
                                  'graduation_year']}),
         ('Roster Info', {'fields':
                          ['bats', 'throws']}),
-        ('Unique Player Page Link', {'fields': ['player_link']})
+        ('Unique Player Page Link', {'fields': ['player_link']}),
+        ('Is player active?', {'fields': ['is_active']})
     ]
 
 

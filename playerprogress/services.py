@@ -1,3 +1,5 @@
+import datetime
+
 from .models import LiftType, Lift, LiftImprovement
 from .models import VelocityType, Velocity, VelocityImprovement
 from .models import TimeType, Time, TimeImprovement
@@ -112,6 +114,7 @@ def get_all_player_body_weights(player_id):
 def _get_latest_model_records(improvement_model, ttype):
     latest_query = (
             improvement_model.objects
+            .filter(player__is_active=True)
             .filter(ttype=ttype)
             .only('latest')
         )
@@ -170,12 +173,15 @@ def get_distance_leaders():
 #
 
 
-def _get_model_improvement_leaders(type_model, improvement_model):
+def _get_model_improvement_leaders(type_model, improvement_model,
+                                   zero_value=0):
     improvement_leaders = {}
     for ttype in type_model.objects.all():
         improvement_leaders[ttype.name] = (
                 improvement_model.objects
+                .filter(player__is_active=True)
                 .filter(ttype=ttype)
+                .filter(improvement__gt=zero_value)
                 .order_by('-improvement')
             )[:top]
 
@@ -191,7 +197,8 @@ def get_velocity_improvement_leaders():
 
 
 def get_time_improvement_leaders():
-    return _get_model_improvement_leaders(TimeType, TimeImprovement)
+    return _get_model_improvement_leaders(TimeType, TimeImprovement,
+                                          zero_value=datetime.timedelta(0))
 
 
 def get_distance_improvement_leaders():
@@ -201,6 +208,8 @@ def get_distance_improvement_leaders():
 def get_body_weight_improvement_leaders():
     improvement_leaders = (
         BodyWeightImprovement.objects
+        .filter(player__is_active=True)
+        .filter(improvement__gt=0)
         .order_by('-improvement')
     )[:top]
 

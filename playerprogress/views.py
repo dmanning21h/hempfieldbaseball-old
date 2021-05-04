@@ -43,6 +43,21 @@ def get_player_data_and_dates(request):
     return JsonResponse(data)
 
 
+def get_player_lift_data_and_dates(request):
+    player_id = request.GET.get('player_id')
+    lift_name = request.GET.get('lift_name')
+
+    records = pps.get_player_lifts_by_lift_name(player_id, lift_name)
+    data = [lift.strength_points() for lift in records]
+    dates = [lift.date.strftime('%m/%d/%y') for lift in records]
+
+    response = {
+        'data': data,
+        'dates': dates
+    }
+    return JsonResponse(response)
+
+
 def leaderboards(request):
     lift_data_exists = pps.does_lift_data_exist()
     velocity_data_exists = pps.does_velocity_data_exist()
@@ -65,6 +80,12 @@ def leaderboards(request):
 
     return render(request, 'playerprogress/leaderboards.html',
                   context)
+
+
+def resources(request):
+    context = {}
+
+    return render(request, 'playerprogress/resources.html', context)
 
 
 def lifting_performance_leaderboards(request):

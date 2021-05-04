@@ -11,9 +11,17 @@ urlpatterns = [
          views.get_player_data_and_dates,
          name='get_player_data_and_dates'),
 
+    path('ajax/get_player_lift_data_and_dates',
+         views.get_player_lift_data_and_dates,
+         name='get_player_lift_data_and_dates'),
+
     path('leaderboards',
          views.leaderboards,
          name='leaderboards'),
+
+    path('resources',
+         views.resources,
+         name='resources'),
 
     path('performance/leaderboards/lifting',
          views.lifting_performance_leaderboards,
