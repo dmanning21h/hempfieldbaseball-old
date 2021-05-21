@@ -19,17 +19,25 @@ roles = [
     "Head Junior Varsity",
     "Assistant Junior Varsity",
     "Volunteer",
-    "Volunteer Pitching",
 ]
+
+priorities = [
+    1,
+    3,
+    7,
+    9,
+    17,
+]
+
 
 print("Seeding Coach Roles. . .")
 
-for role in roles:
+for role, priority in zip(roles, priorities):
     try:
         cursor.execute(
             f"""
                 INSERT INTO HempfieldBaseball.CoachRole
-                values (NULL, '{role}')
+                values (NULL, '{role}', {priority})
             """
         )
     except Exception as e:

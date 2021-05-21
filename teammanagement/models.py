@@ -32,47 +32,6 @@ class Player(models.Model):
     def full_name(self):
         return f"{self.first_name} {self.last_name}"
 
-    def has_graduated(self):
-        current_year = datetime.now().year
-        current_month = datetime.now().month
-
-        if self.graduation_year < current_year:
-            return True
-        elif self.graduation_year == current_year and current_month > 6:
-            return True
-        else:
-            return False
-
-    def class_standing(self):
-        if self.has_graduated():
-            return "Graduated"
-
-        current_year = datetime.now().year
-        current_month = datetime.now().month
-        year_diff = self.graduation_year - current_year
-
-        if current_month > 6:
-            year_diff -= 1
-
-        class_standings = ["Senior", "Junior", "Sophomore", "Freshman"]
-
-        return class_standings[year_diff]
-
-    def class_standing_abbr(self):
-        if self.has_graduated():
-            return "GR."
-
-        current_year = datetime.now().year
-        current_month = datetime.now().month
-        year_diff = self.graduation_year - current_year
-
-        if current_month > 6:
-            year_diff -= 1
-
-        class_standings = ["SR.", "JR.", "SO.", "FR."]
-
-        return class_standings[year_diff]
-
     def __str__(self):
         return self.full_name()
 
@@ -180,12 +139,13 @@ class TeamCoach(models.Model):
 class CoachRole(models.Model):
     coach_role_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50, unique=True)
+    priority = models.PositiveSmallIntegerField()
 
     class Meta:
         db_table = "CoachRole"
         verbose_name = "Coach Role"
         verbose_name_plural = "Coach Roles"
-        ordering = ['name']
+        ordering = ['priority']
 
     def __str__(self):
         return self.name

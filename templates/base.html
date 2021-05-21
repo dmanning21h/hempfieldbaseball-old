@@ -1,6 +1,5 @@
 {% load static %}<!doctype html>
 <html>
-
   <head>
     <meta charset="utf-8">
 
@@ -9,17 +8,24 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     
-    <!--link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}"-->
+    <link rel="icon" type="image/png" href="{% static 'favicon.ico' %}">
     
     <style>
-      #footer {
+      #page-container {
         position: relative;
-        padding: 10px 10px 0px 10px;
-        margin-top: 75px;
+        min-height: 100vh;
+        padding-bottom: 2.5rem;
+      }
+
+      #content-wrap {
+        padding-bottom: 2.5rem;
+      }
+
+      #footer {
+        position: absolute;
         bottom: 0;
         width: 100%;
-        height: 40px;
+        height: 2.5rem;
         }
 
       .dropdown-toggle::after {
@@ -39,95 +45,94 @@
 
   </head>
 
-  <body>
-    <header>
-      
-    </header>
+  <body id="page-container">
+    <div id="content-wrap">
+      <header>
+        
+      </header>
 
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        Menu
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="/">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/roster">Roster</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/alumni/college">Alumni</a>
-          </li>
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/roster">Roster</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/alumni/college">Alumni</a>
+            </li>
 
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Star Forge
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <li class="">
-                <a class="dropdown-item" href="/leaderboards">Leaderboards</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="/resources">Resources</a>
-              </li>
-            </ul>
-          </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Star Forge
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li class="">
+                  <a class="dropdown-item" href="/leaderboards">Leaderboards</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/resources">Resources</a>
+                </li>
+              </ul>
+            </li>
 
-        </ul>
-      </div>
-    </nav>
+          </ul>
+        </div>
+      </nav>
 
-    <main>
-      {% block content %}{% endblock %}
-    </main>
+      <main>
+        {% block content %}{% endblock %}
+      </main>
+    </div>
+  </body>
 
-    <footer id="footer" class="page-footer">
-      <div class="container text-center">
-        <p class="text-muted">© 2021 Hempfield Baseball</p>
-      </div>
-    </footer>
+  <footer id="footer" class="page-footer">
+    <div class="container text-center">
+      <p class="text-muted">© 2021 Hempfield Baseball</p>
+    </div>
+  </footer>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
-    <!--script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'js/Chart.bundle.min.js' %}"></script-->
-
-    <script>
-        const $dropdown = $(".dropdown");
-        const $dropdownToggle = $(".dropdown-toggle");
-        const $dropdownMenu = $(".dropdown-menu");
-        const showClass = "show";
+  <script>
+    const $dropdown = $(".dropdown");
+    const $dropdownToggle = $(".dropdown-toggle");
+    const $dropdownMenu = $(".dropdown-menu");
+    const showClass = "show";
          
-        $(window).on("load resize", function() {
-          if (this.matchMedia("(min-width: 768px)").matches) {
-            $dropdown.hover(
-              function() {
-                const $this = $(this);
-                $this.addClass(showClass);
-                $this.find($dropdownToggle).attr("aria-expanded", "true");
-                $this.find($dropdownMenu).stop(true, true).slideDown(200);
-                $this.find($dropdownMenu).addClass(showClass);
-              },
-              function() {
-                const $this = $(this);
-                $this.removeClass(showClass);
-                $this.find($dropdownToggle).attr("aria-expanded", "false");
-                $this.find($dropdownMenu).stop(true, true).slideUp(200);
-                $this.find($dropdownMenu).removeClass(showClass);
-              }
-            );
-          } else {
-            $dropdown.off("mouseenter mouseleave");
+    $(window).on("load resize", function() {
+      if (this.matchMedia("(min-width: 768px)").matches) {
+        $dropdown.hover(
+          function() {
+            const $this = $(this);
+            $this.addClass(showClass);
+            $this.find($dropdownToggle).attr("aria-expanded", "true");
+            $this.find($dropdownMenu).stop(true, true).slideDown(200);
+            $this.find($dropdownMenu).addClass(showClass);
+          },
+          function() {
+            const $this = $(this);
+            $this.removeClass(showClass);
+            $this.find($dropdownToggle).attr("aria-expanded", "false");
+            $this.find($dropdownMenu).stop(true, true).slideUp(200);
+            $this.find($dropdownMenu).removeClass(showClass);
           }
-        });
+        );
+      } else {
+        $dropdown.off("mouseenter mouseleave");
+      }
+    });
     </script>
 
     
     {% block javascript %}{% endblock %}
-  </body>
+  
 </html>

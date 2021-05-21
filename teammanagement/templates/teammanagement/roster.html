@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load teammanagement_tags %}
 
 {% block title %}
   Roster - Hempfield Baseball
@@ -64,8 +65,8 @@
              
                 <td class="col-3 text-center py-5">
                   <p class="text-muted">
-                    <span class="full-text">{{ player.info.class_standing|upper }}</span>
-                    <span class="short-text">{{ player.info.class_standing_abbr|upper }}</span>
+                    <span class="full-text">{{ player.info|class_standing:team.year|upper }}</span>
+                    <span class="short-text">{{ player.info|class_standing_abbr:team.year|upper }}</span>
                   </p>
                 </td>
 
