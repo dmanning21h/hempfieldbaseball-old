@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load teammanagement_tags %}
-{% load playerprogress_extras %}
+{% load playerprogress_tags %}
 
 {% block title %}
 	{{ player.info.full_name }} - Hempfield Baseball
@@ -62,7 +62,7 @@
 
 		try {
 			result = await $.ajax({
-				url: "{% url 'get_player_data_and_dates' %}",
+				url: "{% url 'playerprogress:get-player-data-and-dates' %}",
 				type: 'GET',
 		        data: {
 		          'data_type': dataType,

@@ -5,9 +5,9 @@ from django.conf import settings
 
 from . import views
 
-app_name = 'alumni'
+app_name = "resources"
 urlpatterns = [
-    path('college', views.college_alumni, name='college-alumni'),
+    path('', views.index, name='resources-index'),
 
 ]
 

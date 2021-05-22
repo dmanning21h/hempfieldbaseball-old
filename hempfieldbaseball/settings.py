@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'playerprogress.apps.PlayerprogressConfig',
     'teammanagement.apps.TeammanagementConfig',
     'alumni.apps.AlumniConfig',
+    'resources.apps.ResourcesConfig',
 ]
 
 MIDDLEWARE = [

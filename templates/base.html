@@ -59,13 +59,13 @@
         <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item text-left">
-              <a class="nav-link" href="/">HOME</a>
+              <a class="nav-link" href="{% url 'teammanagement:site-index' %}">HOME</a>
             </li>
             <li class="nav-item text-left">
-              <a class="nav-link" href="/roster">ROSTER</a>
+              <a class="nav-link" href="{% url 'teammanagement:current-roster' %}">ROSTER</a>
             </li>
             <li class="nav-item text-left">
-              <a class="nav-link" href="/alumni/college">ALUMNI</a>
+              <a class="nav-link" href="{% url 'alumni:college-alumni' %}">ALUMNI</a>
             </li>
 
             <li class="nav-item dropdown text-left">
@@ -74,10 +74,10 @@
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <li class="text-left">
-                  <a class="dropdown-item" href="/resources">RESOURCES</a>
+                  <a class="dropdown-item" href="{% url 'resources:resources-index' %}">RESOURCES</a>
                 </li>
                 <li  class="text-left">
-                  <a class="dropdown-item" href="/leaderboards">LEADERBOARDS</a>
+                  <a class="dropdown-item" href="{% url 'playerprogress:progress-leaderboards-index' %}">LEADERBOARDS</a>
                 </li>
               </ul>
             </li>

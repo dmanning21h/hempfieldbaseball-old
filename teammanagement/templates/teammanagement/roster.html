@@ -55,7 +55,7 @@
                     </p>
                     <h4>
                       {{ player.number }}
-                      <a href="/roster/{{ player.info.player_link }}" class="text-danger">
+                      <a href="{% url 'teammanagement:player-page' player.info.player_link %}" class="text-danger">
                         {{ player.info.full_name|upper }}
                       </a>
                     </h4>
@@ -101,7 +101,7 @@
                     <b>{{ coach.role.name|upper }} COACH</b>
                   </p>
                   <h4>
-                    <a href="/roster" class="text-danger">
+                    <a href="{% url 'teammanagement:current-roster' %}" class="text-danger">
                       {{ coach.info.full_name|upper }}
                     </a>
                   </h4>

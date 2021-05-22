@@ -5,14 +5,15 @@ from django.conf import settings
 
 from . import views
 
+app_name = 'teammanagement'
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', views.index, name='site-index'),
 
-    path('roster', views.roster, name='current_roster'),
+    path('roster', views.roster, name='current-roster'),
 
-    path('roster/<int:year>', views.roster, name='year_roster'),
+    path('roster/<int:year>', views.roster, name='year-roster'),
 
-    path('roster/<str:player_link>', views.player, name='player'),
+    path('roster/<str:player_link>', views.player, name='player-page'),
 
 ]
 

@@ -6,14 +6,6 @@
 
 {% block stylesheet %}
   <style>
-  	.card-columns {
-  	  @include media-breakpoint-only(md) {
-        column-count: 3;
-      }
-      @include media-breakpoint-only(lg) {
-        column-count: 4;
-      }
-	}
 
 	@media (max-width: 768px) {
 		.card {
@@ -61,7 +53,7 @@
     <div class="container">
   	  <div class="row">
   	    {% for player in class.players.all %}
-  	      <div class="col-lg-3 col-md-4 col-sm-3 mx-auto mt-3 mb-4">
+  	      <div class="col-lg-3 col-md-4 mx-auto mt-3 mb-4">
 
   	        <div class="card shadow-lg mx-auto">
   	  	      <a href="{{ player.college_roster_link }}" target="_blank">
