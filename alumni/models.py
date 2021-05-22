@@ -17,7 +17,7 @@ class AlumniPlayer(models.Model):
                                      verbose_name="Alumni Class",
                                      related_name='players',
                                      on_delete=models.CASCADE)
-    college_roster_link = models.CharField(max_length=75, unique=True)
+    college_roster_link = models.URLField(max_length=75, unique=True)
     college_roster_photo = models.ImageField(upload_to='alumni-portraits')
 
     class Meta:
