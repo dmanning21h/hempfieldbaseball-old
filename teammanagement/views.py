@@ -36,7 +36,7 @@ def player(request, player_link):
 
     has_data = []
     for metric in [lifts, velocities, times, distances]:
-        has_data.extend([True for name, data in lifts.items() if data])
+        has_data.extend([True for name, data in metric.items() if data])
     has_data.extend([True for weight in body_weights if weight])
 
     context = {

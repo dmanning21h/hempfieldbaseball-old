@@ -8,7 +8,7 @@ from .models import BodyWeight, BodyWeightImprovement
 
 
 # Global for number of Leaderboard players
-top = 5
+top = 7
 
 
 def _get_model_records_by_player_and_type_name(model, player_id, type_name):
