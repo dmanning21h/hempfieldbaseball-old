@@ -8,6 +8,10 @@ from . import views
 app_name = "resources"
 urlpatterns = [
     path('', views.index, name='resources-index'),
+    path('diet', views.diet, name='resources-diet'),
+    path('books', views.books, name='resources-books'),
+    path('hitting-videos', views.hitting_videos, name='resources-hitting-videos'),
+    path('hitting-articles', views.hitting_articles, name='resources-hitting-articles')
 
 ]
 
