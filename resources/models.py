@@ -27,11 +27,13 @@ class Book(models.Model):
 class BookType(models.Model):
     book_type_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=30)
+    order = models.PositiveSmallIntegerField(unique=True)
 
     class Meta:
         db_table = "BookType"
         verbose_name = "Book Type"
         verbose_name_plural = "Book Types"
+        ordering = ['order']
 
     def __str__(self):
         return self.name

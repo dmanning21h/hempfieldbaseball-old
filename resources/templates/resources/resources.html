@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+	Resources - Hempfield Baseball
+{% endblock %}
+
+{% block stylesheet %}
+<style>
+	.category-header {
+		text-shadow: 1px 1px 2px #222629;
+	}
+</style>
+{% endblock %}
+
+{% block content %}
+
+	
+	<div class="container text-center mt-5">
+		<hr>
+		<h2 class="category-header display-4">Diet and Mental Game</h2>
+		<div class="row">
+
+			<div class="col-md mb-5">
+				<div class="card shadow border border-dark">
+					<img class="card-img-top" src="{% static 'img/resources-index/diet.jpg' %}" alt="Diet card image cap">
+					<div class="card-body">
+						<hr>
+						<a href="{% url 'resources:resources-diet' %}" class="btn btn-danger shadow">
+							<h4>Diet Resources</h4>
+						</a>
+						<hr>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="col-md mb-5">
+				<div class="card shadow border border-dark">
+					<img class="card-img-top" src="{% static 'img/resources-index/books.jpg' %}" alt="Books card image cap">
+					<div class="card-body">
+						<hr>
+						<a href="{% url 'resources:resources-books' %}" class="btn btn-danger shadow">
+					    	<h4>Books for Improving the Mental Game</h4>
+						</a>
+						<hr>
+					</div>
+				</div>
+			</div>
+
+	    </div>
+
+	</div>
+
+
+	<div class="container text-center mt-3">
+		
+		<hr>
+		<h2 class="category-header display-4">Hitting</h2>
+		<div class="row">
+
+			<div class="col-md mb-5">
+				<div class="card shadow border border-dark">
+					<img class="card-img-top" src="{% static 'img/resources-index/hitting-videos.jpg' %}" alt="Hitting videos card image cap">
+					<div class="card-body">
+						<hr>
+						<a href="{% url 'resources:resources-hitting-videos' %}" class="btn btn-danger">
+							<h4>Hitting Videos</h4>
+						</a>
+						<hr>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md mb-5">
+				<div class="card shadow border border-dark">
+					<img class="card-img-top" src="{% static 'img/resources-index/hitting-articles.jpg' %}" alt="Hitting articles card image cap">
+					<div class="card-body">
+						<hr>
+						<a href="{% url 'resources:resources-hitting-articles' %}" class="btn btn-danger">
+							<h4>Hitting Development Articles</h4>
+						</a>
+						<hr>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+
+
+{% endblock %}
