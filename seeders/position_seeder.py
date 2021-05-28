@@ -1,12 +1,19 @@
+import os as os
+
 import mysql.connector as mysqlConnector
 
-conn = mysqlConnector.connect(host='localhost',
-                              user='hempfield_baseball_admin',
-                              passwd='hempfield')
-if conn:
-    # print("Connection Successful")
-    pass
-else:
+
+DATABASE_HOST = os.environ.get('DATABASE_HOST')
+DATABASE_PORT = os.environ.get('DATABASE_PORT')
+DATABASE_USER = os.environ.get('DATABASE_USER')
+DATABASE_PASSWORD = os.environ.get('DATABASE_PASSWORD')
+DATABASE_NAME = os.environ.get('DATABASE_NAME')
+
+conn = mysqlConnector.connect(host=DATABASE_HOST,
+                              port=DATABASE_PORT,
+                              user=DATABASE_USER,
+                              passwd=DATABASE_PASSWORD)
+if not conn:
     print("Connection Failed")
     exit()
 
@@ -21,8 +28,15 @@ positions = [
     "Shortstop",
     "Third Base",
     "Outfield",
+    "Infield",
     "Pitcher/Outfield",
     "Pitcher/First Base",
+    "Pitcher/Third Base",
+    "Shortstop/Pitcher",
+    "Third Base/Pitcher",
+    "Outfield/Pitcher",
+    "Infield/Pitcher",
+    "Pitcher/Outfield/First Base",
 ]
 
 abbrs = [
@@ -33,8 +47,15 @@ abbrs = [
     "SS",
     "3B",
     "OF",
+    "INF",
     "P/OF",
     "P/1B",
+    "P/3B",
+    "SS/P",
+    "3B/P",
+    "OF/P",
+    "INF/P",
+    "P/OF/1B",
 ]
 
 print("Seeding Positions. . .")
@@ -43,7 +64,7 @@ for position, abbr in zip(positions, abbrs):
     try:
         cursor.execute(
             f"""
-                INSERT INTO HempfieldBaseball.Position
+                INSERT INTO {DATABASE_NAME}.Position
                 values (NULL, '{position}', '{abbr}')
             """
         )

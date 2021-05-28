@@ -19,16 +19,17 @@ if not conn:
 
 cursor = conn.cursor()
 
-print("Seeding Time Types. . .")
+print("Seeding Book Types. . .")
 
-# Generate Time Types
-time_types = ["Plank", "60-yd Dash", "Mile", "Pop"]
-for time_type in time_types:
+# Generate Book Types
+book_types = ["Mental Baseball", "Misc. Mental", "Lifting"]
+ordering = [1, 2, 3]
+for book_type, order in zip(book_types, ordering):
     try:
         cursor.execute(
             f"""
-                INSERT INTO {DATABASE_NAME}.TimeType
-                values (NULL, '{time_type}')
+                INSERT INTO {DATABASE_NAME}.BookType
+                values (NULL, '{book_type}', {order})
             """
         )
     except Exception as e:

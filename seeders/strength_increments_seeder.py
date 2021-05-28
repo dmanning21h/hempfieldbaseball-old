@@ -1,4 +1,13 @@
+import os as os
+
 import mysql.connector as mysqlConnector
+
+
+DATABASE_HOST = os.environ.get('DATABASE_HOST')
+DATABASE_PORT = os.environ.get('DATABASE_PORT')
+DATABASE_USER = os.environ.get('DATABASE_USER')
+DATABASE_PASSWORD = os.environ.get('DATABASE_PASSWORD')
+DATABASE_NAME = os.environ.get('DATABASE_NAME')
 
 
 def get_set_id(weight, reps):
@@ -6,7 +15,7 @@ def get_set_id(weight, reps):
         cursor.execute(
             f"""
                 SELECT lift_set_id
-                FROM HempfieldBaseball.LiftSet
+                FROM {DATABASE_NAME}.LiftSet
                 WHERE weight={weight} AND reps={reps}
             """
         )
@@ -25,7 +34,7 @@ def get_exercise_id(name):
         cursor.execute(
             f"""
                 SELECT lift_type_id
-                FROM HempfieldBaseball.LiftType
+                FROM {DATABASE_NAME}.LiftType
                 WHERE name='{name}'
             """
         )
@@ -45,7 +54,7 @@ def insert_strength_increment(lift_type_id, lift_set_id, points, adj):
     try:
         cursor.execute(
             f"""
-                INSERT INTO HempfieldBaseball.StrengthIncrement
+                INSERT INTO {DATABASE_NAME}.StrengthIncrement
                 SET lift_type_id = {lift_type_id},
                     lift_set_id = {lift_set_id},
                     strength_points = {points - adj}
@@ -59,13 +68,11 @@ def insert_strength_increment(lift_type_id, lift_set_id, points, adj):
     conn.commit()
 
 
-conn = mysqlConnector.connect(host='localhost',
-                              user='hempfield_baseball_admin',
-                              passwd='hempfield')
-if conn:
-    # print("Connection Successful")
-    pass
-else:
+conn = mysqlConnector.connect(host=DATABASE_HOST,
+                              port=DATABASE_PORT,
+                              user=DATABASE_USER,
+                              passwd=DATABASE_PASSWORD)
+if not conn:
     print("Connection Failed")
     exit()
 
@@ -97,6 +104,28 @@ while weight >= 65:
 
 # Squat
 exercise_id = get_exercise_id("Squat")
+weight = 315
+reps = 6
+points = 1005.0
+adj = 0
+while weight >= 45:
+    while reps >= 3:
+        set_id = get_set_id(weight, reps)
+
+        if reps == 3:
+            adj = 15.5
+
+        insert_strength_increment(exercise_id, set_id, points, adj)
+
+        reps -= 1
+        points -= 2.5
+    weight -= 5
+    reps = 6
+    points -= 8
+    adj = 0
+
+# Front Squat
+exercise_id = get_exercise_id("Front Squat")
 weight = 315
 reps = 6
 points = 1005.0

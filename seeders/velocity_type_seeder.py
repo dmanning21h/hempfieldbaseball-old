@@ -1,12 +1,19 @@
+import os as os
+
 import mysql.connector as mysqlConnector
 
-conn = mysqlConnector.connect(host='localhost',
-                              user='hempfield_baseball_admin',
-                              passwd='hempfield')
-if conn:
-    # print("Connection Successful")
-    pass
-else:
+
+DATABASE_HOST = os.environ.get('DATABASE_HOST')
+DATABASE_PORT = os.environ.get('DATABASE_PORT')
+DATABASE_USER = os.environ.get('DATABASE_USER')
+DATABASE_PASSWORD = os.environ.get('DATABASE_PASSWORD')
+DATABASE_NAME = os.environ.get('DATABASE_NAME')
+
+conn = mysqlConnector.connect(host=DATABASE_HOST,
+                              port=DATABASE_PORT,
+                              user=DATABASE_USER,
+                              passwd=DATABASE_PASSWORD)
+if not conn:
     print("Connection Failed")
     exit()
 
@@ -20,7 +27,7 @@ for velocity_type in velocity_types:
     try:
         cursor.execute(
             f"""
-                INSERT INTO HempfieldBaseball.VelocityType
+                INSERT INTO {DATABASE_NAME}.VelocityType
                 values (NULL, '{velocity_type}')
             """
         )

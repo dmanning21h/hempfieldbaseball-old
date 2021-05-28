@@ -9,7 +9,10 @@ seeders = [
     'strength_increments_seeder.py',
     'position_seeder.py',
     'coach_role_seeder.py',
-    'height_seeder.py'
+    'height_seeder.py',
+    'book_type_seeder.py',
+    'website_link_type_seeder.py',
+    'document_link_type_seeder.py',
 ]
 
 for seeder in seeders:

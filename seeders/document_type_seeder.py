@@ -19,16 +19,16 @@ if not conn:
 
 cursor = conn.cursor()
 
-print("Seeding Time Types. . .")
+print("Seeding Document Types. . .")
 
-# Generate Time Types
-time_types = ["Plank", "60-yd Dash", "Mile", "Pop"]
-for time_type in time_types:
+# Generate Document Types
+document_types = ["Diet",]
+for document_type in document_types:
     try:
         cursor.execute(
             f"""
-                INSERT INTO {DATABASE_NAME}.TimeType
-                values (NULL, '{time_type}')
+                INSERT INTO {DATABASE_NAME}.DocumentType
+                values (NULL, '{document_type}')
             """
         )
     except Exception as e:
