@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	Hitting Videos - Hempfield Baseball
+{% endblock %}
+
+{% block stylesheet %}
+<style>
+    .title {
+		text-shadow: .25px .25px .5px #222629;
+	}
+
+	.video-box {
+		position:   relative;
+        width: 90%;
+        height: 0;
+        padding-top: 50.625%;
+	}
+
+    .video {
+        position: absolute;
+        top:      0;
+        left:     0;
+         bottom:   0;
+        right:    0;
+        width:    100%;
+        height:   100%
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <div class="container text-center mt-md-4">
+        {% for video_link in hitting_video_links %}
+            <div class="mb-5">
+                <hr>
+                <h4 class="title mb-3">
+                    {{video_link.name}}
+                </h4>
+                <div class="container video-box text-center shadow">
+                    <iframe class="video" src="{{ video_link.url }}" title="YouTube video player"
+                    frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

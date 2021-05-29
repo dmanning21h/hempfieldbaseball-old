@@ -65,7 +65,7 @@ def get_all_books_grouped_by_type():
 
 
 def get_all_hitting_video_links():
-    return WebsiteLink.object.filter(website_link_type_id__name="Hitting Video")
+    return WebsiteLink.objects.filter(website_link_type_id__name="Hitting Video")
 
 
 def get_all_hitting_articles():

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	Diet Resources - Hempfield Baseball
+{% endblock %}
+
+{% block stylesheet %}
+<style>
+    .title {
+		text-shadow: .25px .25px .5px #222629;
+	}
+</style>
+{% endblock %}
+
+{% block content %}
+    <div class="container text-center mt-md-4">
+        <hr>
+        <h2 class="title mb-3">
+            Documents
+        </h2>
+        {% for document in diet_documents %}
+            <div class="mb-3">
+                <h4 class="title mb-3">
+                    <a href="{{ document.file.url }}" class="text-danger">
+                        {{ document.name }}
+                    </a>
+                </h4>
+                
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
