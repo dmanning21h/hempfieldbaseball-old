@@ -11,7 +11,7 @@
 
   @media (max-width: 720px) {
     .short-text { display: inline-block; }
-    .full-text { display: none; }
+    .full-text, .team-picture { display: none; }
   }
 </style>
 {% endblock %}
@@ -25,8 +25,9 @@
   </div>
 
   {% if team.team_photo %}
-    <div class="container text-center mb-4 mt-3">
-      <img src="{{ team.team_photo.url }}" width="99%" class="rounded">
+    <div class="container team-picture text-center mb-4 mt-2">
+      <hr>
+      <img src="{{ team.team_photo.url }}" width="95%" class="rounded">
     </div>
   {% endif %}
 

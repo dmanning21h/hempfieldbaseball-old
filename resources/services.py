@@ -59,7 +59,7 @@ def get_all_diet_website_links():
 def get_all_books_grouped_by_type():
     books_grouped = {}
     for book_type in BookType.objects.all():
-        books_grouped[book_type.name] = book_type.books
+        books_grouped[book_type.name] = book_type.books.all()
 
     return books_grouped
 

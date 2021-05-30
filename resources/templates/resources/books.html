@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	Book Resources - Hempfield Baseball
+{% endblock %}
+
+{% block stylesheet %}
+<style>
+    .title {
+		text-shadow: .25px .25px .5px #222629;
+	}
+</style>
+{% endblock %}
+
+{% block content %}
+    <div class="container text-center mt-md-4">
+        {% for book_type, books in books_by_type.items %}
+            {% if books %}
+                <hr>
+                <h2 class="title mb-2">
+                    {{ book_type }} Books
+                </h2>
+            {% endif %}
+            {% for book in books %}
+                <div class="mb-4">
+                    <hr>
+                    <h4 class="title mb-1">
+                        <a href="{{ book.amazon_url }}" class="text-danger text-decoration-underline" target="_blank">
+                            {{ book.name }}
+                        </a>
+                    </h4>
+                    <h5 class="text-muted">
+                        by {{ book.author }}
+                    </h5>
+                    <div class="container text-center">
+                        <a href="{{ book.amazon_url }}" class="text-danger text-decoration-underline" target="_blank">
+                            <img src="{{ book.image.url }}" width="25%" class="rounded border border-dark shadow">
+                        </a>
+                      </div>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+{% endblock %}

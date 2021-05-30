@@ -9,10 +9,9 @@ class Book(models.Model):
                                      on_delete=models.PROTECT)
     name = models.CharField(max_length=50)
     author = models.CharField(max_length=30)
-    amazon_url = models.URLField(max_length=75)
+    amazon_url = models.URLField(max_length=125)
     image = models.ImageField(upload_to='resources-book-images')
     order = models.PositiveSmallIntegerField(unique=True)
-    note = models.CharField(max_length=75, blank=True, null=True)
 
     class Meta:
         db_table = "Book"
@@ -46,7 +45,7 @@ class WebsiteLink(models.Model):
                                      related_name='website_links',
                                      on_delete=models.PROTECT)
     name = models.CharField(max_length=75)
-    url = models.URLField(max_length=75)
+    url = models.URLField(max_length=100)
     order = models.PositiveSmallIntegerField(unique=True)
     image = models.ImageField(upload_to='resources-website-link-images', blank=True, null=True)
     order = models.PositiveSmallIntegerField(unique=True)
@@ -83,6 +82,7 @@ class Document(models.Model):
                                          on_delete=models.PROTECT)
     name = models.CharField(max_length=50)
     file = models.FileField(upload_to='resources-documents')
+    image = models.ImageField(upload_to='resources-documents-images')
     order = models.PositiveSmallIntegerField(unique=True)
 
     class Meta:

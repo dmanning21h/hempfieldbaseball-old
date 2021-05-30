@@ -41,7 +41,7 @@ def books(request):
     books = rs.get_all_books_grouped_by_type()
 
     context = {
-        'books_by_type': books
+        'books_by_type': books,
     }
 
     return render(request, 'resources/books.html', context)
