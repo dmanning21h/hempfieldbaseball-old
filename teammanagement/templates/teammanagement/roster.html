@@ -15,7 +15,7 @@
   }
 
   h4 {
-    font-size: 1.2rem;
+    font-size: 1.05rem;
   }
 
   p {
@@ -61,10 +61,10 @@
                 {% endif %}
               </td>
 
-              <td class="col text-left pl-4 pt-4">
+              <td class="col text-left pl-2 pt-4">
                 <div class="row">
                   <div class="col-md-9">
-                    <p class="pt-md-2">
+                    <p class="pt-2">
                       <b>
                         <span class="full-text">{{ player.position.name|upper }}</span>
                         <span class="short-text">{{ player.position.abbr|upper }}</span>
@@ -73,7 +73,7 @@
                       / {{ player.weight }} LBS
                       / {{ player.info.bats }}/{{ player.info.throws }}
                     </p>
-                    <h4>
+                    <h4 class="mb-3">
                       {{ player.number }}
                       <a href="{% url 'teammanagement:player-page' player.info.player_link %}" class="text-danger">
                         {{ player.info.full_name|upper }}
@@ -116,7 +116,7 @@
                   {% endif %}
                 </td>
 
-                <td class="col-9 text-left py-4 pl-4">
+                <td class="col-9 text-left py-4 pl-3">
                   <p class="pt-2">
                     <b>{{ coach.role.name|upper }} COACH</b>
                   </p>
