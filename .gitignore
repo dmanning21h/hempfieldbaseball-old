@@ -2,3 +2,5 @@ __pycache__/
 media/
 .env
 .vscode
+*.pyc
+assets/
