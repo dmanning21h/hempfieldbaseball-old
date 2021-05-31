@@ -44,8 +44,8 @@ class WebsiteLink(models.Model):
                                      verbose_name='Website Link Type',
                                      related_name='website_links',
                                      on_delete=models.PROTECT)
-    name = models.CharField(max_length=75)
-    url = models.URLField(max_length=100)
+    name = models.CharField(max_length=100)
+    url = models.URLField(max_length=150)
     order = models.PositiveSmallIntegerField(unique=True)
     image = models.ImageField(upload_to='resources-website-link-images', blank=True, null=True)
     order = models.PositiveSmallIntegerField(unique=True)
