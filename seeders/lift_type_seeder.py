@@ -23,12 +23,13 @@ print("Seeding Lift Types. . .")
 
 # Generate Lift Types
 lift_types = ["Deadlift", "Squat", "Front Squat", "Bench Press", "Military Press"]
-for lift_type in lift_types:
+ordering = [1, 2, 3, 4, 5]
+for lift_type, order in zip(lift_types, ordering):
     try:
         cursor.execute(
             f"""
                 INSERT INTO {DATABASE_NAME}.LiftType
-                values (NULL, '{lift_type}')
+                values (NULL, '{lift_type}', {order})
             """
         )
     except Exception as e:

@@ -23,12 +23,14 @@ print("Seeding Time Types. . .")
 
 # Generate Time Types
 time_types = ["Plank", "60-yd Dash", "Mile", "Pop"]
-for time_type in time_types:
+ordering = [2, 1, 3, 4]
+is_speeds = [0, 1, 1, 1]
+for time_type, order, is_speed in zip(time_types, ordering, is_speeds):
     try:
         cursor.execute(
             f"""
                 INSERT INTO {DATABASE_NAME}.TimeType
-                values (NULL, '{time_type}')
+                values (NULL, '{time_type}', {order}, {is_speed})
             """
         )
     except Exception as e:

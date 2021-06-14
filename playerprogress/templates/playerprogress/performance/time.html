@@ -15,25 +15,25 @@
 		   		<table class="table table-striped table-bordered shadow">
 		      		<thead class="thead-dark">
 		   				<tr class="text-center">
-		  					<th>Player</th>
-		      				<th>Time</th>
-		      				<th>Date</th>
+		  					<th class="col-4">Player</th>
+		      				<th class="col-4">Time</th>
+		      				<th class="col-4">Date</th>
 		      			</tr>
 		   			</thead>
 		   			<tbody>
 						{% for time in top_times %}
 							<tr class="text-center">
-								<td class="align-middle">
+								<td class="col-4 align-middle">
 									<h5>
 										<a href="/roster/{{time.player.player_link}}" class="text-danger">
 											{{ time.player.full_name }}
 										</a>
 									</h5>
 								</td>
-								<td class="align-middle">
+								<td class="col-4 align-middle">
 									{{ time.formatted_time }}
 								</td>
-								<td class="align-middle">
+								<td class="col-4 align-middle">
 									{{ time.date }}
 								</td>
 							</tr>

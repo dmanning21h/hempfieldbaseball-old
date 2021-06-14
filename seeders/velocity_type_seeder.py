@@ -23,12 +23,13 @@ print("Seeding Velocity Types. . .")
 
 # Generate Velocity Types
 velocity_types = ["Exit", "Pitching", "Infield", "Outfield"]
-for velocity_type in velocity_types:
+ordering = [1, 2, 4, 3]
+for velocity_type, order in zip(velocity_types, ordering):
     try:
         cursor.execute(
             f"""
                 INSERT INTO {DATABASE_NAME}.VelocityType
-                values (NULL, '{velocity_type}')
+                values (NULL, '{velocity_type}', {order})
             """
         )
     except Exception as e:

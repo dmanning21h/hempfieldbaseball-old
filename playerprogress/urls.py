@@ -16,47 +16,47 @@ urlpatterns = [
          views.get_player_lift_data_and_dates,
          name='get-player-lift-data-and-dates'),
 
-    path('leaderboards',
+    path('',
          views.leaderboards,
-         name='progress-leaderboards-index'),
+         name='leaderboards-index'),
 
-    path('performance/leaderboards/lifting',
+    path('performance/lifting',
          views.lifting_performance_leaderboards,
          name='lifting-performance-leaderboards'),
 
-    path('performance/leaderboards/velocity',
+    path('performance/velocity',
          views.velocity_performance_leaderboards,
          name='velocity-performance-leaderboards'),
 
-    path('performance/leaderboards/time',
+    path('performance/time',
          views.time_performance_leaderboards,
          name='time-performance-leaderboards'),
 
-    path('performance/leaderboards/distance',
+    path('performance/distance',
          views.distance_performance_leaderboards,
          name='distance-performance-leaderboards'),
 
-    path('performance/leaderboards/misc',
-         views.misc_performance_leaderboards,
-         name='misc-performance-leaderboards'),
+    #path('performance/misc',
+    #     views.misc_performance_leaderboards,
+    #     name='misc-performance-leaderboards'),
 
-    path('improvement/leaderboards/lifting',
+    path('improvement/lifting',
          views.lifting_improvement_leaderboards,
          name='lifting-improvement-leaderboards'),
 
-    path('improvement/leaderboards/velocity',
+    path('improvement/velocity',
          views.velocity_improvement_leaderboards,
          name='velocity-improvement-leaderboards'),
 
-    path('improvement/leaderboards/time',
+    path('improvement/time',
          views.time_improvement_leaderboards,
          name='time-improvement-leaderboards'),
 
-    path('improvement/leaderboards/distance',
+    path('improvement/distance',
          views.distance_improvement_leaderboards,
          name='distance-improvement-leaderboards'),
 
-    path('improvement/leaderboards/misc', views.misc_improvement_leaderboards,
+    path('improvement/misc', views.misc_improvement_leaderboards,
          name="misc-improvement-leaderboards"),
 
 ]

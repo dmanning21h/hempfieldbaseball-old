@@ -10,7 +10,9 @@ from .models import BodyWeight, BodyWeightImprovement
 
 
 class LiftTypeAdmin(admin.ModelAdmin):
-    fields = ['name']
+    list_display = ['name', 'order']
+
+    fields = ['name', 'order']
 
 
 class LiftAdmin(admin.ModelAdmin):
@@ -71,7 +73,9 @@ class StrengthIncrementAdmin(admin.ModelAdmin):
 
 
 class VelocityTypeAdmin(admin.ModelAdmin):
-    fields = ['name']
+    list_display = ['name', 'order']
+
+    fields = ['name', 'order']
 
 
 class VelocityAdmin(admin.ModelAdmin):
@@ -112,7 +116,9 @@ class VelocityAdmin(admin.ModelAdmin):
 
 
 class TimeTypeAdmin(admin.ModelAdmin):
-    fields = ['name']
+    list_display = ['name', 'order', 'is_speed']
+
+    fields = ['name', 'order', 'is_speed']
 
 
 class TimeAdmin(admin.ModelAdmin):
@@ -140,15 +146,25 @@ class TimeAdmin(admin.ModelAdmin):
         else:
             if new_time.date <= time_improvement.baseline.date:
                 time_improvement.baseline = new_time
-                time_improvement.improvement = -(
-                    time_improvement.latest.time
-                    - new_time.time)
+                if time_type.is_speed:
+                    time_improvement.improvement = -(
+                        time_improvement.latest.time
+                        - new_time.time)
+                else:
+                    time_improvement.improvement = (
+                        time_improvement.latest.time
+                        - new_time.time)
 
             elif new_time.date >= time_improvement.latest.date:
                 time_improvement.latest = new_time
-                time_improvement.improvement = -(
-                    new_time.time
-                    - time_improvement.baseline.time)
+                if time_type.is_speed:
+                    time_improvement.improvement = -(
+                        new_time.time
+                        - time_improvement.baseline.time)
+                else:
+                    time_improvement.improvement = (
+                        new_time.time
+                        - time_improvement.baseline.time)
 
         time_improvement.baseline.save()
         time_improvement.latest.save()
@@ -157,7 +173,9 @@ class TimeAdmin(admin.ModelAdmin):
 
 
 class DistanceTypeAdmin(admin.ModelAdmin):
-    fields = ['name']
+    list_display = ['name', 'order']
+
+    fields = ['name', 'order']
 
 
 class DistanceAdmin(admin.ModelAdmin):

@@ -23,12 +23,13 @@ print("Seeding Distance Types. . .")
 
 # Generate Distance Types
 distance_types = ["Long Toss", "Broad Jump"]
-for distance_type in distance_types:
+ordering = [1, 2]
+for distance_type, order in zip(distance_types, ordering):
     try:
         cursor.execute(
             f"""
                 INSERT INTO {DATABASE_NAME}.DistanceType
-                values (NULL, '{distance_type}')
+                values (NULL, '{distance_type}', {order})
             """
         )
     except Exception as e:
