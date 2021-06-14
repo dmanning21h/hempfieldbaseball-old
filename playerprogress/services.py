@@ -134,7 +134,11 @@ def _get_model_leaders(type_model, sorting_key, descending=True):
         latest_records = _get_latest_model_records(ttype)
         if descending == False:
             if ttype.is_speed == False:
-                descending = True
+                leaders[ttype.name] = _sort_model_latest_records(latest_records,
+                                                                 sorting_key,
+                                                                 True)
+                continue
+
         leaders[ttype.name] = _sort_model_latest_records(latest_records,
                                                          sorting_key,
                                                          descending)
