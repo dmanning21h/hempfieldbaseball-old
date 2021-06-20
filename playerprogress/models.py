@@ -9,7 +9,7 @@ from teammanagement.models import Player
 class LiftType(models.Model):
     lift_type_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=25)
-    order = models.PositiveSmallIntegerField(default=0)
+    order = models.PositiveSmallIntegerField(unique=True)
 
     class Meta:
         db_table = "LiftType"
@@ -134,7 +134,7 @@ class LiftImprovement(models.Model):
 class VelocityType(models.Model):
     velocity_type_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=25)
-    order = models.PositiveSmallIntegerField(default=0)
+    order = models.PositiveSmallIntegerField(unique=True)
 
     class Meta:
         db_table = "VelocityType"
@@ -202,7 +202,7 @@ class VelocityImprovement(models.Model):
 class TimeType(models.Model):
     time_type_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=25)
-    order = models.PositiveSmallIntegerField(default=0)
+    order = models.PositiveSmallIntegerField(unique=True)
     is_speed = models.BooleanField(default=True)
 
     class Meta:
@@ -299,7 +299,7 @@ class TimeImprovement(models.Model):
 class DistanceType(models.Model):
     distance_type_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=25)
-    order = models.PositiveSmallIntegerField(default=0)
+    order = models.PositiveSmallIntegerField(unique=True)
 
     class Meta:
         db_table = "DistanceType"
