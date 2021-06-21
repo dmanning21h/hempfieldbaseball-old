@@ -57,7 +57,7 @@
             <tr>       
               <td class="pl-4" style="max-width: 125px">
                 {% if player.roster_photo %}
-                  <img src="{{ player.roster_photo.url }}" width="100" class="rounded">
+                  <img src="{{ player.roster_photo.url }}" width="100" class="rounded" alt="{{ player.info.full_name }} roster photo">
                 {% endif %}
               </td>
 
@@ -110,7 +110,7 @@
           
                 <td class="pl-4" style="max-width: 125px">
                   {% if coach.roster_photo %}
-                    <img src="{{ coach.roster_photo.url }}" width="100" class="rounded">
+                    <img src="{{ coach.roster_photo.url }}" width="100" class="rounded" alt="Coach {{ coach.info.full_name }} roster photo">
                   {% else %}
                     Picture?
                   {% endif %}

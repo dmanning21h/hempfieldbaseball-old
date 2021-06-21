@@ -57,7 +57,7 @@
 
   	        <div class="card shadow-lg mx-auto">
   	  	      <a href="{{ player.college_roster_link }}" target="_blank">
-		        <img class="card-img-top img-thumbnail" src="{{ player.college_roster_photo.url }}" alt="College Roster Photo">
+		        <img class="card-img-top img-thumbnail" src="{{ player.college_roster_photo.url }}" alt="{{ player.first_name }} {{ player.last_name }} college roster photo">
 		        <div class="card-body text-danger">
 		          <h4 class="card-title text-center">{{ player.first_name }} {{ player.last_name }}</h4>
 		          <p class="card-text text-center">{{ player.college }}</p>

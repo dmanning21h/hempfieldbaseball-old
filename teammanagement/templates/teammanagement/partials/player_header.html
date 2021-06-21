@@ -2,7 +2,7 @@
 	<div class="row">
 		<div class="col-md-3 text-center mb-3 pl-md-4 pl-lg-5">
 			{% if player.roster_photo %}
-                  <img src="{{ player.roster_photo.url }}" width="175px" class="rounded border border-dark shadow-lg">
+                  <img src="{{ player.roster_photo.url }}" width="175px" class="rounded border border-dark shadow-lg" alt="{{ player.info.full_name }} roster photo">
             {% endif %}
 		</div>
 
