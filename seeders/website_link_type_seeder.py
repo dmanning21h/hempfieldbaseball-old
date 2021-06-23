@@ -22,7 +22,7 @@ cursor = conn.cursor()
 print("Seeding Website Link Types. . .")
 
 # Generate Website Link Types
-website_link_types = ["Hitting Video", "Hitting Article", "Diet Article"]
+website_link_types = ["Hitting Video", "Hitting Article", "Diet"]
 is_videos = [1, 0, 0]
 for website_link_type, is_video in zip(website_link_types, is_videos):
     try:
