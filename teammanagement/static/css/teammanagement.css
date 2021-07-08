@@ -1,0 +1,41 @@
+.short-text { display: none; }
+
+@media (max-width: 720px) {
+    .short-text { display: inline-block; }
+    .full-text, .team-picture { display: none; }
+}
+
+h4 {
+    font-size: 1.05rem;
+}
+
+p {
+    font-size: .75rem;
+}
+
+@media (min-width: 544px) {  
+    h4 {
+        font-size: 1.5rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+}
+
+.nav-tabs > li > a.active, .nav-tabs > li > a.active:hover, .nav-tabs > li > a.active:focus {
+    color: #fff !important;
+    background-color: #111 !important;
+}
+
+.nav-tabs > li > a {
+    color: red !important;
+}
+
+.nav-tabs > li > a:hover {
+    color: #222 !important;
+}
+
+.card-header > .btn-link:hover, .card-header > .btn-link:active, .card-header > .btn-link:focus {
+    text-decoration: none !important;
+}

@@ -1,0 +1,38 @@
+#page-container {
+    position: relative;
+    min-height: 100vh;
+    padding-bottom: 2.5rem;
+  }
+
+  #content-wrap {
+    padding-bottom: 2.5rem;
+  }
+
+  #footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;
+    }
+
+  .dropdown-toggle::after {
+    transition: transform 0.15s linear; 
+  }
+
+  .show.dropdown .dropdown-toggle::after {
+    transform: translateY(2.5px);
+  }
+
+  .dropdown-menu {
+    margin-top: 0;
+  }
+
+  .navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+
+  #main-content {
+    margin-top: 56px;
+  }

@@ -20,49 +20,9 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
     <link rel="icon" type="image/png" href="{% static 'img/favicon.ico' %}">
-    
-    <style>
-      #page-container {
-        position: relative;
-        min-height: 100vh;
-        padding-bottom: 2.5rem;
-      }
-
-      #content-wrap {
-        padding-bottom: 2.5rem;
-      }
-
-      #footer {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        height: 2.5rem;
-        }
-
-      .dropdown-toggle::after {
-        transition: transform 0.15s linear; 
-      }
- 
-      .show.dropdown .dropdown-toggle::after {
-        transform: translateY(2.5px);
-      }
-
-      .dropdown-menu {
-        margin-top: 0;
-      }
-
-      .navbar {
-        position: fixed;
-        top: 0;
-        width: 100%;
-      }
-
-      #main-content {
-        margin-top: 56px;
-      }
-    </style>
 
     {% block stylesheet %}{% endblock %}
 
@@ -132,36 +92,7 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
-  <script>
-    const $dropdown = $(".dropdown");
-    const $dropdownToggle = $(".dropdown-toggle");
-    const $dropdownMenu = $(".dropdown-menu");
-    const showClass = "show";
-         
-    $(window).on("load resize", function() {
-      if (this.matchMedia("(min-width: 768px)").matches) {
-        $dropdown.hover(
-          function() {
-            const $this = $(this);
-            $this.addClass(showClass);
-            $this.find($dropdownToggle).attr("aria-expanded", "true");
-            $this.find($dropdownMenu).stop(true, true).slideDown(200);
-            $this.find($dropdownMenu).addClass(showClass);
-          },
-          function() {
-            const $this = $(this);
-            $this.removeClass(showClass);
-            $this.find($dropdownToggle).attr("aria-expanded", "false");
-            $this.find($dropdownMenu).stop(true, true).slideUp(200);
-            $this.find($dropdownMenu).removeClass(showClass);
-          }
-        );
-      } else {
-        $dropdown.off("mouseenter mouseleave");
-      }
-    });
-    </script>
-
+  <script src="{% static 'js/main.js' %}"></script>
     
     {% block javascript %}{% endblock %}
   

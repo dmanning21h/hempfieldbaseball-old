@@ -1,15 +1,12 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
 	Hitting Development Articles - Hempfield Baseball
 {% endblock %}
 
 {% block stylesheet %}
-<style>
-    .title {
-		text-shadow: .25px .25px .5px #222629;
-	}
-</style>
+    <link rel="stylesheet" href="{% static 'css/resources.css' %}">
 {% endblock %}
 
 {% block content %}
