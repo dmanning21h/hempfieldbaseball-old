@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% load teammanagement_tags %}
 {% load playerprogress_tags %}
 
@@ -7,25 +8,7 @@
 {% endblock %}
 
 {% block stylesheet %}
-<style>
-	.nav-tabs > li > a.active, .nav-tabs > li > a.active:hover, .nav-tabs > li > a.active:focus {
-    	color: #fff !important;
-    	background-color: #111 !important;
-	}
-
-	.nav-tabs > li > a {
-    	color: red !important;
-	}
-
-	.nav-tabs > li > a:hover {
-    	color: #222 !important;
-	}
-
-	.card-header > .btn-link:hover, .card-header > .btn-link:active, .card-header > .btn-link:focus {
-    	text-decoration: none !important;
-	}
-
-</style>
+	<link rel="stylesheet" href="{% static 'css/teammanagement.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -57,87 +40,9 @@
 
 {% block javascript %}
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script src="{% static 'js/teammanagement.js' %}"></script>
 
 <script>
-	async function getDataAndDates(metricName, dataType)
-	{
-		let result;
-
-		try {
-			result = await $.ajax({
-				url: "{% url 'playerprogress:get-player-data-and-dates' %}",
-				type: 'GET',
-		        data: {
-		          'data_type': dataType,
-		          'player_id': "{{ player.info.player_id }}",
-		          'metric_name': metricName
-		        },
-		        dataType: 'json',
-			});
-
-			return result;
-		} catch (error) {
-			console.error(error);
-		}
-	}
-
-	async function generateChart(chartId, metricName, dataType, label)
-	{
-		if ($("#".concat(chartId).concat("Chart")).length)
-		{
-			const ajaxResponse = await getDataAndDates(metricName, dataType);
-
-			const dates = ajaxResponse.dates;
-			const data = ajaxResponse.data;
-
-			var line_chart_options = {
-				maintainAspectRatio: false,
-	      		scales: {
-	        		x: {
-	        			type: 'time',
-	        			distribution: 'linear',
-	        			time: {
-	        				parser: 'MM/DD/YYYY',
-	        				unit: 'month'
-	        			},
-	        			bounds: 'labels'
-	          		},
-	          		yAxes: [{
-	          			scaleLabel: {
-	          				display: true,
-	          				labelString: label
-	          			}
-	          		}]
-	      		},
-	      		legend: {
-	      			display: false
-	      		}
-	    	}
-	    	var line_chart_data = {
-				labels: dates,
-				datasets: [
-					{
-						label: label,
-						backgroundColor: 'transparent',
-						borderColor: 'rgb(199, 44, 58)',
-						borderWidth: 2,
-						pointBackgroundColor: 'rgb(199, 44, 58)',
-						data: data,
-						fill: false,
-						lineTension: 0
-					}
-				]
-			}
-
-			var ctx = document.getElementById(chartId.concat("Chart")).getContext('2d');
-			var chart = new Chart(ctx, {
-						type: 'line',
-						data: line_chart_data,
-						options: line_chart_options
-					});
-		}
-	}
-
 	{% for lift_name in lift_data %}
 		generateChart("{{ lift_name|id_format }}", "{{lift_name}}", "lift", "Strength Points");
 	{% endfor %}
@@ -152,22 +57,28 @@
 
 	generateChart("bodyweight", "Body Weight", "weight", "Weight (lbs)")
 
-	$("#accordion").on("hide.bs.collapse show.bs.collapse", e => {
-  		$(e.target)
-    	.prev()
-    	.find("i:last-child")
-    	.toggleClass("fa-minus-square fa-plus-square");
-	});
+	
 
-	$("#accordion").on("shown.bs.collapse", e => {
-  		$("html, body").animate(
-    		{
-      			scrollTop: $(e.target)
-        		.prev()
-        		.offset().top
-    		},
-    		400
-  		);
-	});
+	async function getDataAndDates(metricName, dataType)
+	{
+		let result;
+
+		try {
+			result = await $.ajax({
+				url: "{% url 'playerprogress:get-player-data-and-dates' %}",
+				type: 'GET',
+				data: {
+					'data_type': dataType,
+					'player_id': "{{ player.info.player_id }}",
+					'metric_name': metricName
+				},
+				dataType: 'json',
+			});
+
+			return result;
+		} catch (error) {
+			console.error(error);
+		}
+	}
 </script>
 {% endblock %}

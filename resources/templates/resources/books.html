@@ -1,15 +1,12 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
 	Book Resources - Hempfield Baseball
 {% endblock %}
 
 {% block stylesheet %}
-<style>
-    .title {
-		text-shadow: .25px .25px .5px #222629;
-	}
-</style>
+    <link rel="stylesheet" href="{% static 'css/resources.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -17,14 +14,14 @@
         {% for book_type, books in books_by_type.items %}
             {% if books %}
                 <hr>
-                <h2 class="title mb-2">
+                <h2 class="sub-header mb-2">
                     {{ book_type }} Books
                 </h2>
             {% endif %}
             {% for book in books %}
                 <div class="mb-4">
                     <hr>
-                    <h4 class="title mb-1">
+                    <h4 class="sub-header mb-1">
                         <a href="{{ book.amazon_url }}" class="text-danger text-decoration-underline" target="_blank">
                             {{ book.name }}
                         </a>

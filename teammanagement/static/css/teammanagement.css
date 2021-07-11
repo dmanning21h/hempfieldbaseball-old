@@ -1,0 +1,64 @@
+/* Roster and Individual Player Page Styling */
+@media (max-width: 768px) {
+    .team-picture { display: none; }
+}
+
+/* Mobile Screen Sizes */
+h1 {
+    font-size: 1.75rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+h4 {
+    font-size: 1.05rem;
+}
+
+p, th, td {
+    font-size: .75rem;
+}
+
+#playerInfo p {
+    font-size: 1rem;
+}
+
+/* Large Screen Size */
+@media (min-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    h3 {
+        font-size: 1.75rem;
+    }
+    
+    h4 {
+        font-size: 1.5rem;
+    }
+
+    p, th, td {
+        font-size: 1rem;
+    }
+}
+
+
+
+/* Accordion Content Tabs */
+.nav-tabs > li > a.active, .nav-tabs > li > a.active:hover, .nav-tabs > li > a.active:focus {
+    color: #fff !important;
+    background-color: #111 !important;
+}
+
+.nav-tabs > li > a {
+    color: red !important;
+}
+
+.nav-tabs > li > a:hover {
+    color: #222 !important;
+}
+
+.card-header > .btn-link:hover, .card-header > .btn-link:active, .card-header > .btn-link:focus {
+    text-decoration: none !important;
+}
