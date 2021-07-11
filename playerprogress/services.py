@@ -196,6 +196,8 @@ def get_distance_improvement_leaders():
 
 
 def get_body_weight_improvement_leaders():
+    top = 10
+
     improvement_leaders = (
         BodyWeightImprovement.objects
         .filter(player__is_active=True)

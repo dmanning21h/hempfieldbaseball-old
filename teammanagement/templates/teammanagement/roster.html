@@ -12,13 +12,13 @@
 
 {% block content %}
   <div class="container pt-4">
-    <h2 class="text-center">
+    <h1 class="text-center">
       {{ team.year }} HEMPFIELD BASEBALL
-    </h2>
+    </h1>
   </div>
 
   {% if team.team_photo %}
-    <div class="container team-picture text-center mb-4 mt-2">
+    <div id="teamPhoto" class="container text-center mb-4 mt-2">
       <hr>
       <img src="{{ team.team_photo.url }}" width="95%" class="rounded">
     </div>

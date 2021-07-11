@@ -12,12 +12,12 @@
 {% block content %}
     <div class="container text-center pt-1 pt-md-2">
         <hr>
-        <h2 class="title mb-3">
+        <h2 class="sub-header mb-3">
             Hitting Development Articles
         </h2>
         {% for link in hitting_article_links %}
             <div class="mb-4">
-                <h4 class="title mb-3">
+                <h4 class="sub-header mb-3">
                     <a href="{{ link.url }}" class="text-danger" target="_blank">
                         {{ link.name }}
                     </a>
