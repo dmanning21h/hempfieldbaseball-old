@@ -2,7 +2,7 @@
 
 {% for time_name, times in time_data.items %}
 	{% if times %}
-		<div class="card">
+		<div id="{{ time_name|time_id_format }}Data" class="card">
 
 			<div class="card-header text-center" id="{{ time_name|time_id_format }}Heading">
 					<button class="btn btn-link collapsed text-danger" data-toggle="collapse" data-target="#{{ time_name|time_id_format }}Content" aria-expanded="true" aria-controls="{{ time_name|time_id_format }}Content">

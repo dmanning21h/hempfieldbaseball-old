@@ -2,7 +2,7 @@
 
 {% for distance_name, distances in distance_data.items %}
 	{% if distances %}
-		<div class="card">
+		<div id="{{ distance_name|id_format }}Data" class="card">
 
 			<div class="card-header text-center" id="{{ distance_name|id_format }}Heading">
 					<button class="btn btn-link collapsed text-danger" data-toggle="collapse" data-target="#{{ distance_name|id_format }}Content" aria-expanded="true" aria-controls="{{ distance_name|id_format }}Content">

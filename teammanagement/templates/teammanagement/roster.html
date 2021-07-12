@@ -25,10 +25,10 @@
   {% endif %}
 
   <div class="container">
-    <table class="table table-striped shadow-lg">
+    <table id="rosterPlayers" class="container table table-striped shadow-lg">
       <tbody>
         {% for player in team.players.all %}
-            <tr>       
+            <tr class="roster-player-row">       
               <td class="pl-4" style="max-width: 125px">
                 {% if player.roster_photo %}
                   <img src="{{ player.roster_photo.url }}" width="100" class="rounded" alt="{{ player.info.full_name }} roster photo">
@@ -77,16 +77,14 @@
   </h2>
 
   <div class="container">
-    <table class="table table-striped shadow-lg">
+    <table id="rosterCoaches" class="table table-striped shadow-lg">
       <tbody>
         {% for coach in team.coaches.all %}
-            <tr>
+            <tr class="roster-coach-row">
           
                 <td class="pl-4" style="max-width: 125px">
                   {% if coach.roster_photo %}
                     <img src="{{ coach.roster_photo.url }}" width="100" class="rounded" alt="Coach {{ coach.info.full_name }} roster photo">
-                  {% else %}
-                    Picture?
                   {% endif %}
                 </td>
 
@@ -95,7 +93,7 @@
                     <b>{{ coach.role.name|upper }} COACH</b>
                   </p>
                   <h4>
-                    <a href="{% url 'teammanagement:current-roster' %}" class="text-danger">
+                    <a href="" class="text-danger">
                       {{ coach.info.full_name|upper }}
                     </a>
                   </h4>

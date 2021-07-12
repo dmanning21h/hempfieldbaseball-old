@@ -3,9 +3,9 @@
 
 {% for lift_name, lifts in lift_data.items %}
 	{% if lifts %}
-		<div class="card">
+		<div id="{{ lift_name|id_format }}Data" class="card">
 
-			<div class="card-header text-center" id="{{ lift_name|id_format }}Heading">
+			<div id="{{ lift_name|id_format }}Heading" class="card-header text-center">
 					<button id="{{ lift_name|id_format }}Button" class="btn btn-link collapsed text-danger" data-toggle="collapse" data-target="#{{ lift_name|id_format }}Content" aria-expanded="true" aria-controls="{{ lift_name|id_format }}Content">
 						<h3>
 							<span>
@@ -20,29 +20,27 @@
 
 			
 			<div id="{{ lift_name|id_format }}Content" class="collapse" aria-labelledby="{{ lift_name|id_format }}Heading" data-parent="#accordion">
-				<div class="card-body">
+				<div id="{{ lift_name|id_format }}DataBody" class="card-body">
 
-					<ul class="nav nav-tabs justify-content-center" id="{{ lift_name|id_format }}-tab" role="tablist">
-							
-							<li class="nav-item" role="presentation">
-							<a class="nav-link active" id="{{ lift_name|id_format }}-chart-tab" data-toggle="tab" href="#{{ lift_name|id_format }}-chart" role="tab" aria-controls="{{ lift_name|id_format }}-chart" aria-selected="true">Graph</a>
-							</li>
+					<ul id="{{ lift_name|id_format }}Tab" class="nav nav-tabs justify-content-center" role="tablist">
+						<li class="nav-item" role="presentation">
+							<a id="{{ lift_name|id_format }}ChartTab" class="nav-link active" data-toggle="tab" href="#{{ lift_name|id_format }}ChartContainer" role="tab" aria-controls="{{ lift_name|id_format }}ChartContainer" aria-selected="true">Graph</a>
+						</li>
 
-							<li class="nav-item" role="presentation">
-							<a class="nav-link" id="{{ lift_name|id_format }}-table-tab" data-toggle="tab" href="#{{ lift_name|id_format }}-table" role="tab" aria-controls="{{ lift_name|id_format }}-table" aria-selected="false">Table</a>
-							</li>
-
+						<li class="nav-item" role="presentation">
+							<a id="{{ lift_name|id_format }}TableTab" class="nav-link" data-toggle="tab" href="#{{ lift_name|id_format }}Table" role="tab" aria-controls="{{ lift_name|id_format }}Table" aria-selected="false">Table</a>
+						</li>
 					</ul>
 
 					<br>
 
-					<div class="tab-content" id="{{ lift_name|id_format }}-tabContent">
+					<div id="{{ lift_name|id_format }}TabContent" class="tab-content">
 
-						<div class="tab-pane fade show active" id="{{ lift_name|id_format }}-chart" style="height: 50vh; width: 100%" role="tabpanel" aria-labelledby="{{ lift_name|id_format }}-chart-tab">
+						<div id="{{ lift_name|id_format }}ChartContainer" class="tab-pane fade show active" style="height: 50vh; width: 100%" role="tabpanel" aria-labelledby="{{ lift_name|id_format }}ChartTab">
 							<canvas id="{{ lift_name|id_format }}Chart"></canvas>
 						</div>
 
-						 <div class="container tab-pane fade" id="{{ lift_name|id_format }}-table" role="tabpanel" aria-labelledby="{{ lift_name|id_format }}-table-tab">
+						 <div id="{{ lift_name|id_format }}Table" class="container tab-pane fade"role="tabpanel" aria-labelledby="{{ lift_name|id_format }}TableTab">
 						  	<table class="table table-striped table-bordered">
 								<thead class="thead-dark">
 									<tr class="text-center">

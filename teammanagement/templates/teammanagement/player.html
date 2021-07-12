@@ -25,12 +25,12 @@
 			<h3 class="text-muted">Player Progress</h3>
 		</div>
 
-		<div class="container" id="accordion">
+		<div id="accordion" class="container">
+			{% show_player_misc %}
 			{% show_player_lifts %}
 			{% show_player_velocities %}
 			{% show_player_times %}
 			{% show_player_distances %}
-			{% show_player_misc %}
 		</div>
 	{% endif %}
 
