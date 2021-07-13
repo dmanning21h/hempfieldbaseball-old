@@ -252,14 +252,18 @@ class BodyWeightAdmin(admin.ModelAdmin):
 
 admin.site.register(LiftType, LiftTypeAdmin)
 admin.site.register(Lift, LiftAdmin)
+admin.site.register(LiftImprovement)
+
 admin.site.register(LiftSet, LiftSetAdmin)
 admin.site.register(StrengthIncrement, StrengthIncrementAdmin)
 
 admin.site.register(VelocityType, VelocityTypeAdmin)
 admin.site.register(Velocity, VelocityAdmin)
+admin.site.register(VelocityImprovement)
 
 admin.site.register(TimeType, TimeTypeAdmin)
 admin.site.register(Time, TimeAdmin)
+admin.site.register(TimeImprovement)
 
 admin.site.register(DistanceType, DistanceTypeAdmin)
 admin.site.register(Distance, DistanceAdmin)
