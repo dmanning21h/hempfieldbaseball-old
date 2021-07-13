@@ -1,9 +1,9 @@
 {% load playerprogress_tags %}
 
 {% if body_weights %}
-	<div class="card">
+	<div id="bodyweightData" class="card">
 
-		<div class="card-header text-center" id="bodyweightHeading">
+		<div id="bodyweightHeading" class="card-header text-center">
 				<button class="btn btn-link collapsed text-danger" data-toggle="collapse" data-target="#bodyweightContent" aria-expanded="true" aria-controls="bodyweightContent">
 					<h3>
 						Body Weight
@@ -18,27 +18,27 @@
 		<div id="bodyweightContent" class="collapse" aria-labelledby="bodyweightHeading" data-parent="#accordion">
 			<div class="card-body">
 
-				<ul class="nav nav-tabs justify-content-center" id="bodyweight-tab" role="tablist">
+				<ul id="bodyweightTabs" class="nav nav-tabs justify-content-center" role="tablist">
 						
 						<li class="nav-item" role="presentation">
-							<a class="nav-link active" id="bodyweight-chart-tab" data-toggle="tab" href="#bodyweight-chart" role="tab" aria-controls="bodyweight-chart" aria-selected="true">Graph</a>
+							<a id="bodyweightChartTab" class="nav-link active" data-toggle="tab" href="#bodyweightChartContainer" role="tab" aria-controls="bodyweightChartContainer" aria-selected="true">Graph</a>
 						</li>
 
 						<li class="nav-item" role="presentation">
-							<a class="nav-link" id="bodyweight-table-tab" data-toggle="tab" href="#bodyweight-table" role="tab" aria-controls="bodyweight-table" aria-selected="false">Table</a>
+							<a id="bodyweightTableTab" class="nav-link" data-toggle="tab" href="#bodyweightTableContainer" role="tab" aria-controls="bodyweightTableContainer" aria-selected="false">Table</a>
 						</li>
 
 				</ul>
 
 				<br>
 
-				<div class="tab-content" id="bodyweight-tabContent">
+				<div id="bodyweightTabContent" class="tab-content">
 
-					<div class="container tab-pane fade show active" id="bodyweight-chart" style="height: 50vh; width: 100%" role="tabpanel" aria-labelledby="bodyweight-chart-tab">
+					<div id="bodyweightChartContainer" class="container tab-pane fade show active" style="height: 50vh; width: 100%" role="tabpanel" aria-labelledby="bodyweightChartTab">
 						<canvas id="bodyweightChart"></canvas>
 					 </div>
 
-					 <div class="container tab-pane fade" id="bodyweight-table" role="tabpanel" aria-labelledby="bodyweight-table-tab">
+					 <div id="bodyweightTableContainer" class="container tab-pane fade" role="tabpanel" aria-labelledby="bodyweightTableTab">
 					  	<table class="table table-striped table-bordered">
 							<thead class="thead-dark">
 								<tr class="text-center">

@@ -25,12 +25,11 @@
 			<h3 class="text-muted">Player Progress</h3>
 		</div>
 
-		<div class="container" id="accordion">
+		<div id="accordion" class="container">
+			{% show_player_misc %}
 			{% show_player_lifts %}
 			{% show_player_velocities %}
 			{% show_player_times %}
-			{% show_player_distances %}
-			{% show_player_misc %}
 		</div>
 	{% endif %}
 
@@ -43,6 +42,8 @@
 <script src="{% static 'js/teammanagement.js' %}"></script>
 
 <script>
+	generateChart("bodyweight", "Body Weight", "weight", "Weight (lbs)")
+	
 	{% for lift_name in lift_data %}
 		generateChart("{{ lift_name|id_format }}", "{{lift_name}}", "lift", "Strength Points");
 	{% endfor %}
@@ -50,12 +51,6 @@
 	{% for velocity_name in velocity_data %}
 		generateChart("{{ velocity_name|id_format }}", "{{ velocity_name }}", "velocity", "Velocity (MPH)");
 	{% endfor %}
-
-	{% for distance_name in distance_data %}
-		generateChart("{{ distance_name|id_format }}", "{{ distance_name }}", "distance", "Distance (ft)");
-	{% endfor %}
-
-	generateChart("bodyweight", "Body Weight", "weight", "Weight (lbs)")
 
 	
 
