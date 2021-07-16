@@ -1,4 +1,8 @@
 /* Roster and Individual Player Page Styling */
+p {
+    font-family: 'Ubuntu', sans-serif;
+}
+
 @media (max-width: 768px) {
     .team-picture { display: none; }
 }
