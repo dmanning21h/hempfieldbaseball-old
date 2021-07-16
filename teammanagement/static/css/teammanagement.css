@@ -16,6 +16,14 @@ h3 {
     font-size: 1.5rem;
 }
 
+#rosterHeading {
+    font-size: 1.4rem;
+}
+
+#coachesHeading {
+    font-size: 1.3rem;
+}
+
 h4 {
     font-size: 1.05rem;
 }
@@ -30,8 +38,12 @@ p, th, td {
 
 /* Large Screen Size */
 @media (min-width: 768px) {
-    h1 {
+    #rosterHeading, h1 {
         font-size: 2.5rem;
+    }
+
+    #coachesHeading {
+        font-size: 2rem;
     }
 
     h3 {
