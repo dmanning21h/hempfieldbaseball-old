@@ -1,3 +1,11 @@
+h1, h2, h3, h4, h5, h6, th, td, li, a {
+  font-family: 'Ubuntu', sans-serif;
+}
+
+p {
+  font-family: 'Lora', serif;
+}
+
 #page-container {
   position: relative;
   min-height: 100vh;

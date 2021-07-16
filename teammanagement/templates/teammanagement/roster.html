@@ -3,7 +3,7 @@
 {% load teammanagement_tags %}
 
 {% block title %}
-  Roster - Hempfield Baseball
+  Roster
 {% endblock %}
 
 {% block stylesheet %}
@@ -12,7 +12,7 @@
 
 {% block content %}
   <div class="container pt-4">
-    <h1 class="text-center">
+    <h1 class="text-center section-header">
       {{ team.year }} HEMPFIELD BASEBALL
     </h1>
   </div>
@@ -49,7 +49,7 @@
                     </p>
                     <h4 class="mb-3">
                       {{ player.number }}
-                      <a href="{% url 'teammanagement:player-page' player.info.player_link %}" class="text-danger">
+                      <a href="{% url 'teammanagement:player-page' player.info.player_link %}" class="sub-header text-danger">
                         {{ player.info.full_name|upper }}
                       </a>
                     </h4>
@@ -72,7 +72,7 @@
 
   <br>
 
-  <h2 class="text-center">
+  <h2 class="sub-header text-center">
     COACHING STAFF
   </h2>
 
@@ -93,7 +93,7 @@
                     <b>{{ coach.role.name|upper }} COACH</b>
                   </p>
                   <h4>
-                    <a href="" class="text-danger">
+                    <a href="" class="sub-header text-danger">
                       {{ coach.info.full_name|upper }}
                     </a>
                   </h4>

@@ -1,4 +1,7 @@
 /* Player Progress Leaderboards Styling */
+p {
+    font-family: 'Ubuntu', sans-serif;
+}
 
 /* Mobile Screen Sizes */
 h1 {
