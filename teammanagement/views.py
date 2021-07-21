@@ -4,13 +4,6 @@ from . import services as tms
 from playerprogress import services as pps
 
 
-def index(request):
-
-    context = {}
-
-    return render(request, 'teammanagement/index.html', context)
-
-
 def roster(request, year=None):
     if year:
         team = tms.get_team_by_year(year)
