@@ -22,8 +22,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'playerprogress.apps.PlayerprogressConfig',
+    'sitemanagement.apps.SitemanagementConfig',
     'teammanagement.apps.TeammanagementConfig',
+    'playerprogress.apps.PlayerprogressConfig',
     'alumni.apps.AlumniConfig',
     'resources.apps.ResourcesConfig',
 ]

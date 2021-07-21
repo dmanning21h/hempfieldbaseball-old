@@ -12,10 +12,12 @@
       gtag('config', 'G-FHRYL1X7P2');
     </script>
 
+    <!-- Device Metas -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>{% block title %}Default Title{% endblock %}{% block title_extension %} - Hempfield Baseball{% endblock %}</title>
+    <!-- Page Information -->
+    <title>{% block title %}Default Title{% endblock %}{% block title_extension %} | Hempfield Baseball{% endblock %}</title>
     <meta name="description" content="Hempfield Baseball · 200 Stanley Avenue Landisville, PA, 17538 USA. SECTION THREE: 1983, 1993. SECTION ONE: 1995, 1996, 1997, 2000, 2001, 2003, 2005, 2012, 2013, 2015, 2016, 2019. LANCASTER-LEBANON: 1974, 1996, 1997, 1998, 1999, 2004, 2005, 2008, 2014. DISTRICT 3: 2004, 2015.">
 
     <!-- Fonts -->
@@ -46,15 +48,22 @@
           </button>
           <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
             <ul class="navbar-nav">
+
               <li class="nav-item text-left">
-                <a class="nav-link" href="{% url 'teammanagement:site-index' %}">HOME</a>
+                <a class="nav-link" href="{% url 'sitemanagement:site-index' %}">HOME</a>
               </li>
+
               <li class="nav-item text-left">
                 <a class="nav-link" href="{% url 'teammanagement:current-roster' %}">ROSTER</a>
               </li>
+
               <li class="nav-item text-left">
                 <a class="nav-link" href="{% url 'alumni:college-alumni' %}">ALUMNI</a>
               </li>
+
+              <!--li class="nav-item text-left">
+                <a class="nav-link" href="{% url 'playerprogress:leaderboards-index' %}">LEADERBOARDS</a>
+              </li-->
   
               <li class="nav-item dropdown text-left">
                 <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -73,9 +82,6 @@
                   <li class="text-left">
                     <a class="dropdown-item" href="{% url 'resources:resources-hitting-articles' %}">HITTING ARTICLES</a>
                   </li>
-                  <!--li  class="text-left">
-                    <a class="dropdown-item" href="{% url 'playerprogress:leaderboards-index' %}">LEADERBOARDS</a>
-                  </li-->
                 </ul>
               </li>
   
@@ -99,9 +105,8 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
   <script src="{% static 'js/main.js' %}"></script>
     
-    {% block javascript %}{% endblock %}
+  {% block javascript %}{% endblock %}
   
 </html>

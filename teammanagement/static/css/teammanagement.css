@@ -12,16 +12,8 @@ h1 {
     font-size: 1.75rem;
 }
 
-h3 {
+#rosterHeading, #coachesHeading, h3 {
     font-size: 1.5rem;
-}
-
-#rosterHeading {
-    font-size: 1.4rem;
-}
-
-#coachesHeading {
-    font-size: 1.3rem;
 }
 
 h4 {
