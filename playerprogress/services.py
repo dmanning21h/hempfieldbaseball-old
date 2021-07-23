@@ -9,7 +9,7 @@ from .models import BodyWeight, BodyWeightImprovement
 
 
 # Global for number of Leaderboard players
-top = 5
+top = 10
 
 
 def get_player_lifts_by_lift_name(player_id, lift_name):
