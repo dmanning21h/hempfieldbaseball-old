@@ -3,9 +3,8 @@
 {% load teammanagement_tags %}
 {% load playerprogress_tags %}
 
-{% block title %}
-	{{ player.info.full_name }}
-{% endblock %}
+{% block title %}{{ player.info.full_name }}{% endblock %}
+{% block description %}<meta name="description" content="{{ player.info.full_name }} extended roster details and player progress.">{% endblock %}
 
 {% block stylesheet %}
 	<link rel="stylesheet" href="{% static 'css/teammanagement.css' %}">

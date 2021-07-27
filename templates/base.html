@@ -18,7 +18,7 @@
 
     <!-- Page Information -->
     <title>{% block title %}Default Title{% endblock %}{% block title_extension %} | Hempfield Baseball{% endblock %}</title>
-    <meta name="description" content="Hempfield Baseball · 200 Stanley Avenue Landisville, PA, 17538 USA. SECTION THREE: 1983, 1993. SECTION ONE: 1995, 1996, 1997, 2000, 2001, 2003, 2005, 2012, 2013, 2015, 2016, 2019. LANCASTER-LEBANON: 1974, 1996, 1997, 1998, 1999, 2004, 2005, 2008, 2014. DISTRICT 3: 2004, 2015.">
+    {% block description %}{% endblock %}
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,11 +30,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    {% block stylesheet %}{% endblock %}
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="{% static 'img/favicon.ico' %}">
-
-    {% block stylesheet %}{% endblock %}
 
   </head>
 

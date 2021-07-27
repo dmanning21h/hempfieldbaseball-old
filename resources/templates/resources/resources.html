@@ -1,16 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}
-	Resources
-{% endblock %}
+{% block title %}Resources{% endblock %}
+{% block description %}<meta name="description" content="Player resources landing page.">{% endblock %}
 
 {% block stylesheet %}
 	<link rel="stylesheet" href="{% static 'css/resources.css' %}">
 {% endblock %}
 
 {% block content %}
-
 	
 	<div class="container text-center pt-4">
 		<hr>
@@ -84,7 +82,5 @@
 		</div>
 
 	</div>
-
-
 
 {% endblock %}
