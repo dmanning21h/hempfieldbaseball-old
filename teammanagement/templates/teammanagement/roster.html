@@ -2,9 +2,8 @@
 {% load static %}
 {% load teammanagement_tags %}
 
-{% block title %}
-  Roster
-{% endblock %}
+{% block title %}{{ team.year }} Roster{% endblock %}
+{% block description %}<meta name="description" content="{{ team.year }} Hempfield High School baseball roster.">{% endblock %}
 
 {% block stylesheet %}
     <link rel="stylesheet" href="{% static 'css/teammanagement.css' %}">
