@@ -12,12 +12,57 @@ from .models import BodyWeight, BodyWeightImprovement
 top = 10
 
 
+def get_player_deadlift_lifts(player_id):
+    return get_player_lifts_by_lift_name(player_id, "Deadlift")
+
+
+def get_player_squat_lifts(player_id):
+    return get_player_lifts_by_lift_name(player_id, "Squat")
+
+
+def get_player_bench_lifts(player_id):
+    return get_player_lifts_by_lift_name(player_id, "Bench Press")
+
+
+def get_player_exit_velocities(player_id):
+    return get_player_velocities_by_velocity_name(player_id, "Exit")
+
+
+def get_player_pitching_velocities(player_id):
+    return get_player_velocities_by_velocity_name(player_id, "Pitching")
+
+
+def get_player_outfield_velocities(player_id):
+    return get_player_velocities_by_velocity_name(player_id, "Outfield")
+
+
+def get_player_infield_velocities(player_id):
+    return get_player_velocities_by_velocity_name(player_id, "Infield")
+
+
+def get_player_sixty_times(player_id):
+    return get_player_times_by_time_name(player_id, "60-yd Dash")
+
+
 def get_player_lifts_by_lift_name(player_id, lift_name):
+    return _get_model_records_by_player_id_and_ttype_name(Lift, player_id, lift_name)
+
+
+def get_player_velocities_by_velocity_name(player_id, velocity_name):
+    return _get_model_records_by_player_id_and_ttype_name(Velocity, player_id, velocity_name)
+
+
+def get_player_times_by_time_name(player_id, time_name):
+    return _get_model_records_by_player_id_and_ttype_name(Time, player_id, time_name)
+
+
+def _get_model_records_by_player_id_and_ttype_name(model, player_id, ttype_name):
     return (
-        Player.objects.get(player_id=player_id)
-        .lifts.filter(ttype__name=lift_name)
-        .order_by('date')
-    )
+            model.objects
+            .filter(player=player_id)
+            .filter(ttype__name=ttype_name)
+            .order_by('date')
+        )
 
 
 def get_player_velocities_by_velocity_name(player_id, velocity_name):
@@ -94,7 +139,7 @@ def get_all_player_distances(player_id):
     return _get_model_records_by_player(DistanceType, Distance, player_id)
 
 
-def get_all_player_body_weights(player_id):
+def get_player_body_weights(player_id):
     body_weight_data = (
             BodyWeight.objects
             .filter(player=player_id)

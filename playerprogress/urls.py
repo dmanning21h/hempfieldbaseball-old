@@ -8,13 +8,21 @@ from . import views
 app_name = 'playerprogress'
 urlpatterns = [
 
-    path('ajax/get_player_data_and_dates',
-         views.get_player_data_and_dates,
-         name='get-player-data-and-dates'),
+     path('ajax/get-player-body-weights-with-dates',
+          views.get_player_body_weights_with_dates,
+          name='get-player-body-weights-with-dates'),
 
-    path('ajax/get_player_lift_data_and_dates',
-         views.get_player_lift_data_and_dates,
-         name='get-player-lift-data-and-dates'),
+    path('ajax/get-player-lifts-with-dates',
+          views.get_player_lifts_with_dates,
+          name='get-player-lifts-with-dates'),
+
+     path('ajax/get-player-velocities-with-dates',
+          views.get_player_velocities_with_dates,
+          name='get-player-velocities-with-dates'),
+
+     path('ajax/get-player-times-with-dates',
+          views.get_player_times_with_dates,
+          name='get-player-times-with-dates'),
 
     path('',
          views.leaderboards,
@@ -35,10 +43,6 @@ urlpatterns = [
     path('performance/distance',
          views.distance_performance_leaderboards,
          name='distance-performance-leaderboards'),
-
-    #path('performance/misc',
-    #     views.misc_performance_leaderboards,
-    #     name='misc-performance-leaderboards'),
 
     path('improvement/lifting',
          views.lifting_improvement_leaderboards,

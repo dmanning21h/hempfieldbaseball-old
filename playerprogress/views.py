@@ -4,57 +4,119 @@ from django.shortcuts import render
 from . import services as pps
 
 
-def get_player_data_and_dates(request):
-    player_id = request.GET.get('player_id')
-    data_type = request.GET.get('data_type')
+def get_player_body_weights_with_dates(request):
+    """
+    Returns all body weights (date, body weight) for a given player.
+    """
+    player_id = player_id = request.GET.get('player_id')
 
-    if data_type == "lift":
-        lift_name = request.GET.get('metric_name')
-        records = pps.get_player_lifts_by_lift_name(player_id, lift_name)
-        data = [lift.strength_points() for lift in records]
-        dates = [lift.date.strftime('%m/%d/%y') for lift in records]
-
-    elif data_type == "velocity":
-        velo_name = request.GET.get('metric_name')
-        records = pps.get_player_velocities_by_velocity_name(player_id,
-                                                             velo_name)
-        data = [velo.velocity for velo in records]
-        dates = [velo.date.strftime('%m/%d/%y') for velo in records]
-
-    elif data_type == "time":
-        pass
-
-    elif data_type == "distance":
-        distance_name = request.GET.get('metric_name')
-        records = pps.get_player_distances_by_distance_name(player_id,
-                                                            distance_name)
-        data = [dist.distance for dist in records]
-        dates = [dist.date.strftime('%m/%d/%y') for dist in records]
-
-    elif data_type == "weight":
-        records = pps.get_all_player_body_weights(player_id)
-        data = [bw.weight for bw in records]
-        dates = [bw.date.strftime('%m/%d/%y') for bw in records]
-
-    data = {
-        'data': data,
-        'dates': dates
-    }
-    return JsonResponse(data)
-
-
-def get_player_lift_data_and_dates(request):
-    player_id = request.GET.get('player_id')
-    lift_name = request.GET.get('lift_name')
-
-    records = pps.get_player_lifts_by_lift_name(player_id, lift_name)
-    data = [lift.strength_points() for lift in records]
-    dates = [lift.date.strftime('%m/%d/%y') for lift in records]
+    body_weight_records = pps.get_player_body_weights(player_id)
+    body_weight_dates = [body_weight.date.strftime('%m/%d/%y') for body_weight in body_weight_records]
+    body_weights = [body_weight.weight for body_weight in body_weight_records]
+    body_weight_return_data = list(zip(body_weight_dates, body_weights))
 
     response = {
-        'data': data,
-        'dates': dates
+        "bodyWeight": body_weight_return_data,
+        "allDates": body_weight_dates
     }
+
+    return JsonResponse(response)
+
+
+def get_player_lifts_with_dates(request):
+    """
+    Returns all lifts (date, sets, strength points) of each type for a given player.
+    Also returns a list of all dates for lifts for use with Chart.js.
+    """
+    player_id = player_id = request.GET.get('player_id')
+
+    deadlift_records = pps.get_player_deadlift_lifts(player_id)
+    deadlift_dates = [lift.date.strftime('%m/%d/%y') for lift in deadlift_records]
+    deadlift_strength_points = [lift.strength_points() for lift in deadlift_records]
+    deadlift_sets = [lift.sets() for lift in deadlift_records]
+    deadlift_return_data = list(zip(deadlift_dates, deadlift_strength_points, deadlift_sets))
+
+    squat_records = pps.get_player_squat_lifts(player_id)
+    squat_dates = [lift.date.strftime('%m/%d/%y') for lift in squat_records]
+    squat_strength_points = [lift.strength_points() for lift in squat_records]
+    squat_sets = [lift.sets() for lift in squat_records]
+    squat_return_data = list(zip(squat_dates, squat_strength_points, squat_sets))
+
+    bench_records = pps.get_player_bench_lifts(player_id)
+    bench_strength_points = [lift.strength_points() for lift in bench_records]
+    bench_dates = [lift.date.strftime('%m/%d/%y') for lift in bench_records]
+    bench_sets = [lift.sets() for lift in bench_records]
+    bench_return_data = list(zip(bench_dates, bench_strength_points, bench_sets))
+
+    all_dates = sorted(deadlift_dates + squat_dates + bench_dates) 
+
+    response = {
+        "deadlift": deadlift_return_data,
+        "squat": squat_return_data,
+        "benchPress": bench_return_data,
+        "allDates": all_dates
+    }
+
+    return JsonResponse(response)
+
+
+def get_player_velocities_with_dates(request):
+    """
+    Returns all velocities (date, velocity) of each type for a given player.
+    Also returns a list of all dates for velocities for use with Chart.js.
+    """
+    player_id = player_id = request.GET.get('player_id')
+
+    exit_velocity_records = pps.get_player_exit_velocities(player_id)
+    exit_velocity_dates = [velocity.date.strftime('%m/%d/%y') for velocity in exit_velocity_records]
+    exit_velocities = [velocity.velocity for velocity in exit_velocity_records]
+    exit_velocity_return_data = list(zip(exit_velocity_dates, exit_velocities))
+
+    pitching_velocity_records = pps.get_player_pitching_velocities(player_id)
+    pitching_velocity_dates = [velocity.date.strftime('%m/%d/%y') for velocity in pitching_velocity_records]
+    pitching_velocities = [velocity.velocity for velocity in pitching_velocity_records]
+    pitching_velocity_return_data = list(zip(pitching_velocity_dates, pitching_velocities))
+
+    outfield_velocity_records = pps.get_player_outfield_velocities(player_id)
+    outfield_velocity_dates = [velocity.date.strftime('%m/%d/%y') for velocity in outfield_velocity_records]
+    outfield_velocities = [velocity.velocity for velocity in outfield_velocity_records]
+    outfield_velocity_return_data = list(zip(outfield_velocity_dates, outfield_velocities))
+
+    infield_velocity_records = pps.get_player_infield_velocities(player_id)
+    infield_velocity_dates = [velocity.date.strftime('%m/%d/%y') for velocity in infield_velocity_records]
+    infield_velocities = [velocity.velocity for velocity in infield_velocity_records]
+    infield_velocity_return_data = list(zip(infield_velocity_dates, infield_velocities))
+
+    all_dates = sorted(exit_velocity_dates + pitching_velocity_dates + outfield_velocity_dates + infield_velocity_dates) 
+
+    response = {
+        "exit": exit_velocity_return_data,
+        "pitching": pitching_velocity_return_data,
+        "outfield": outfield_velocity_return_data,
+        "infield": infield_velocity_return_data,
+        "allDates": all_dates
+    }
+    
+    return JsonResponse(response)
+
+
+def get_player_times_with_dates(request):
+    """
+    Returns all times (date, time) of each type for a given player.
+    Also returns a list of all dates for times for use with Chart.js.
+    """
+    player_id = player_id = request.GET.get('player_id')
+
+    sixty_records = pps.get_player_sixty_times(player_id)
+    sixty_dates = [time.date.strftime('%m/%d/%y') for time in sixty_records]
+    sixty_times = [time.formatted_time() for time in sixty_records]
+    sixty_time_return_data = list(zip(sixty_dates, sixty_times))
+
+    response = {
+        "sixty": sixty_time_return_data,
+        "allDates": sixty_dates
+    }
+    
     return JsonResponse(response)
 
 
@@ -80,12 +142,6 @@ def leaderboards(request):
 
     return render(request, 'playerprogress/leaderboards.html',
                   context)
-
-
-def resources(request):
-    context = {}
-
-    return render(request, 'playerprogress/resources.html', context)
 
 
 def lifting_performance_leaderboards(request):
@@ -130,13 +186,6 @@ def distance_performance_leaderboards(request):
 
     return render(request, 'playerprogress/performance/distance.html',
                   context)
-
-
-def misc_performance_leaderboards(request):
-
-    context = {}
-
-    return render(request, 'playerprogress/performance/misc.html', context)
 
 
 def lifting_improvement_leaderboards(request):
