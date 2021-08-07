@@ -23,6 +23,11 @@ p {
   height: 2.5rem;
 }
 
+#footer p {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 1rem;
+}
+
 .dropdown-toggle::after {
   transition: transform 0.15s linear; 
 }
