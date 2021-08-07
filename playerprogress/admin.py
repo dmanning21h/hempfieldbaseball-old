@@ -2,6 +2,7 @@ from datetime import timedelta
 
 from django.contrib import admin
 
+from teammanagement.models import Player
 from .models import LiftType, Lift, LiftImprovement, LiftSet, StrengthIncrement
 from .models import VelocityType, Velocity, VelocityImprovement
 from .models import TimeType, Time, TimeImprovement
@@ -27,6 +28,11 @@ class LiftAdmin(admin.ModelAdmin):
         ('Sets', {'fields': ['set1', 'set2', 'set3']})
     ]
     autocomplete_fields = ['set1', 'set2', 'set3']
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == 'player':
+            kwargs["queryset"] = Player.objects.filter(is_active=True)
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
     def save_model(self, request, new_lift, form, change):
         lift_type = new_lift.ttype
@@ -58,6 +64,11 @@ class LiftAdmin(admin.ModelAdmin):
         super().save_model(request, new_lift, form, change)
 
 
+class LiftImprovementAdmin(admin.ModelAdmin):
+    list_display = ('player', 'ttype', 'baseline', 'latest')
+    list_filter = ['player',]
+
+
 class LiftSetAdmin(admin.ModelAdmin):
     search_fields = ['weight']
     list_display = ['weight', 'reps']
@@ -83,6 +94,11 @@ class VelocityAdmin(admin.ModelAdmin):
     list_filter = ['player', 'date', 'ttype']
 
     fields = ['player', 'date', 'ttype', 'velocity']
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == 'player':
+            kwargs["queryset"] = Player.objects.filter(is_active=True)
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
     def save_model(self, request, new_velocity, form, change):
         velocity_type = new_velocity.ttype
@@ -115,6 +131,11 @@ class VelocityAdmin(admin.ModelAdmin):
         super().save_model(request, new_velocity, form, change)
 
 
+class VelocityImprovementAdmin(admin.ModelAdmin):
+    list_display = ('player', 'ttype', 'baseline', 'latest')
+    list_filter = ['player',]
+
+
 class TimeTypeAdmin(admin.ModelAdmin):
     list_display = ['name', 'order', 'is_speed']
 
@@ -126,6 +147,11 @@ class TimeAdmin(admin.ModelAdmin):
     list_filter = ['player', 'date', 'ttype']
 
     fields = ['player', 'date', 'ttype', 'time']
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == 'player':
+            kwargs["queryset"] = Player.objects.filter(is_active=True)
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
     def save_model(self, request, new_time, form, change):
         time_type = new_time.ttype
@@ -172,6 +198,11 @@ class TimeAdmin(admin.ModelAdmin):
         super().save_model(request, new_time, form, change)
 
 
+class TimeImprovementAdmin(admin.ModelAdmin):
+    list_display = ('player', 'ttype', 'baseline', 'latest')
+    list_filter = ['player',]
+
+
 class DistanceTypeAdmin(admin.ModelAdmin):
     list_display = ['name', 'order']
 
@@ -183,6 +214,11 @@ class DistanceAdmin(admin.ModelAdmin):
     list_filter = ['player', 'date', 'ttype']
 
     fields = ['player', 'date', 'ttype', 'distance']
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == 'player':
+            kwargs["queryset"] = Player.objects.filter(is_active=True)
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
     def save_model(self, request, new_distance, form, change):
         distance_type = new_distance.ttype
@@ -213,6 +249,10 @@ class DistanceAdmin(admin.ModelAdmin):
         distance_improvement.latest.save()
         distance_improvement.save()
         super().save_model(request, new_distance, form, change)
+
+
+class DistanceImprovementAdmin(admin.ModelAdmin):
+    pass
 
 
 class BodyWeightAdmin(admin.ModelAdmin):
@@ -252,20 +292,20 @@ class BodyWeightAdmin(admin.ModelAdmin):
 
 admin.site.register(LiftType, LiftTypeAdmin)
 admin.site.register(Lift, LiftAdmin)
-admin.site.register(LiftImprovement)
+admin.site.register(LiftImprovement, LiftImprovementAdmin)
 
 admin.site.register(LiftSet, LiftSetAdmin)
 admin.site.register(StrengthIncrement, StrengthIncrementAdmin)
 
 admin.site.register(VelocityType, VelocityTypeAdmin)
 admin.site.register(Velocity, VelocityAdmin)
-admin.site.register(VelocityImprovement)
+admin.site.register(VelocityImprovement, VelocityImprovementAdmin)
 
 admin.site.register(TimeType, TimeTypeAdmin)
 admin.site.register(Time, TimeAdmin)
-admin.site.register(TimeImprovement)
+admin.site.register(TimeImprovement, TimeImprovementAdmin)
 
-admin.site.register(DistanceType, DistanceTypeAdmin)
-admin.site.register(Distance, DistanceAdmin)
+#admin.site.register(DistanceType, DistanceTypeAdmin)
+#admin.site.register(Distance, DistanceAdmin)
 
 admin.site.register(BodyWeight, BodyWeightAdmin)
