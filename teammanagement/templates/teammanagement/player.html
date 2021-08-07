@@ -103,7 +103,7 @@
 
 	function displayProgressIfData() {
 		if ($("#accordion").has(".card").length) {
-			$("#playerProgress").fadeIn(400);
+			$("#playerProgress").fadeIn(250);
 		}
 	}
 
@@ -437,6 +437,13 @@
 				},
 				maintainAspectRatio: false,
 				plugins: {
+					legend: {
+						labels: {
+							font: {
+								size: 10
+							}
+						}
+					},
 					title: {
 						color: 'black',
 						display: true,
