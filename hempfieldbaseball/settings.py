@@ -22,11 +22,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'sitemanagement.apps.SitemanagementConfig',
-    'teammanagement.apps.TeammanagementConfig',
-    'playerprogress.apps.PlayerprogressConfig',
+
     'alumni.apps.AlumniConfig',
+    'playerprogress.apps.PlayerprogressConfig',
+    #'postgradprep.apps.PostgradprepConfig',
     'resources.apps.ResourcesConfig',
+    'teammanagement.apps.TeammanagementConfig',
+    'sitemanagement.apps.SitemanagementConfig',
 ]
 
 MIDDLEWARE = [
