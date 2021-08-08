@@ -65,22 +65,6 @@ def _get_model_records_by_player_id_and_ttype_name(model, player_id, ttype_name)
         )
 
 
-def get_player_velocities_by_velocity_name(player_id, velocity_name):
-    return (
-        Player.objects.get(player_id=player_id)
-        .velocities.filter(ttype__name=velocity_name)
-        .order_by('date')
-    )
-
-
-def get_player_distances_by_distance_name(player_id, distance_name):
-    return (
-        Player.objects.get(player_id=player_id)
-        .distances.filter(ttype__name=distance_name)
-        .order_by('date')
-    )
-
-
 def _model_records_exist(model):
     if len(model.objects.all()) > 0:
         return True
