@@ -25,7 +25,7 @@ def index(request):
 
 def diet(request):
     diet_documents = rs.get_all_diet_documents()
-    diet_website_links = rs.get_all_diet_website_links()
+    diet_website_links = rs.get_all_diet_articles()
 
     context = {
         'diet_documents':
@@ -48,7 +48,7 @@ def books(request):
 
 
 def hitting_videos(request):
-    hitting_videos = rs.get_all_hitting_video_links()
+    hitting_videos = rs.get_all_hitting_videos()
 
     context = {
         'hitting_video_links': hitting_videos

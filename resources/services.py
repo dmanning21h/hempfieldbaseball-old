@@ -1,5 +1,5 @@
 from .models import Book, BookType
-from .models import WebsiteLink, WebsiteLinkType
+from .models import ArticleLink, VideoLink, LinkType
 from .models import Document, DocumentType
 
 
@@ -28,32 +28,32 @@ def does_diet_document_data_exist():
 
 
 def does_diet_website_link_data_exist():
-    if len(WebsiteLink.objects.filter(website_link_type_id__name="Diet")) > 0:
+    if len(ArticleLink.objects.filter(link_type_id__name="Diet")) > 0:
         return True
     else:
         return False
 
 
 def does_hitting_video_link_data_exist():
-    if len(WebsiteLink.objects.filter(website_link_type_id__name="Hitting Video")) > 0:
+    if len(VideoLink.objects.filter(link_type_id__name="Hitting Video")) > 0:
         return True
     else:
         return False
 
 
 def does_hitting_article_link_data_exist():
-    if len(WebsiteLink.objects.filter(website_link_type_id__name="Hitting Article")) > 0:
+    if len(ArticleLink.objects.filter(link_type_id__name="Hitting Article")) > 0:
         return True
     else:
         return False
 
 
 def get_all_diet_documents():
-    return Document.objects.filter(document_type_id__name="Diet")
+    return DocumentType.objects.get(name="Diet").documents.all()
 
 
-def get_all_diet_website_links():
-    return WebsiteLink.objects.filter(website_link_type_id__name="Diet")
+def get_all_diet_articles():
+    return LinkType.objects.get(name="Diet").articles.all()
 
 
 def get_all_books_grouped_by_type():
@@ -64,9 +64,9 @@ def get_all_books_grouped_by_type():
     return books_grouped
 
 
-def get_all_hitting_video_links():
-    return WebsiteLink.objects.filter(website_link_type_id__name="Hitting Video")
+def get_all_hitting_videos():
+    return LinkType.objects.get(name="Hitting").videos.all()
 
 
 def get_all_hitting_articles():
-    return WebsiteLink.objects.filter(website_link_type_id__name="Hitting Article")
+    return LinkType.objects.get(name="Hitting").articles.all()
