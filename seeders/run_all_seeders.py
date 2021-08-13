@@ -11,7 +11,7 @@ seeders = [
     'coach_role_seeder.py',
     'height_seeder.py',
     'book_type_seeder.py',
-    'website_link_type_seeder.py',
+    'link_type_seeder.py',
     'document_type_seeder.py',
 ]
 

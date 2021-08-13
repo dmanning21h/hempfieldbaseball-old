@@ -19,17 +19,16 @@ if not conn:
 
 cursor = conn.cursor()
 
-print("Seeding Website Link Types. . .")
+print("Seeding Link Types. . .")
 
-# Generate Website Link Types
-website_link_types = ["Hitting Video", "Hitting Article", "Diet"]
-is_videos = [1, 0, 0]
-for website_link_type, is_video in zip(website_link_types, is_videos):
+# Generate Link Types
+link_types = ["Hitting", "Diet", "Lifting"]
+for link_type in link_types:
     try:
         cursor.execute(
             f"""
-                INSERT INTO {DATABASE_NAME}.WebsiteLinkType
-                values (NULL, '{website_link_type}', {is_video})
+                INSERT INTO {DATABASE_NAME}.LinkType
+                values (NULL, '{link_type}')
             """
         )
     except Exception as e:
