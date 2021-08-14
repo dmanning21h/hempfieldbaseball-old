@@ -29,6 +29,8 @@ INSTALLED_APPS = [
     'resources.apps.ResourcesConfig',
     'sitemanagement.apps.SitemanagementConfig',
     'teammanagement.apps.TeammanagementConfig',
+
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [
