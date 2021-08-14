@@ -12,117 +12,42 @@ from .models import BodyWeight, BodyWeightImprovement
 top = 10
 
 
+# Lifting
 def get_player_deadlift_lifts(player_id):
-    return get_player_lifts_by_lift_name(player_id, "Deadlift")
+    return _get_player_lifts_by_lift_name(player_id, "Deadlift")
 
 
 def get_player_squat_lifts(player_id):
-    return get_player_lifts_by_lift_name(player_id, "Squat")
+    return _get_player_lifts_by_lift_name(player_id, "Squat")
 
 
 def get_player_bench_lifts(player_id):
-    return get_player_lifts_by_lift_name(player_id, "Bench Press")
+    return _get_player_lifts_by_lift_name(player_id, "Bench Press")
 
 
+# Velocities
 def get_player_exit_velocities(player_id):
-    return get_player_velocities_by_velocity_name(player_id, "Exit")
+    return _get_player_velocities_by_velocity_name(player_id, "Exit")
 
 
 def get_player_pitching_velocities(player_id):
-    return get_player_velocities_by_velocity_name(player_id, "Pitching")
+    return _get_player_velocities_by_velocity_name(player_id, "Pitching")
 
 
 def get_player_outfield_velocities(player_id):
-    return get_player_velocities_by_velocity_name(player_id, "Outfield")
+    return _get_player_velocities_by_velocity_name(player_id, "Outfield")
 
 
 def get_player_infield_velocities(player_id):
-    return get_player_velocities_by_velocity_name(player_id, "Infield")
+    return _get_player_velocities_by_velocity_name(player_id, "Infield")
 
 
+# Times
 def get_player_sixty_times(player_id):
-    return get_player_times_by_time_name(player_id, "60-yd Dash")
+    return _get_player_times_by_time_name(player_id, "60-yd Dash")
 
 
-def get_player_lifts_by_lift_name(player_id, lift_name):
-    return _get_model_records_by_player_id_and_ttype_name(Lift, player_id, lift_name)
-
-
-def get_player_velocities_by_velocity_name(player_id, velocity_name):
-    return _get_model_records_by_player_id_and_ttype_name(Velocity, player_id, velocity_name)
-
-
-def get_player_times_by_time_name(player_id, time_name):
-    return _get_model_records_by_player_id_and_ttype_name(Time, player_id, time_name)
-
-
-def _get_model_records_by_player_id_and_ttype_name(model, player_id, ttype_name):
-    return (
-            model.objects
-            .filter(player=player_id)
-            .filter(ttype__name=ttype_name)
-            .order_by('date')
-        )
-
-
-def _model_records_exist(model):
-    if len(model.objects.all()) > 0:
-        return True
-    else:
-        return False
-
-
-def does_lift_data_exist():
-    return _model_records_exist(Lift)
-
-
-def does_velocity_data_exist():
-    return _model_records_exist(Velocity)
-
-
-def does_time_data_exist():
-    return _model_records_exist(Time)
-
-
-def does_distance_data_exist():
-    return _model_records_exist(Distance)
-
-
-def does_body_weight_data_exist():
-    return _model_records_exist(BodyWeight)
-
-
-# Dict grouping with type name as key
-def _get_model_records_by_player(type_model, model, player_id):
-    records = {}
-    for ttype in type_model.objects.all():
-        single_type_data = (
-                model.objects
-                .filter(player=player_id)
-                .filter(ttype=ttype)
-                .order_by('date')
-            )
-        records[ttype.name] = single_type_data
-
-    return records
-
-
-def get_all_player_lifts(player_id):
-    return _get_model_records_by_player(LiftType, Lift, player_id)
-
-
-def get_all_player_velocities(player_id):
-    return _get_model_records_by_player(VelocityType, Velocity, player_id)
-
-
-def get_all_player_times(player_id):
-    return _get_model_records_by_player(TimeType, Time, player_id)
-
-
-def get_all_player_distances(player_id):
-    return _get_model_records_by_player(DistanceType, Distance, player_id)
-
-
+# Misc
 def get_player_body_weights(player_id):
     body_weight_data = (
             BodyWeight.objects
@@ -133,11 +58,32 @@ def get_player_body_weights(player_id):
     return body_weight_data
 
 
+# More General Model Functions
+def _get_player_lifts_by_lift_name(player_id, lift_name):
+    return _get_model_records_by_player_id_and_ttype_name(Lift, player_id, lift_name)
+
+
+def _get_player_velocities_by_velocity_name(player_id, velocity_name):
+    return _get_model_records_by_player_id_and_ttype_name(Velocity, player_id, velocity_name)
+
+
+def _get_player_times_by_time_name(player_id, time_name):
+    return _get_model_records_by_player_id_and_ttype_name(Time, player_id, time_name)
+
+
+# Most General Model Helper Functions
+def _get_model_records_by_player_id_and_ttype_name(model, player_id, ttype_name):
+    return (
+            model.objects
+            .filter(player=player_id)
+            .filter(ttype__name=ttype_name)
+            .order_by('date')
+        )
+
+
 #
 # PERFORMANCE LEADERBOARDS
 #
-
-
 def _get_latest_model_records(ttype):
     latest_query = (
             ttype.improvements
@@ -193,8 +139,6 @@ def get_distance_leaders():
 #
 # IMPROVEMENT LEADERBOARDS
 #
-
-
 def _get_model_improvement_leaders(type_model, zero_value=0):
     improvement_leaders = {}
     for ttype in type_model.objects.all():

@@ -146,28 +146,26 @@
 	{% endif %}
 	-->
 
-	{% if body_weight_data_exists %}
-		<div class="container text-center mt-3 pt-2">
-			
-			<hr>
-			<h2 class="section-header display-4">Misc.</h2>
-			<div class="row">
-				<div class="col-md-3"></div>
-				<div class="col-md-6 mb-5 mx-auto w-75">
-					<div class="card shadow border border-dark">
-					  <img class="card-img-top" src="{% static 'img/playerprogress/misc-improvement.jpeg' %}" alt="Misc improvement leaderboard card image cap">
-					  <div class="card-body">
-					    <h3 class="card-title">Improvement</h3>
-					    <a href="{% url 'playerprogress:misc-improvement-leaderboards' %}" class="btn btn-danger">
-					    	View Leaderboards
-					    </a>
-					  </div>
+	<div class="container text-center mt-3 pt-2">
+		
+		<hr>
+		<h2 class="section-header display-4">Misc.</h2>
+		<div class="row">
+			<div class="col-md-3"></div>
+			<div class="col-md-6 mb-5 mx-auto w-75">
+				<div class="card shadow border border-dark">
+					<img class="card-img-top" src="{% static 'img/playerprogress/misc-improvement.jpeg' %}" alt="Misc improvement leaderboard card image cap">
+					<div class="card-body">
+					<h3 class="card-title">Improvement</h3>
+					<a href="{% url 'playerprogress:misc-improvement-leaderboards' %}" class="btn btn-danger">
+						View Leaderboards
+					</a>
 					</div>
 				</div>
-				<div class="col-md-3"></div>
 			</div>
-
+			<div class="col-md-3"></div>
 		</div>
-	{% endif %}
+
+	</div>
 
 {% endblock %}

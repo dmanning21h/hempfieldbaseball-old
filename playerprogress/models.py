@@ -8,7 +8,7 @@ from teammanagement.models import Player
 
 class LiftType(models.Model):
     lift_type_id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=25)
+    name = models.CharField(max_length=25, unique=True)
     order = models.PositiveSmallIntegerField(default=0)
 
     class Meta:
@@ -31,7 +31,7 @@ class Lift(models.Model):
     ttype = models.ForeignKey('LiftType', db_column='lift_type_id',
                               verbose_name="Lift Type",
                               related_name='lifts',
-                              on_delete=models.PROTECT)
+                              on_delete=models.CASCADE)
     set1 = models.ForeignKey('LiftSet', db_column='set1_id',
                              verbose_name="Set 1",
                              related_name='set1_lifts',
@@ -64,7 +64,7 @@ class Lift(models.Model):
         ordering = ['-date']
 
     def __str__(self):
-        return f"{self.player} {self.date} {self.ttype}"
+        return f"{self.date} {self.player} {self.ttype} ({self.sets()})"
 
 
 class LiftSet(models.Model):
@@ -86,7 +86,7 @@ class StrengthIncrement(models.Model):
     lift_type = models.ForeignKey('LiftType', db_column='lift_type_id',
                                   verbose_name="Lift Type",
                                   related_name='strength_increments',
-                                  on_delete=models.PROTECT)
+                                  on_delete=models.CASCADE)
     lift_set = models.ForeignKey('LiftSet', db_column='lift_set_id',
                                  verbose_name="Set Weight x Reps",
                                  related_name='strength_increments',
@@ -99,7 +99,7 @@ class StrengthIncrement(models.Model):
         verbose_name_plural = "Lift Strength Increments"
 
     def __str__(self):
-        return f"{self.lift_type} ({self.set_id}): {self.strength_points} SP"
+        return f"{self.lift_type} ({self.lift_set}): {self.strength_points} SP"
 
 
 class LiftImprovement(models.Model):
@@ -111,7 +111,7 @@ class LiftImprovement(models.Model):
     ttype = models.ForeignKey('LiftType', db_column='lift_type_id',
                               verbose_name="Lift Type",
                               related_name='improvements',
-                              on_delete=models.PROTECT)
+                              on_delete=models.CASCADE)
     baseline = models.ForeignKey('Lift', db_column='baseline_lift_id',
                                  verbose_name="Baseline",
                                  related_name='baseline_lift_improvements',
@@ -136,7 +136,7 @@ class LiftImprovement(models.Model):
 
 class VelocityType(models.Model):
     velocity_type_id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=25)
+    name = models.CharField(max_length=25, unique=True)
     order = models.PositiveSmallIntegerField(default=0)
 
     class Meta:
@@ -160,7 +160,7 @@ class Velocity(models.Model):
                               db_column='velocity_type_id',
                               verbose_name="Velocity Type",
                               related_name='velocities',
-                              on_delete=models.PROTECT)
+                              on_delete=models.CASCADE)
     velocity = models.PositiveSmallIntegerField()
 
     class Meta:
@@ -182,7 +182,7 @@ class VelocityImprovement(models.Model):
                               db_column='velocity_type_id',
                               verbose_name="Velocity Type",
                               related_name='improvements',
-                              on_delete=models.PROTECT)
+                              on_delete=models.CASCADE)
     baseline = models.ForeignKey('Velocity', db_column='baseline_velocity_id',
                                  verbose_name="Baseline",
                                  related_name='baseline_velocity_improvements',
@@ -207,7 +207,7 @@ class VelocityImprovement(models.Model):
 
 class TimeType(models.Model):
     time_type_id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=25)
+    name = models.CharField(max_length=25, unique=True)
     order = models.PositiveSmallIntegerField(default=0)
     is_speed = models.BooleanField(default=True)
 
@@ -232,7 +232,7 @@ class Time(models.Model):
                               db_column='time_type_id',
                               verbose_name="Time Type",
                               related_name='times',
-                              on_delete=models.PROTECT)
+                              on_delete=models.CASCADE)
     time = models.DurationField()
 
     def formatted_time(self):
@@ -267,7 +267,7 @@ class TimeImprovement(models.Model):
                               db_column='time_type_id',
                               verbose_name="Time Type",
                               related_name='improvements',
-                              on_delete=models.PROTECT)
+                              on_delete=models.CASCADE)
     baseline = models.ForeignKey('Time', db_column='baseline_time_id',
                                  verbose_name="Baseline",
                                  related_name='baseline_time_improvements',
@@ -307,7 +307,7 @@ class TimeImprovement(models.Model):
 
 class DistanceType(models.Model):
     distance_type_id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=25)
+    name = models.CharField(max_length=25, unique=True)
     order = models.PositiveSmallIntegerField(default=0)
 
     class Meta:
@@ -331,7 +331,7 @@ class Distance(models.Model):
                               db_column='distance_type_id',
                               verbose_name="Distance Type",
                               related_name='distances',
-                              on_delete=models.PROTECT)
+                              on_delete=models.CASCADE)
     distance = models.FloatField()
 
     class Meta:
@@ -352,7 +352,7 @@ class DistanceImprovement(models.Model):
                               db_column='distance_type_id',
                               verbose_name="Distance Type",
                               related_name='improvements',
-                              on_delete=models.PROTECT)
+                              on_delete=models.CASCADE)
     baseline = models.ForeignKey('Distance', db_column='baseline_distance_id',
                                  verbose_name="Baseline",
                                  related_name='baseline_distance_improvements',

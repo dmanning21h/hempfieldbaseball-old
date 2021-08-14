@@ -13,6 +13,7 @@ seeders = [
     'book_type_seeder.py',
     'link_type_seeder.py',
     'document_type_seeder.py',
+    'front_squat_trap_dl_strength_increment_seeder.py',
 ]
 
 for seeder in seeders:

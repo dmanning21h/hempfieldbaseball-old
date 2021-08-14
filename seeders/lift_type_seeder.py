@@ -22,7 +22,7 @@ cursor = conn.cursor()
 print("Seeding Lift Types. . .")
 
 # Generate Lift Types
-lift_types = ["Deadlift", "Squat", "Front Squat", "Bench Press", "Military Press"]
+lift_types = ["Deadlift", "Trap Bar Deadlift", "Squat", "Front Squat", "Bench Press"]
 ordering = [1, 2, 3, 4, 5]
 for lift_type, order in zip(lift_types, ordering):
     try:

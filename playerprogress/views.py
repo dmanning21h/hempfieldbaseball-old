@@ -32,21 +32,15 @@ def get_player_lifts_with_dates(request):
 
     deadlift_records = pps.get_player_deadlift_lifts(player_id)
     deadlift_dates = [lift.date.strftime('%m/%d/%y') for lift in deadlift_records]
-    deadlift_strength_points = [lift.strength_points() for lift in deadlift_records]
-    deadlift_sets = [lift.sets() for lift in deadlift_records]
-    deadlift_return_data = list(zip(deadlift_dates, deadlift_strength_points, deadlift_sets))
+    deadlift_return_data = [[lift.date.strftime('%m/%d/%y'), lift.strength_points(), lift.sets()] for lift in deadlift_records]
 
     squat_records = pps.get_player_squat_lifts(player_id)
     squat_dates = [lift.date.strftime('%m/%d/%y') for lift in squat_records]
-    squat_strength_points = [lift.strength_points() for lift in squat_records]
-    squat_sets = [lift.sets() for lift in squat_records]
-    squat_return_data = list(zip(squat_dates, squat_strength_points, squat_sets))
+    squat_return_data = [[lift.date.strftime('%m/%d/%y'), lift.strength_points(), lift.sets()] for lift in squat_records]
 
     bench_records = pps.get_player_bench_lifts(player_id)
-    bench_strength_points = [lift.strength_points() for lift in bench_records]
     bench_dates = [lift.date.strftime('%m/%d/%y') for lift in bench_records]
-    bench_sets = [lift.sets() for lift in bench_records]
-    bench_return_data = list(zip(bench_dates, bench_strength_points, bench_sets))
+    bench_return_data = [[lift.date.strftime('%m/%d/%y'), lift.strength_points(), lift.sets()] for lift in bench_records]
 
     all_dates = sorted(deadlift_dates + squat_dates + bench_dates) 
 
@@ -121,24 +115,7 @@ def get_player_times_with_dates(request):
 
 
 def leaderboards(request):
-    lift_data_exists = pps.does_lift_data_exist()
-    velocity_data_exists = pps.does_velocity_data_exist()
-    time_data_exists = pps.does_time_data_exist()
-    distance_data_exists = pps.does_distance_data_exist()
-    body_weight_data_exists = pps.does_body_weight_data_exist()
-
-    context = {
-        'lift_data_exists':
-            lift_data_exists,
-        'velocity_data_exists':
-            velocity_data_exists,
-        'time_data_exists':
-            time_data_exists,
-        'distance_data_exists':
-            distance_data_exists,
-        'body_weight_data_exists':
-            body_weight_data_exists
-    }
+    context = {}
 
     return render(request, 'playerprogress/leaderboards.html',
                   context)

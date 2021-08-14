@@ -76,77 +76,50 @@ if not conn:
     print("Connection Failed")
     exit()
 
-print("Seeding Strength Increments. . .")
+print("Seeding Front Squat and Trap Bar Deadlift Strength Increments. . .")
 
 cursor = conn.cursor(buffered=True)
 
-# Deadlift
-exercise_id = get_exercise_id("Deadlift")
-weight = 405
+# Trap Bar Deadlift
+exercise_id = get_exercise_id("Trap Bar Deadlift")
+weight = 495
 reps = 6
-points = 1003.0
+points = 1002.0
 adj = 0
-while weight >= 65:
+while weight >= 75:
     while reps >= 3:
         set_id = get_set_id(weight, reps)
 
         if reps == 3:
-            adj = 13
+            adj = 10.5
 
         insert_strength_increment(exercise_id, set_id, points, adj)
         reps -= 1
-        points -= 1.5
+        points -= 1
 
     weight -= 5
     reps = 6
-    points -= 8.5
+    points -= 7.5
     adj = 0
 
-# Squat
-exercise_id = get_exercise_id("Squat")
-weight = 315
+# Front Squat
+exercise_id = get_exercise_id("Front Squat")
+weight = 275
 reps = 6
-points = 1005.0
-adj = 0
-while weight >= 45:
-    while reps >= 3:
-        set_id = get_set_id(weight, reps)
-
-        if reps == 3:
-            adj = 15.5
-
-        insert_strength_increment(exercise_id, set_id, points, adj)
-
-        reps -= 1
-        points -= 2.5
-    weight -= 5
-    reps = 6
-    points -= 8
-    adj = 0
-
-# Bench
-exercise_id = get_exercise_id("Bench Press")
-weight = 225
-reps = 6
-points = 1010
+points = 1006.0
 adj = 0
 while weight >= 45:
     while reps >= 3:
         set_id = get_set_id(weight, reps)
 
         if reps == 3:
-            adj = 22
+            adj = 18
 
         insert_strength_increment(exercise_id, set_id, points, adj)
 
         reps -= 1
-        points -= 5
+        points -= 3
     weight -= 5
     reps = 6
-    points -= 7
+    points -= 9
     adj = 0
-
-
-conn.close()
-
-print("Done!")
