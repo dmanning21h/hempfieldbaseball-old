@@ -128,7 +128,7 @@ class LiftImprovement(models.Model):
         db_table = "LiftImprovement"
         verbose_name = "Lift Improvement"
         verbose_name_plural = "Lift Improvements"
-        ordering = ['-player__graduation_year', 'ttype__name']
+        ordering = ['-player__is_active', 'player__last_name', 'ttype__order']
 
     def __str__(self):
         return f"{self.player} {self.ttype} Improvement"
@@ -199,7 +199,7 @@ class VelocityImprovement(models.Model):
         db_table = "VelocityImprovement"
         verbose_name = "Velocity Improvement"
         verbose_name_plural = "Velocity Improvements"
-        ordering = ['-player__graduation_year', 'ttype__name']
+        ordering = ['-player__is_active', 'player__last_name', 'ttype__order']
 
     def __str__(self):
         return f"{self.player} {self.ttype} Improvement"
@@ -299,7 +299,7 @@ class TimeImprovement(models.Model):
         db_table = "TimeImprovement"
         verbose_name = "Time Improvement"
         verbose_name_plural = "Time Improvements"
-        ordering = ['-player__graduation_year', 'ttype__name']
+        ordering = ['-player__is_active', 'player__last_name', 'ttype__order']
 
     def __str__(self):
         return f"{self.player} {self.ttype} Improvement"
@@ -369,7 +369,7 @@ class DistanceImprovement(models.Model):
         db_table = "DistanceImprovement"
         verbose_name = "Distance Improvement"
         verbose_name_plural = "Distance Improvements"
-        ordering = ['-player__graduation_year', 'ttype__name']
+        ordering = ['-player__is_active', 'player__last_name', 'ttype__order']
 
     def __str__(self):
         return f"{self.player} {self.ttype} Improvement"

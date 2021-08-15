@@ -27,12 +27,7 @@ class LiftAdmin(admin.ModelAdmin):
                               ['ttype']}),
         ('Sets', {'fields': ['set1', 'set2', 'set3']})
     ]
-    autocomplete_fields = ['set1', 'set2', 'set3']
-
-    def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if db_field.name == 'player':
-            kwargs["queryset"] = Player.objects.filter(is_active=True)
-        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+    autocomplete_fields = ['player', 'set1', 'set2', 'set3']
 
     def save_model(self, request, new_lift, form, change):
         lift_type = new_lift.ttype
@@ -94,11 +89,7 @@ class VelocityAdmin(admin.ModelAdmin):
     list_filter = ['player', 'date', 'ttype']
 
     fields = ['player', 'date', 'ttype', 'velocity']
-
-    def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if db_field.name == 'player':
-            kwargs["queryset"] = Player.objects.filter(is_active=True)
-        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+    autocomplete_fields = ['player']
 
     def save_model(self, request, new_velocity, form, change):
         velocity_type = new_velocity.ttype
@@ -147,11 +138,7 @@ class TimeAdmin(admin.ModelAdmin):
     list_filter = ['player', 'date', 'ttype']
 
     fields = ['player', 'date', 'ttype', 'time']
-
-    def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if db_field.name == 'player':
-            kwargs["queryset"] = Player.objects.filter(is_active=True)
-        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+    autocomplete_fields = ['player']
 
     def save_model(self, request, new_time, form, change):
         time_type = new_time.ttype
@@ -214,11 +201,7 @@ class DistanceAdmin(admin.ModelAdmin):
     list_filter = ['player', 'date', 'ttype']
 
     fields = ['player', 'date', 'ttype', 'distance']
-
-    def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if db_field.name == 'player':
-            kwargs["queryset"] = Player.objects.filter(is_active=True)
-        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+    autocomplete_fields = ['player']
 
     def save_model(self, request, new_distance, form, change):
         distance_type = new_distance.ttype
@@ -260,6 +243,7 @@ class BodyWeightAdmin(admin.ModelAdmin):
     list_filter = ['player', 'date']
 
     fields = ['player', 'date', 'weight']
+    autocomplete_fields = ['player']
 
     def save_model(self, request, new_weight, form, change):
         player = new_weight.player

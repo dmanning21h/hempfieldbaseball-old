@@ -27,7 +27,7 @@ class Player(models.Model):
 
     class Meta:
         db_table = "Player"
-        ordering = ['-graduation_year', 'last_name']
+        ordering = ['-is_active', 'last_name']
 
     def full_name(self):
         return f"{self.first_name} {self.last_name}"

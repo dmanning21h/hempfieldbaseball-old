@@ -5,6 +5,7 @@ from .models import Position, CoachRole, Height
 
 
 class PlayerAdmin(admin.ModelAdmin):
+    search_fields = ['last_name']
     list_display = ('full_name', 'graduation_year', 'is_active')
     list_filter = ['graduation_year']
 
@@ -16,11 +17,23 @@ class PlayerAdmin(admin.ModelAdmin):
         ('Unique Player Page Link', {'fields': ['player_link']}),
         ('Is player active?', {'fields': ['is_active']})
     ]
+    
+    def get_search_results(self, request, queryset, search_term):
+        queryset, may_have_duplicates = super().get_search_results(
+            request, queryset, search_term,
+        )
+
+        if search_term:
+            queryset &= self.model.objects.filter(is_active=True)
+        
+        return queryset, may_have_duplicates
 
 
 class TeamPlayerInline(admin.TabularInline):
     model = TeamPlayer
     extra = 0
+
+    autocomplete_fields = ('info',)
 
 
 class CoachAdmin(admin.ModelAdmin):
