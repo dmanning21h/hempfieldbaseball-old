@@ -1,0 +1,153 @@
+{% extends 'admin/base_site.html' %}
+{% load static %}
+
+{% block title %}{{ title }} | Hempfield Baseball Admin{% endblock %}
+
+{% block branding %}
+  <h1 id="site-name"><a href="{% url 'admin:index' %}">Hempfield Baseball Admin</a></h1>
+{% endblock %}
+
+{% block extrahead %}{{ block.super }}
+<link rel="icon" type="image/png" href="{% static 'img/favicon.ico' %}">
+
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --main-black: #1f1f1f;
+    --dark-gray: #303030;
+    --main-gray: #707070;
+    --light-gray: #D3D3D3;
+    --off-white: #f8f8ff;
+    --dark-red: DarkRed;
+    --dull-red: #731010;
+    --main-red: FireBrick;
+    --light-red: #f90001; /* Links Highlighting */
+    --header-highlight: #111111;
+    --highlight-red: #ff898d;
+
+    --primary: var(--dark-red); /* Subheader Backgrounds */
+    --secondary: var(--main-red); /* Main Header Background */
+    --accent: var(--off-white); /* Admin Index Header Link */
+    --primary-fg: var(--off-white); /* Header Links, App Names, Filter Panel Header */
+
+    --body-fg: var(--off-white); /* Content Text */
+    --body-bg: var(--main-black); /* Main Page Background */
+    --body-quiet-color: var(--light-red); /* Main Text and Side Filter Text (non-link) */
+    --body-loud-color: var(--off-white); /* Inline Headers */
+
+    --header-color: var(--off-white); /* Header Welcome, Active App Color */
+    --header-branding-color: var(--off-white);
+    --header-bg: var(--secondary);
+    --header-link-color: var(--primary-fg);
+
+    --breadcrumbs-fg: #c4dce8;
+    --breadcrumbs-link-fg: var(--main-gray);
+    --breadcrumbs-bg: var(--primary);
+
+    --link-fg: var(--light-red);
+    --link-hover-color: var(--main-red);
+    --link-selected-fg: var(--main-red);
+
+    --hairline-color: var(--dull-red); /* Div/Cell Divider Color */
+    --border-color: var(--dull-red); /* Widget Borders */
+
+    --error-fg: #ba2121;
+
+    --message-success-bg: #dfd;
+    --message-warning-bg: #ffc;
+    --message-error-bg: #ffefef;
+
+    --darkened-bg: var(--dark-gray); /* Alternating Row Background and Filter area Background */
+    --selected-bg: var(--header-highlight); /* Table Header Cell Sorting Highlighting */
+    --selected-row: var(--highlight-red); /* Cell Highlighting */
+
+    --button-fg: var(--off-white); /* Button Text */
+    --button-bg: var(--main-red);
+    --button-hover-bg: var(--dark-red);
+
+    --default-button-bg: var(--dark-red);
+    --default-button-hover-bg: var(--dull-red);
+
+    --close-button-bg: var(--main-gray); /* Add new Model record button */
+    --close-button-hover-bg: var(--light-gray);
+
+    --delete-button-bg: #ba2121;
+    --delete-button-hover-bg: #a41515;
+
+    --object-tools-fg: var(--button-fg);
+    --object-tools-bg: var(--close-button-bg);
+    --object-tools-hover-bg: var(--close-button-hover-bg);
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --main-black: #1f1f1f;
+    --dark-gray: #404040;
+    --main-gray: #707070;
+    --light-gray: #D3D3D3;
+    --off-white: #f8f8ff;
+    --dark-red: DarkRed;
+    --dull-red: #731010;
+    --main-red: FireBrick;
+    --light-red: #f90001; /* Links Highlighting */
+    --header-highlight-red: #ff4248;
+    --highlight-red: #ff898d;
+
+    --primary: var(--dark-red); /* Subheader Backgrounds */
+    --secondary: var(--main-black); /* Main Header Background */
+    --accent: var(--off-white); /* Admin Index Header Link */
+    --primary-fg: var(--off-white); /* Header Links, App Names, Filter Panel Header */
+
+    --body-fg: var(--main-black); /* Content Text */
+    --body-bg: var(--off-white); /* Main Page Background */
+    --body-quiet-color: var(--dull-red); /* Main Text and Side Filter Text (non-link) */
+    --body-loud-color: var(--main-black); /* Inline Headers */
+
+    --header-color: var(--off-white); /* Header Welcome, Active App Color */
+    --header-branding-color: var(--off-white);
+    --header-bg: var(--secondary);
+    --header-link-color: var(--primary-fg);
+
+    --breadcrumbs-fg: #c4dce8;
+    --breadcrumbs-link-fg: var(--body-bg);
+    --breadcrumbs-bg: var(--primary);
+
+    --link-fg: var(--main-red);
+    --link-hover-color: var(--light-red);
+    --link-selected-fg: var(--light-red);
+
+    --hairline-color: var(--dark-red); /* Div/Cell Divider Color */
+    --border-color: var(--dark-red); /* Widget Borders */
+
+    --error-fg: #ba2121;
+
+    --message-success-bg: #dfd;
+    --message-warning-bg: #ffc;
+    --message-error-bg: #ffefef;
+
+    --darkened-bg: var(--light-gray); /* Alternating Row Background and Filter area Background */
+    --selected-bg: var(--main-gray); /* Table Header Cell Sorting Highlighting */
+    --selected-row: var(--highlight-red); /* Cell Highlighting */
+
+    --button-fg: var(--off-white); /* Button Text */
+    --button-bg: var(--main-red);
+    --button-hover-bg: var(--dark-red);
+
+    --default-button-bg: var(--dark-red);
+    --default-button-hover-bg: var(--dull-red);
+
+    --close-button-bg: var(--main-black); /* Add new Model record button */
+    --close-button-hover-bg: var(--dark-gray);
+
+    --delete-button-bg: #ba2121;
+    --delete-button-hover-bg: #a41515;
+
+    --object-tools-fg: var(--button-fg);
+    --object-tools-bg: var(--close-button-bg);
+    --object-tools-hover-bg: var(--close-button-hover-bg);
+
+  }
+}
+</style>
+{% endblock %}
