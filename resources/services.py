@@ -21,28 +21,28 @@ def does_diet_data_exist():
 
 
 def does_diet_document_data_exist():
-    if len(Document.objects.filter(document_type_id__name="Diet")) > 0:
+    if len(Document.objects.filter(document_type__name="Diet")) > 0:
         return True
     else:
         return False
 
 
 def does_diet_website_link_data_exist():
-    if len(ArticleLink.objects.filter(link_type_id__name="Diet")) > 0:
+    if len(ArticleLink.objects.filter(link_type__name="Diet")) > 0:
         return True
     else:
         return False
 
 
 def does_hitting_video_link_data_exist():
-    if len(VideoLink.objects.filter(link_type_id__name="Hitting Video")) > 0:
+    if len(VideoLink.objects.filter(link_type__name="Hitting Video")) > 0:
         return True
     else:
         return False
 
 
 def does_hitting_article_link_data_exist():
-    if len(ArticleLink.objects.filter(link_type_id__name="Hitting Article")) > 0:
+    if len(ArticleLink.objects.filter(link_type__name="Hitting Article")) > 0:
         return True
     else:
         return False
@@ -58,7 +58,7 @@ def get_all_diet_articles():
 
 def get_all_books_grouped_by_type():
     books_grouped = {}
-    for book_type in BookType.objects.all():
+    for book_type in BookType.objects.exclude(name="lifting"):
         books_grouped[book_type.name] = book_type.books.all()
 
     return books_grouped

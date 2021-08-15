@@ -18,7 +18,7 @@ class BookType(models.Model):
 
 class Book(models.Model):
     book_id = models.AutoField(primary_key=True)
-    book_type_id = models.ForeignKey('BookType', db_column='book_type_id',
+    book_type = models.ForeignKey('BookType', db_column='book_type_id',
                                      verbose_name='Book Type',
                                      related_name='books',
                                      on_delete=models.CASCADE)
@@ -53,7 +53,7 @@ class LinkType(models.Model):
 
 class ArticleLink(models.Model):
     article_link_id = models.AutoField(primary_key=True)
-    link_type_id = models.ForeignKey('LinkType', db_column='link_type_id',
+    link_type = models.ForeignKey('LinkType', db_column='link_type_id',
                                      verbose_name='Link Type',
                                      related_name='articles',
                                      on_delete=models.CASCADE)
@@ -74,7 +74,7 @@ class ArticleLink(models.Model):
 
 class VideoLink(models.Model):
     video_link_id = models.AutoField(primary_key=True)
-    link_type_id = models.ForeignKey('LinkType', db_column='link_type_id',
+    link_type = models.ForeignKey('LinkType', db_column='link_type_id',
                                      verbose_name='Link Type',
                                      related_name='videos',
                                      on_delete=models.CASCADE)
@@ -107,7 +107,7 @@ class DocumentType(models.Model):
 
 class Document(models.Model):
     document_id = models.AutoField(primary_key=True)
-    document_type_id = models.ForeignKey('DocumentType', db_column='document_type_id',
+    document_type = models.ForeignKey('DocumentType', db_column='document_type_id',
                                          verbose_name='Document Type',
                                          related_name='documents',
                                          on_delete=models.CASCADE)
