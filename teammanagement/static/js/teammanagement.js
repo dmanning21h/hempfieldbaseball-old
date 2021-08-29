@@ -12,7 +12,7 @@ $("#accordion").on("shown.bs.collapse", e => {
           .prev()
           .offset().top
       },
-      120
+      150
     );
 });
 
