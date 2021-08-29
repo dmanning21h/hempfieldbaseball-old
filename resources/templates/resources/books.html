@@ -13,14 +13,14 @@
         {% for book_type, books in books_by_type.items %}
             {% if books %}
                 <hr>
-                <h2 class="sub-header mb-2">
+                <h2 class="text-shadow-sm mb-2">
                     {{ book_type }} Books
                 </h2>
             {% endif %}
             {% for book in books %}
                 <div class="mb-4">
                     <hr>
-                    <h4 class="sub-header mb-1">
+                    <h4 class="text-shadow-sm mb-1">
                         <a href="{{ book.amazon_url }}" class="text-danger text-decoration-underline" target="_blank">
                             {{ book.name }}
                         </a>
