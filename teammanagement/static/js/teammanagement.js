@@ -249,7 +249,7 @@ function createTabScaffolding(idPrefix, accordionTabTitle, hasGraph)
       <div id="${idPrefix}Heading" class="accordion-header text-center">
         <button id="${idPrefix}Button" class="accordion-button collapsed text-danger bg-light" data-bs-toggle="collapse" data-bs-target="#${idPrefix}Content" aria-expanded="false" aria-controls="${idPrefix}Content">
           <h3 class="accordion-button-text">
-            <span class="text-shadow-lg">
+            <span class="text-shadow-sm">
               ${accordionTabTitle}
             </span>
             <!--span>
