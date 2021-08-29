@@ -5,7 +5,7 @@ $("#accordion").on("hide.bs.collapse show.bs.collapse", e => {
   .toggleClass("fa-minus-square fa-plus-square");
 });
 
-$("#accordion").on("shown.bs.collapse", e => {
+/*$("#accordion").on("shown.bs.collapse", e => {
     $("html, body").animate(
       {
             scrollTop: $(e.target)
@@ -14,7 +14,7 @@ $("#accordion").on("shown.bs.collapse", e => {
       },
       150
     );
-});
+});*/
 
 function fetchDataWithDatesAsync(url, playerId)
 {
