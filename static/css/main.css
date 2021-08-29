@@ -50,11 +50,11 @@ p {
   margin-top: 56px;
 }
 
-.section-header {
+.text-shadow-lg {
   text-shadow: 1px 1px 2px #222629;
 }
 
-.sub-header {
+.text-shadow-sm {
   text-shadow: .25px .25px .5px #222629;
 }
 

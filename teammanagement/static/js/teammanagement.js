@@ -12,7 +12,7 @@ $("#accordion").on("shown.bs.collapse", e => {
           .prev()
           .offset().top
       },
-      400
+      120
     );
 });
 
@@ -244,22 +244,22 @@ function getTimeSectionData() {
 function createTabScaffolding(idPrefix, accordionTabTitle, hasGraph)
 {
   var tabAppend = $(`
-    <div id="${idPrefix}Data" class="card">
+    <div id="${idPrefix}Data" class="accordion-item">
 
-      <div id="${idPrefix}Heading" class="card-header text-center">
-        <button id="${idPrefix}Button" class="btn btn-link collapsed text-danger" data-toggle="collapse" data-target="#${idPrefix}Content" aria-expanded="true" aria-controls="${idPrefix}Content">
-          <h3>
-            <span>
+      <div id="${idPrefix}Heading" class="accordion-header text-center">
+        <button id="${idPrefix}Button" class="accordion-button collapsed text-danger bg-secondary" data-bs-toggle="collapse" data-bs-target="#${idPrefix}Content" aria-expanded="false" aria-controls="${idPrefix}Content">
+          <h3 class="accordion-button-text">
+            <span class="text-shadow-lg">
               ${accordionTabTitle}
             </span>
-            <span>
+            <!--span>
                 <i class="text-dark fa fa-plus-square"></i>
-              </span>
+              </span-->
           </h3>
         </button>
       </div>
 
-      <div id="${idPrefix}Content" class="collapse" aria-labelledby="${idPrefix}Heading" data-parent="#accordion">
+      <div id="${idPrefix}Content" class="accordion-collapse collapse" aria-labelledby="${idPrefix}Heading" data-bs-parent="#accordion">
         <div id="${idPrefix}DataBody" class="card-body">
 
           <ul id="${idPrefix}Tabs" class="nav nav-tabs justify-content-center" role="tablist"></ul>
@@ -275,7 +275,7 @@ function createTabScaffolding(idPrefix, accordionTabTitle, hasGraph)
   if (hasGraph) {
     $(tabAppend).find(`#${idPrefix}Tabs`).append(
       `<li class="nav-item" role="presentation">
-        <a id="${idPrefix}ChartTab" class="nav-link active" data-toggle="tab" href="#${idPrefix}ChartContainer" role="tab" aria-controls="${idPrefix}ChartContainer" aria-selected="true">Graph</a>
+        <a id="${idPrefix}ChartTab" class="nav-link active" data-bs-toggle="tab" href="#${idPrefix}ChartContainer" role="tab" aria-controls="${idPrefix}ChartContainer" aria-selected="true">Graph</a>
       </li>`
     );
     $(tabAppend).find(`#${idPrefix}TabContent`).append(
@@ -422,7 +422,7 @@ function generateTables(sectionData) {
       if (sectionData.graph.hasGraph) {
         tabToAppend = $(`
           <li class="nav-item" role="presentation">
-            <a id="${currentCategory.idPrefix}TableTab" class="nav-link" data-toggle="tab" href="#${currentCategory.idPrefix}TableContainer" role="tab" aria-controls="${currentCategory.idPrefix}TableContainer" aria-selected="false">
+            <a id="${currentCategory.idPrefix}TableTab" class="nav-link" data-bs-toggle="tab" href="#${currentCategory.idPrefix}TableContainer" role="tab" aria-controls="${currentCategory.idPrefix}TableContainer" aria-selected="false">
               ${currentCategory.table.tabTitle}
             </a>
           </li>
@@ -430,8 +430,8 @@ function generateTables(sectionData) {
 
         tabContentToAppend = $(`
           <div id="${currentCategory.idPrefix}TableContainer" class="container tab-pane fade" role="tabpanel" aria-labelledby="${currentCategory.idPrefix}TableTab">
-            <table id="${currentCategory.idPrefix}Table" class="table table-striped table-bordered">
-              <thead id="${currentCategory.idPrefix}TableHead" class="thead-dark">
+            <table id="${currentCategory.idPrefix}Table" class="table table-dark table-striped table-bordered">
+              <thead id="${currentCategory.idPrefix}TableHead" class="">
                 <tr id="${currentCategory.idPrefix}TableHeadRow" class="text-center"></tr>
               </thead>
               <tbody id="${currentCategory.idPrefix}TableBody"></tbody>
@@ -450,8 +450,8 @@ function generateTables(sectionData) {
 
         tabContentToAppend = $(`
           <div id="${currentCategory.idPrefix}TableContainer" class="container tab-pane fade show active" role="tabpanel" aria-labelledby="${currentCategory.idPrefix}TableTab">
-            <table id="${currentCategory.idPrefix}Table" class="table table-striped table-bordered">
-              <thead id="${currentCategory.idPrefix}TableHead" class="thead-dark">
+            <table id="${currentCategory.idPrefix}Table" class="table table-dark table-striped table-bordered">
+              <thead id="${currentCategory.idPrefix}TableHead" class="">
                 <tr id="${currentCategory.idPrefix}TableHeadRow" class="text-center"></tr>
               </thead>
               <tbody id="${currentCategory.idPrefix}TableBody"></tbody>
@@ -462,7 +462,7 @@ function generateTables(sectionData) {
 
       for (const columnName of sectionData.table.columns) {
         $(tabContentToAppend).find(`#${currentCategory.idPrefix}TableHeadRow`).append(`
-          <th>${columnName}</th>
+          <th class="col">${columnName}</th>
         `);
       } 
 

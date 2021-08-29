@@ -20,6 +20,10 @@ h5, p, th, td {
     font-size: .75rem;
 }
 
+td small {
+    font-size: .55rem;
+}
+
 #playerInfo p {
     font-size: 1rem;
 }
@@ -44,5 +48,9 @@ h5, p, th, td {
 
     p, th, td {
         font-size: 1rem;
+    }
+
+    td small {
+        font-size: .9rem;
     }
 }
