@@ -5,16 +5,16 @@ $("#accordion").on("hide.bs.collapse show.bs.collapse", e => {
   .toggleClass("fa-minus-square fa-plus-square");
 });
 
-/*$("#accordion").on("shown.bs.collapse", e => {
+$("#accordion").on("shown.bs.collapse", e => {
     $("html, body").animate(
       {
-            scrollTop: $(e.target)
-          .prev()
-          .offset().top
+        scrollTop: $(e.target)
+        .prev()
+        .offset().top
       },
-      150
+      400
     );
-});*/
+});
 
 function fetchDataWithDatesAsync(url, playerId)
 {
@@ -245,27 +245,24 @@ function createTabScaffolding(idPrefix, accordionTabTitle, hasGraph)
 {
   var tabAppend = $(`
     <div id="${idPrefix}Data" class="accordion-item">
-
       <div id="${idPrefix}Heading" class="accordion-header text-center">
-        <button id="${idPrefix}Button" class="accordion-button collapsed text-danger bg-light" data-bs-toggle="collapse" data-bs-target="#${idPrefix}Content" aria-expanded="false" aria-controls="${idPrefix}Content">
-          <h3 class="accordion-button-text">
-            <span class="text-shadow-sm">
+        <button id="${idPrefix}Button" class="accordion-button collapsed text-danger bg-dark text-center" type="button" data-bs-toggle="collapse" data-bs-target="#${idPrefix}Content" aria-expanded="false" aria-controls="${idPrefix}Content">
+          <h3>
+            <span class="text-shadow-lg">
               ${accordionTabTitle}
             </span>
-            <!--span>
-                <i class="text-dark fa fa-plus-square"></i>
-              </span-->
+            <span>
+                <i class="text-light fa fa-plus-square"></i>
+            </span>
           </h3>
         </button>
       </div>
 
       <div id="${idPrefix}Content" class="accordion-collapse collapse" aria-labelledby="${idPrefix}Heading" data-bs-parent="#accordion">
-        <div id="${idPrefix}DataBody" class="card-body">
-
+        <div id="${idPrefix}DataBody" class="accordion-body">
           <ul id="${idPrefix}Tabs" class="nav nav-tabs justify-content-center" role="tablist"></ul>
           <br>
           <div id="${idPrefix}TabContent" class="tab-content"></div>
-
         </div>
       </div>
 
