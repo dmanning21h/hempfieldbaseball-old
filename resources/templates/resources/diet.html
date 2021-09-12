@@ -11,7 +11,7 @@
 {% block content %}
     <div class="container text-center pt-2">
         <hr>
-        <h2 class="text-shadow-sm mb-3">
+        <h2 class="text-shadow-md mb-3">
             Diet Documents
         </h2>
         <div class="row">
@@ -21,8 +21,8 @@
                 <div class="card shadow-lg mx-auto">
                   <img class="card-img-top img-thumbnail" src="{{ document.image.url }}" alt="{{ document.name }} card image cap">
                   <div class="card-body">
-                    <h4 class="card-title text-center">{{ document.name }}</h4>
-                    <a href="{{ document.file.url }}" class="btn btn-danger">
+                    <h4 class="card-title text-shadow-sm text-center">{{ document.name }}</h4>
+                    <a href="{{ document.file.url }}" class="btn btn-dark">
                         Download
                     </a>
                   </div>
@@ -35,13 +35,13 @@
 
     <div class="container text-center mt-md-4">
         <hr>
-        <h2 class="text-shadow-sm mb-3">
+        <h2 class="text-shadow-md mb-3">
             Diet Articles
         </h2>
         {% for link in diet_website_links %}
             <div class="mb-3">
                 <h4 class="text-shadow-sm mb-4">
-                    <a href="{{ link.url }}" class="text-danger text-decoration-none" target="_blank">
+                    <a href="{{ link.url }}" class="text-decoration-none" target="_blank">
                         {{ link.name }}
                     </a>
                 </h4>

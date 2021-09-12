@@ -1,13 +1,9 @@
-/* Roster and Individual Player Page Styling */
+/* FONTS AND SIZING */
 p {
     font-family: 'Ubuntu', sans-serif;
 }
 
-@media (max-width: 768px) {
-    .team-picture { display: none; }
-}
-
-/* Mobile Screen Sizes */
+/* MOBILE */
 h1 {
     font-size: 1.75rem;
 }
@@ -28,7 +24,7 @@ p, th, td {
     font-size: 1rem;
 }
 
-/* Large Screen Size */
+/* NON-MOBILE */
 @media (min-width: 768px) {
     #rosterHeading, h1 {
         font-size: 2.5rem;
@@ -51,43 +47,6 @@ p, th, td {
     }
 }
 
-
-
-/* Accordion Content Tabs */
-.nav-tabs > li > a.active, .nav-tabs > li > a.active:hover, .nav-tabs > li > a.active:focus {
-    color: #fff !important;
-    background-color: #111 !important;
+@media (max-width: 768px) {
+    .team-picture { display: none; }
 }
-
-.nav-tabs > li > a {
-    color: red !important;
-}
-
-.nav-tabs > li > a:hover {
-    color: #222 !important;
-}
-
-.card-header > .btn-link:hover, .card-header > .btn-link:active, .card-header > .btn-link:focus {
-    text-decoration: none !important;
-}
-
-:root {
-    scroll-behavior: auto;
-}
-
-.accordion-button h3 {
-    margin: auto;
-}
-
-.accordion-button:after {
-    width: 0 !important;
-    height: 0 !important;
-    margin-left: 0 !important;
-    background-image: none !important;
-  }
-
-.accordion-button:focus {
-    border-color: #ff4136 !important;
-    box-shadow: 0 0 0 0.25rem rgba(223, 35, 35, 0.3) !important;
-}
-

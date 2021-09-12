@@ -1,6 +1,7 @@
+/* ALUMNI PLAYER CARDS */
 @media (max-width: 768px) {
     .card {
-        max-width: 75%;
+        max-width: 250px;
     }
 }
 

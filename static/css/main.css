@@ -1,3 +1,19 @@
+/* COLOR SCHEME */
+:root {
+  scroll-behavior: auto;
+
+  --main-black: #1f1f1f;
+  --dark-gray: #303030;
+  --main-gray: #707070;
+  --light-gray: #D3D3D3;
+  --off-white: #f8f8ff;
+  --main-red: #C5050C;
+  --dark-red: DarkRed;
+  --dull-red: #731010;
+  --light-red: #ff3b3b;
+}
+
+/* FONTS AND SIZING */
 h1, h2, h3, h4, h5, h6, th, td, li, a {
   font-family: 'Ubuntu', sans-serif;
 }
@@ -6,6 +22,32 @@ p {
   font-family: 'Lora', serif;
 }
 
+/* TEXT DECORATION */
+.text-shadow-lg {
+  text-shadow: 1px 1px 2px #222629;
+}
+
+.text-shadow-md {
+  text-shadow: .5px .5px 1px #222629;
+}
+
+.text-shadow-sm {
+  text-shadow: .25px .25px .5px #222629;
+}
+
+#page-container a {
+  color: var(--main-red);
+}
+
+#page-container a:hover {
+  color: var(--light-red);
+}
+
+#page-container a:active {
+  color: var(--dark-red);
+}
+
+/* MAIN PAGE FORMATTING */
 #page-container {
   position: relative;
   min-height: 100vh;
@@ -16,6 +58,11 @@ p {
   padding-bottom: 2.5rem;
 }
 
+#main-content {
+  margin-top: 56px;
+}
+
+/* FOOTER */
 #footer {
   position: absolute;
   bottom: 0;
@@ -26,6 +73,34 @@ p {
 #footer p {
   font-family: 'Ubuntu', sans-serif;
   font-size: 1rem;
+}
+
+/* NAVIGATION */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+#page-container .navbar a {
+  color: var(--light-gray);
+}
+
+#page-container .navbar a:hover {
+  color: var(--main-red);
+}
+
+#page-container .navbar a:active {
+  color: var(--dark-red);
+}
+
+#page-container .dropdown-menu a {
+  color: var(--dark-gray);
+}
+
+#page-container .dropdown-menu a:active {
+  color: var(--dark-red);
+  background-color: var(--light-gray);
 }
 
 .dropdown-toggle::after {
@@ -40,27 +115,70 @@ p {
     margin-top: 0;
 }
 
-.navbar {
-  position: fixed;
-  top: 0;
-  width: 100%;
+#page-container .navbar-toggler {
+  color: var(--light-gray);
 }
 
-#main-content {
-  margin-top: 56px;
-}
-
-.text-shadow-lg {
-  text-shadow: 1px 1px 2px #222629;
-}
-
-.text-shadow-sm {
-  text-shadow: .25px .25px .5px #222629;
-}
-
+/* RESPONSIVE STYLING */
 .short-text { display: none; }
 
 @media (max-width: 768px) {
     .short-text { display: inline-block; }
     .full-text { display: none; }
+}
+
+/* EMBEDDING VIDEOS */
+.video-box {
+  position:   relative;
+  width: 90%;
+  height: 0;
+  padding-top: 50.625%;
+}
+
+.video {
+  position: absolute;
+  top:      0;
+  left:     0;
+  bottom:   0;
+  right:    0;
+  width:    100%;
+  height:   100%
+}
+
+/* CUSTOM ACCORDION WITH TABS */
+#page-container > .accordion-header > .btn-link:hover,
+#page-container > .accordion-header > .accordion-link:active,
+#page-container > .card-header > .btn-link:focus {
+  text-decoration: none;
+}
+
+#page-container .accordion-button h3 {
+  margin: auto;
+}
+
+#page-container .accordion-button:after {
+  width: 0;
+  height: 0;
+  margin-left: 0;
+  background-image: none;
+}
+
+#page-container .accordion-button:focus {
+  border-color: var(--main-red);
+  box-shadow: 0 0 0 0.25rem rgba(223, 35, 35, 0.3);
+}
+
+#page-container .nav-tabs > li > a.active,
+.nav-tabs > li > a.active:hover,
+.nav-tabs > li > a.active:focus {
+  color: var(--light-red);
+  background-color: var(--main-black);
+}
+
+#page-container .nav-tabs > li > a {
+  color: var(--main-black);
+}
+
+#page-container .nav-tabs > li > a:hover {
+  color: var(--main-red);
 }
