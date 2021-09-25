@@ -25,4 +25,5 @@ def get_latest_team_player_by_player_id(player_id):
             .filter(info_id=player_id)
             .order_by('team__year')
             .last()
+            .select_related('player', 'body_weight', 'lift', 'velocity', 'time')
         )

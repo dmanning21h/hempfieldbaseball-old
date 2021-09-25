@@ -409,6 +409,7 @@ function generateChart(sectionData) {
 function generateTables(sectionData) {
   var sectionTabs = $(`#${sectionData.idPrefix}Tabs`);
   var sectionTabContent = $(`#${sectionData.idPrefix}TabContent`);
+  var hasMultipleTables = sectionData.dataToDisplay.length > 1;
 
   for (const dataCategory in sectionData.dataToDisplay) {
     let currentCategory = sectionData.dataToDisplay[dataCategory];
