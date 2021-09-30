@@ -33,7 +33,7 @@ class TeamPlayerInline(admin.TabularInline):
     model = TeamPlayer
     extra = 0
 
-    autocomplete_fields = ('info',)
+    autocomplete_fields = ('personal_info',)
 
 
 class CoachAdmin(admin.ModelAdmin):

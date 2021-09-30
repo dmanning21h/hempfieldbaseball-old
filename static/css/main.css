@@ -7,10 +7,12 @@
   --main-gray: #707070;
   --light-gray: #D3D3D3;
   --off-white: #f8f8ff;
+
   --main-red: #C5050C;
   --dark-red: DarkRed;
   --dull-red: #731010;
   --light-red: #ff3b3b;
+
 }
 
 /* FONTS AND SIZING */
@@ -26,11 +28,9 @@ p {
 .text-shadow-lg {
   text-shadow: 1px 1px 2px #222629;
 }
-
 .text-shadow-md {
   text-shadow: .5px .5px 1px #222629;
 }
-
 .text-shadow-sm {
   text-shadow: .25px .25px .5px #222629;
 }
@@ -38,13 +38,11 @@ p {
 #page-container a {
   color: var(--main-red);
 }
-
 #page-container a:hover {
-  color: var(--light-red);
-}
-
-#page-container a:active {
   color: var(--dark-red);
+}
+#page-container a:active {
+  color: var(--light-red);
 }
 
 /* MAIN PAGE FORMATTING */
@@ -85,11 +83,9 @@ p {
 #page-container .navbar a {
   color: var(--light-gray);
 }
-
 #page-container .navbar a:hover {
   color: var(--main-red);
 }
-
 #page-container .navbar a:active {
   color: var(--dark-red);
 }
@@ -97,7 +93,6 @@ p {
 #page-container .dropdown-menu a {
   color: var(--dark-gray);
 }
-
 #page-container .dropdown-menu a:active {
   color: var(--dark-red);
   background-color: var(--light-gray);
@@ -134,7 +129,6 @@ p {
   height: 0;
   padding-top: 50.625%;
 }
-
 .video {
   position: absolute;
   top:      0;
@@ -146,39 +140,38 @@ p {
 }
 
 /* CUSTOM ACCORDION WITH TABS */
-#page-container > .accordion-header > .btn-link:hover,
-#page-container > .accordion-header > .accordion-link:active,
-#page-container > .card-header > .btn-link:focus {
-  text-decoration: none;
+#page-container .accordion-button {
+  background-color: var(--dark-gray);
 }
-
-#page-container .accordion-button h3 {
-  margin: auto;
-}
-
 #page-container .accordion-button:after {
   width: 0;
   height: 0;
   margin-left: 0;
   background-image: none;
 }
-
 #page-container .accordion-button:focus {
   border-color: var(--main-red);
   box-shadow: 0 0 0 0.25rem rgba(223, 35, 35, 0.3);
 }
 
-#page-container .nav-tabs > li > a.active,
-.nav-tabs > li > a.active:hover,
-.nav-tabs > li > a.active:focus {
+#page-container .accordion-button h3 {
+  margin: auto;
   color: var(--light-red);
-  background-color: var(--main-black);
+}
+#page-container .accordion-button h3 .fa {
+  color: var(--off-white);
 }
 
-#page-container .nav-tabs > li > a {
-  color: var(--main-black);
-}
 
-#page-container .nav-tabs > li > a:hover {
-  color: var(--main-red);
+#page-container .nav-tabs li a.active,
+#page-container .nav-tabs li a.active:hover,
+#page-container .nav-tabs li a.active:focus {
+  color: var(--light-red);
+  background-color: var(--dark-gray);
+}
+#page-container .nav-tabs li a {
+  color: var(--dark-gray);
+}
+#page-container .nav-tabs li a:hover {
+  color: var(--light-red);
 }

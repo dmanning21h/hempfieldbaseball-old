@@ -3,8 +3,8 @@
 {% load teammanagement_tags %}
 {% load playerprogress_tags %}
 
-{% block title %}{{ player.info.full_name }}{% endblock %}
-{% block description %}<meta name="description" content="{{ player.info.full_name }} extended roster details and player progress.">{% endblock %}
+{% block title %}{{ player.full_name }}{% endblock %}
+{% block description %}<meta name="description" content="{{ player.full_name }} extended roster details and player progress.">{% endblock %}
 
 {% block stylesheet %}
 	<link rel="stylesheet" href="{% static 'css/teammanagement.css' %}">
@@ -18,15 +18,15 @@
 	<div id="playerInfo" class="container pt-2">
 		<div class="row">
 			<div class="col-md-3 text-center mb-3 pl-md-4 pl-lg-5">
-				{% if player.roster_photo %}
-					<img src="{{ player.roster_photo.url }}" width="175px" class="rounded border border-dark shadow-lg" alt="{{ player.info.full_name }} roster photo">
+				{% if roster_info.roster_photo %}
+					<img src="{{ roster_info.roster_photo.url }}" width="175px" class="rounded border border-dark shadow-lg" alt="{{ player.full_name }} roster photo">
 				{% endif %}
 			</div>
 
 			<div class="col-md-7 px-4 px-md-4 ms-md-4 ms-lg-2">
 				<h1>
-					<span class="text-danger px-2 pb-1" style="background-color: black; display: inline-block; border-radius: 5px;">{{ player.number }}</span>
-					<span class="text-shadow-md" style="font-size: smaller;">{{ player.info.full_name|upper }}</span>
+					<span class="text-danger px-2 pb-1" style="background-color: black; display: inline-block; border-radius: 5px;">{{ roster_info.number }}</span>
+					<span class="text-shadow-md" style="font-size: smaller;">{{ player.full_name|upper }}</span>
 				</h1>
 
 				<hr>
@@ -34,25 +34,25 @@
 				<div class="row">
 					<div class="col-md-6">
 						<p>
-							<b>CLASS:</b> {{ player.info.graduation_year }}
+							<b>CLASS:</b> {{ player.graduation_year }}
 						</p>
 						<hr>
 						<p>
-							<b>POSITION:</b> {{ player.position }}
+							<b>POSITION:</b> {{ roster_info.position }}
 						</p>
 						<hr>
 						<p>
-							<b>BATS/THROWS:</b> {{ player.info.bats }}/{{ player.info.throws }}
+							<b>BATS/THROWS:</b> {{ player.bats }}/{{ player.throws }}
 						</p>
 						<hr>
 					</div>
 					<div class="col-md-6">
 						<p>
-							<b>HEIGHT:</b> {{ player.height }}
+							<b>HEIGHT:</b> {{ roster_info.height }}
 						</p>
 						<hr>
 							<p>
-								<b>WEIGHT:</b> {{ player.weight }} lbs
+								<b>WEIGHT:</b> {{ roster_info.weight }} lbs
 							</p>
 							<hr>
 					</div>
@@ -63,8 +63,8 @@
 	</div>
 	<br>
 
-	<div id="playerProgress" style="display: none">
-		<div class="text-center text-muted text-shadow-sm">
+	<div id="playerProgress">
+		<div id="progressHeader" class="text-center text-shadow-md" style="display: none">
 			<h3 class="">Player Progress</h3>
 		</div>
 		<div id="accordion" class="container"></div>
@@ -84,26 +84,31 @@
 	generateAccordionTabs();
 
 	function generateAccordionTabs() {
-		var playerId = "{{ player.info.player_id }}";
+		var playerId = "{{ player.player_id }}";
+
+		var bodyWeightsRequest = fetchBodyWeightDataAsync(playerId);
+		var liftsRequest = fetchLiftingDataAsync(playerId);
+		var velocitiesRequest = fetchVelocityDataAsync(playerId);
+		var timesRequest = fetchTimeDataAsync(playerId);
 
 		// Fetch All Data async and await together
-		$.when(fetchBodyWeightDataAsync(playerId), fetchLiftingDataAsync(playerId), fetchVelocityDataAsync(playerId), fetchTimeDataAsync(playerId))
-			.done(function(bodyWeightResponse, liftingResponse, velocityResponse, timeResponse) {
+		$.when(bodyWeightsRequest).done(function(bodyWeightsResponse) {
 
-			// Then Generate each tab synchronously
-			generateBodyWeightTab(playerId, bodyWeightResponse[0]);
-			generateLiftingTab(playerId, liftingResponse[0]);
-			generateVelocityTab(playerId, velocityResponse[0]);
-			generateTimesTab(playerId, timeResponse[0]);
+				generateBodyWeightTab(playerId, bodyWeightsResponse);
 
-			displayProgressIfData();
+				$.when(liftsRequest).done(function (liftsResponse) {
+					generateLiftingTab(playerId, liftsResponse);
+
+					$.when(velocitiesRequest).done(function (velocitiesResponse) {
+						generateVelocityTab(playerId, velocitiesResponse);
+
+						$.when(timesRequest).done(function (timesResponse) {
+							generateTimesTab(playerId, timesResponse);
+
+						});
+					});
+				});
 			});
-	}
-
-	function displayProgressIfData() {
-		if ($("#accordion").has(".accordion-item").length) {
-			$("#playerProgress").fadeIn(100);
-		}
 	}
 
 	function fetchBodyWeightDataAsync(playerId) {

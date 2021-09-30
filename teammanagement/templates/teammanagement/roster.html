@@ -30,7 +30,7 @@
             <tr class="roster-player-row border">
               <td class="col-1 ps-3 align-items-center" style="max-width: 125px">
                 {% if player.roster_photo %}
-                  <img src="{{ player.roster_photo.url }}" width="100" class="rounded" alt="{{ player.info.full_name }} roster photo">
+                  <img src="{{ player.roster_photo.url }}" width="100" class="rounded" alt="{{ player.personal_info.full_name }} roster photo">
                 {% endif %}
               </td>
 
@@ -44,20 +44,20 @@
                       </b>
                       / {{ player.height }}
                       / {{ player.weight }} LBS
-                      / {{ player.info.bats }}/{{ player.info.throws }}
+                      / {{ player.personal_info.bats }}/{{ player.personal_info.throws }}
                     </p>
                     <h4 class="mb-3">
                       <span class="text-danger px-1" style="background-color: black; display: inline-block; border-radius: 4px;">{{ player.number }}</span>
-                      <a href="{% url 'teammanagement:player-page' player.info.player_link %}" class="text-shadow-sm text-decoration-none">
-                        {{ player.info.full_name|upper }}
+                      <a href="{% url 'teammanagement:player-page' player.personal_info.player_link %}" class="text-shadow-sm text-decoration-none">
+                        {{ player.personal_info.full_name|upper }}
                       </a>
                     </h4>
                   </div>
 
                   <div class="col-md-3">
                     <p class="text-muted pt-md-4">
-                      <span class="year">{{ player.info|class_standing:team.year|upper }}</span>
-                      <!--span class="short-text">{{ player.info|class_standing_abbr:team.year|upper }}</span-->
+                      <span class="year">{{ player.personal_info|class_standing:team.year|upper }}</span>
+                      <!--span class="short-text">{{ player.personal_info|class_standing_abbr:team.year|upper }}</span-->
                     </p>
                   </div>
                 </div>
@@ -82,7 +82,7 @@
             <tr class="roster-coach-row border">
                 <td class="col-1 ps-3 align-items-center" style="max-width: 125px">
                   {% if coach.roster_photo %}
-                    <img src="{{ coach.roster_photo.url }}" width="100" class="rounded" alt="Coach {{ coach.info.full_name }} roster photo">
+                    <img src="{{ coach.roster_photo.url }}" width="100" class="rounded" alt="Coach {{ coach.personal_info.full_name }} roster photo">
                   {% endif %}
                 </td>
 
@@ -92,7 +92,7 @@
                   </p>
                   <h4>
                     <a href="" class="text-shadow-sm text-decoration-none">
-                      {{ coach.info.full_name|upper }}
+                      {{ coach.personal_info.full_name|upper }}
                     </a>
                   </h4>
                 </td>

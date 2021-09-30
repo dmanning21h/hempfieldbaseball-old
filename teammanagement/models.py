@@ -3,6 +3,11 @@ from datetime import datetime
 from django.db import models
 
 
+class PlayerPageManager(models.Manager):
+    def get_queryset(self):
+        return (super().get_queryset()
+            .prefetch_related('roster_infos')) # Future Potential: 'body_weights', 'lifts', 'velocities__ttype', 'times__ttype'
+
 class Player(models.Model):
     BATS_CHOICES = (
             ('R', 'R'),
@@ -24,6 +29,9 @@ class Player(models.Model):
     throws = models.CharField(max_length=1, choices=THROWS_CHOICES,
                               default='R')
     is_active = models.BooleanField(default=True)
+
+    objects = models.Manager()
+    page_object = PlayerPageManager()
 
     class Meta:
         db_table = "Player"
@@ -56,8 +64,9 @@ class Coach(models.Model):
 
 class TeamPlayer(models.Model):
     team_player_id = models.AutoField(primary_key=True)
-    info = models.ForeignKey('Player', db_column='player_id',
+    personal_info = models.ForeignKey('Player', db_column='player_id',
                              verbose_name="Player",
+                             related_name="roster_infos",
                              on_delete=models.CASCADE)
     team = models.ForeignKey('Team', db_column='team_id',
                              verbose_name="Team",
@@ -115,8 +124,9 @@ class Height(models.Model):
 
 class TeamCoach(models.Model):
     team_coach_id = models.AutoField(primary_key=True)
-    info = models.ForeignKey('Coach', db_column='coach_id',
+    personal_info = models.ForeignKey('Coach', db_column='coach_id',
                              verbose_name="Coach",
+                             related_name="roster_infos",
                              on_delete=models.CASCADE)
     team = models.ForeignKey('Team', db_column='team_id',
                              verbose_name="Team",

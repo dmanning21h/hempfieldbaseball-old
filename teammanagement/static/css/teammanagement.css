@@ -50,3 +50,7 @@ p, th, td {
 @media (max-width: 768px) {
     .team-picture { display: none; }
 }
+
+#progressHeader h3 {
+    color: var(--dark-gray);
+}
