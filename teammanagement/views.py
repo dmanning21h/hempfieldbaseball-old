@@ -18,12 +18,12 @@ def roster(request, year=None):
 
 
 def player(request, player_link):
-    player_id = tms.get_player_id_from_link(player_link)
-
-    team_player = tms.get_latest_team_player_by_player_id(player_id)
-
+    player = tms.get_player_from_link(player_link)
+    roster_info = player.roster_infos.last()
+    
     context = {
-        'player': team_player
+        'player': player,
+        'roster_info': roster_info
     }
 
     return render(request, 'teammanagement/player.html', context)

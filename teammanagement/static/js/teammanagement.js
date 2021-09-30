@@ -36,6 +36,7 @@ function generateBodyWeightTab(playerId, dataResponse) {
 
   if (sectionData.allDates.length > 0) {
     createTabScaffolding(sectionData.idPrefix, sectionData.title, sectionData.graph.hasGraph);
+    fadeInTab(sectionData.idPrefix);
     generateChart(sectionData);
     generateTables(sectionData);
   }
@@ -51,6 +52,7 @@ function generateLiftingTab(playerId, dataResponse) {
   
   if (sectionData.allDates.length > 0) {
     createTabScaffolding(sectionData.idPrefix, sectionData.title, sectionData.graph.hasGraph);
+    fadeInTab(sectionData.idPrefix);
     generateChart(sectionData);
     generateTables(sectionData);
   }
@@ -67,6 +69,7 @@ function generateVelocityTab(playerId, dataResponse) {
   
   if (sectionData.allDates.length > 0) {
     createTabScaffolding(sectionData.idPrefix, sectionData.title, sectionData.graph.hasGraph);
+    fadeInTab(sectionData.idPrefix);
     generateChart(sectionData);
     generateTables(sectionData);
   }
@@ -80,8 +83,20 @@ function generateTimesTab(playerId, dataResponse) {
 
   if (sectionData.allDates.length > 0) {
     createTabScaffolding(sectionData.idPrefix, sectionData.title, sectionData.graph.hasGraph);
+    fadeInTab(sectionData.idPrefix);
     generateTables(sectionData);
   }
+}
+
+function fadeInTab(idPrefix) {
+  if ($("#progressHeader").is(":hidden")) {
+    $("#progressHeader").fadeIn(300);
+  }
+
+  $(`#${idPrefix}Data`).hide()  
+    .slideDown(400, 'swing')  
+    .css('opacity', 0)  
+    .animate({opacity: 1}, {queue: false, duration: 100});
 }
 
 function GetBodyWeightSectionData() {
@@ -246,13 +261,13 @@ function createTabScaffolding(idPrefix, accordionTabTitle, hasGraph)
   var tabAppend = $(`
     <div id="${idPrefix}Data" class="accordion-item">
       <div id="${idPrefix}Heading" class="accordion-header text-center">
-        <button id="${idPrefix}Button" class="accordion-button collapsed text-danger bg-dark text-center" type="button" data-bs-toggle="collapse" data-bs-target="#${idPrefix}Content" aria-expanded="false" aria-controls="${idPrefix}Content">
+        <button id="${idPrefix}Button" class="accordion-button collapsed text-center" type="button" data-bs-toggle="collapse" data-bs-target="#${idPrefix}Content" aria-expanded="false" aria-controls="${idPrefix}Content">
           <h3>
-            <span class="text-shadow-lg">
+            <span class="text-shadow-md">
               ${accordionTabTitle}
             </span>
             <span>
-                <i class="text-light fa fa-plus-square"></i>
+                <i class="fa fa-plus-square"></i>
             </span>
           </h3>
         </button>

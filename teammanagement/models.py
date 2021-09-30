@@ -6,7 +6,7 @@ from django.db import models
 class PlayerPageManager(models.Manager):
     def get_queryset(self):
         return (super().get_queryset()
-            .select_related('roster_infos', 'body_weights', 'lifts', 'velocities', 'times'))
+            .prefetch_related('roster_infos')) # Future Potential: 'body_weights', 'lifts', 'velocities__ttype', 'times__ttype'
 
 class Player(models.Model):
     BATS_CHOICES = (
@@ -31,7 +31,7 @@ class Player(models.Model):
     is_active = models.BooleanField(default=True)
 
     objects = models.Manager()
-    player_page_objects = PlayerPageManager()
+    page_object = PlayerPageManager()
 
     class Meta:
         db_table = "Player"
