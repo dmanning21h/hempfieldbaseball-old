@@ -81,7 +81,7 @@ td small {
 }
 #pageContainer::-webkit-scrollbar-thumb {
   background: var(--main-red);
-  border-radius: 10px;
+  border-radius: 15px;
 }
 #pageContainer::-webkit-scrollbar-thumb:hover {
   background: var(--dark-red);
