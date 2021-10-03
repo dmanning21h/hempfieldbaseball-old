@@ -72,6 +72,21 @@ td small {
   }
 }
 
+/* SCROLL BAR */
+#pageContainer::-webkit-scrollbar {
+  width: .55rem;
+}
+#pageContainer::-webkit-scrollbar-track {
+  background: var(--main-black);
+}
+#pageContainer::-webkit-scrollbar-thumb {
+  background: var(--main-red);
+  border-radius: 10px;
+}
+#pageContainer::-webkit-scrollbar-thumb:hover {
+  background: var(--dark-red);
+}
+
 /* TEXT DECORATION */
 .text-shadow-lg {
   text-shadow: 1px 1px 2px #222629;
@@ -83,18 +98,18 @@ td small {
   text-shadow: .25px .25px .5px #222629;
 }
 
-#page-container a {
+#pageContainer a {
   color: var(--main-red);
 }
-#page-container a:hover {
+#pageContainer a:hover {
   color: var(--dark-red);
 }
-#page-container a:active {
+#pageContainer a:active {
   color: var(--light-red);
 }
 
 /* MAIN PAGE FORMATTING */
-#page-container {
+#pageContainer {
   position: relative;
   min-height: 100vh;
   padding-bottom: 2.5rem;
@@ -122,26 +137,29 @@ td small {
 }
 
 /* NAVIGATION */
-.navbar {
+#pageContainer .navbar {
   position: fixed;
   top: 0;
   width: 100%;
 }
-
-#page-container .navbar a {
+#pageContainer .navbar a {
   color: var(--light-gray);
 }
-#page-container .navbar a:hover {
+#pageContainer .navbar a:hover {
   color: var(--main-red);
 }
-#page-container .navbar a:active {
+#pageContainer .navbar a:active {
   color: var(--dark-red);
 }
 
-#page-container .dropdown-menu a {
+#pageContainer .navbar-toggler {
+  color: var(--light-gray);
+}
+
+#pageContainer .dropdown-menu a {
   color: var(--dark-gray);
 }
-#page-container .dropdown-menu a:active {
+#pageContainer .dropdown-menu a:active {
   color: var(--dark-red);
   background-color: var(--light-gray);
 }
@@ -156,10 +174,6 @@ td small {
 
 .dropdown-menu {
     margin-top: 0;
-}
-
-#page-container .navbar-toggler {
-  color: var(--light-gray);
 }
 
 /* RESPONSIVE STYLING */
@@ -188,38 +202,38 @@ td small {
 }
 
 /* CUSTOM ACCORDION WITH TABS */
-#page-container .accordion-button {
+#pageContainer .accordion-button {
   background-color: var(--dark-gray);
 }
-#page-container .accordion-button:after {
+#pageContainer .accordion-button:after {
   width: 0;
   height: 0;
   margin-left: 0;
   background-image: none;
 }
-#page-container .accordion-button:focus {
+#pageContainer .accordion-button:focus {
   border-color: var(--main-red);
   box-shadow: 0 0 0 0.25rem rgba(223, 35, 35, 0.3);
 }
 
-#page-container .accordion-button h3 {
+#pageContainer .accordion-button h3 {
   margin: auto;
   color: var(--light-red);
 }
-#page-container .accordion-button h3 .fa {
+#pageContainer .accordion-button h3 .fa {
   color: var(--off-white);
 }
 
 
-#page-container .nav-tabs li a.active,
-#page-container .nav-tabs li a.active:hover,
-#page-container .nav-tabs li a.active:focus {
+#pageContainer .nav-tabs li a.active,
+#pageContainer .nav-tabs li a.active:hover,
+#pageContainer .nav-tabs li a.active:focus {
   color: var(--light-red);
   background-color: var(--dark-gray);
 }
-#page-container .nav-tabs li a {
+#pageContainer .nav-tabs li a {
   color: var(--dark-gray);
 }
-#page-container .nav-tabs li a:hover {
+#pageContainer .nav-tabs li a:hover {
   color: var(--light-red);
 }
