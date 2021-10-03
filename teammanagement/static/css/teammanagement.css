@@ -4,53 +4,29 @@ p {
 }
 
 /* MOBILE */
-h1 {
-    font-size: 1.75rem;
-}
-
-#rosterHeading, #coachesHeading, h3 {
+#rosterHeading, #coachesHeading{
     font-size: 1.5rem;
-}
-
-h4 {
-    font-size: 1.05rem;
-}
-
-p, th, td {
-    font-size: .75rem;
 }
 
 #playerInfo p {
     font-size: 1rem;
 }
 
-/* NON-MOBILE */
-@media (min-width: 768px) {
-    #rosterHeading, h1 {
-        font-size: 2.5rem;
-    }
-
-    #coachesHeading {
-        font-size: 2rem;
-    }
-
-    h3 {
-        font-size: 1.75rem;
-    }
-    
-    h4 {
-        font-size: 1.5rem;
-    }
-
-    p, th, td {
-        font-size: 1rem;
-    }
+#progressHeader h3 {
+    color: var(--dark-gray);
 }
 
 @media (max-width: 768px) {
     .team-picture { display: none; }
 }
 
-#progressHeader h3 {
-    color: var(--dark-gray);
+/* NON-MOBILE */
+@media (min-width: 768px) {
+    #rosterHeading {
+        font-size: 2.5rem;
+    }
+
+    #coachesHeading {
+        font-size: 2rem;
+    }
 }
