@@ -4,21 +4,7 @@ from . import services as rs
 
 
 def index(request):
-    diet_data_exists = rs.does_diet_data_exist()
-    book_data_exists = rs.does_book_data_exist()
-    hitting_videos_exist = rs.does_hitting_video_link_data_exist()
-    hitting_articles_exist = rs.does_hitting_article_link_data_exist()
-
-    context = {
-        'diet_data_exists':
-            diet_data_exists,
-        'book_data_exists':
-            book_data_exists,
-        'hitting_videos_exist':
-            hitting_videos_exist,
-        'hitting_articles_exist':
-            hitting_articles_exist
-    }
+    context = {}
 
     return render(request, 'resources/resources.html', context)
 
