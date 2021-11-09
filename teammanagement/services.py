@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404
 
-from teammanagement.models import Team, TeamPlayer, Player
+from teammanagement.models import Team, Player
 
 
 # Roster

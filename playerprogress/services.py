@@ -1,11 +1,11 @@
 import datetime as dt
 
-from .models import Player
-from .models import LiftType, Lift, LiftImprovement
-from .models import VelocityType, Velocity, VelocityImprovement
-from .models import TimeType, Time, TimeImprovement
-from .models import DistanceType, Distance, DistanceImprovement
+from .models import LiftType, Lift
+from .models import VelocityType, Velocity
+from .models import TimeType, Time
+from .models import DistanceType, Distance
 from .models import BodyWeight, BodyWeightImprovement
+from .enums import LiftType, VelocityType, TimeType
 
 
 # Global for number of Leaderboard players
@@ -14,37 +14,32 @@ top = 10
 
 # Lifting
 def get_player_deadlift_lifts(player_id):
-    return _get_player_lifts_by_lift_name(player_id, "Deadlift")
-
+    return _get_player_lifts_by_lift_name(player_id, LiftType.DEADLIFT)
 
 def get_player_squat_lifts(player_id):
-    return _get_player_lifts_by_lift_name(player_id, "Squat")
-
+    return _get_player_lifts_by_lift_name(player_id, LiftType.BACK_SQUAT)
 
 def get_player_bench_lifts(player_id):
-    return _get_player_lifts_by_lift_name(player_id, "Bench Press")
+    return _get_player_lifts_by_lift_name(player_id, LiftType.BENCH_PRESS)
 
 
 # Velocities
 def get_player_exit_velocities(player_id):
-    return _get_player_velocities_by_velocity_name(player_id, "Exit")
-
+    return _get_player_velocities_by_velocity_name(player_id, VelocityType.EXIT)
 
 def get_player_pitching_velocities(player_id):
-    return _get_player_velocities_by_velocity_name(player_id, "Pitching")
-
+    return _get_player_velocities_by_velocity_name(player_id, VelocityType.PITCHING)
 
 def get_player_outfield_velocities(player_id):
-    return _get_player_velocities_by_velocity_name(player_id, "Outfield")
-
+    return _get_player_velocities_by_velocity_name(player_id, VelocityType.OUTFIELD)
 
 def get_player_infield_velocities(player_id):
-    return _get_player_velocities_by_velocity_name(player_id, "Infield")
+    return _get_player_velocities_by_velocity_name(player_id, VelocityType.INFIELD)
 
 
 # Times
 def get_player_sixty_times(player_id):
-    return _get_player_times_by_time_name(player_id, "60-yd Dash")
+    return _get_player_times_by_time_name(player_id, TimeType.SIXTY_YARD_DASH)
 
 
 # Misc
@@ -52,7 +47,6 @@ def get_player_body_weights(player_id):
     body_weight_data = (
             BodyWeight.objects
             .filter(player=player_id)
-            .order_by('date')
         )
 
     return body_weight_data
@@ -62,10 +56,8 @@ def get_player_body_weights(player_id):
 def _get_player_lifts_by_lift_name(player_id, lift_name):
     return _get_model_records_by_player_id_and_ttype_name(Lift, player_id, lift_name)
 
-
 def _get_player_velocities_by_velocity_name(player_id, velocity_name):
     return _get_model_records_by_player_id_and_ttype_name(Velocity, player_id, velocity_name)
-
 
 def _get_player_times_by_time_name(player_id, time_name):
     return _get_model_records_by_player_id_and_ttype_name(Time, player_id, time_name)
@@ -77,7 +69,6 @@ def _get_model_records_by_player_id_and_ttype_name(model, player_id, ttype_name)
             model.objects
             .filter(player=player_id)
             .filter(ttype__name=ttype_name)
-            .order_by('date')
         )
 
 

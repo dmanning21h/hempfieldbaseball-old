@@ -1,21 +1,6 @@
 from django.db import models
 
 
-class BookType(models.Model):
-    book_type_id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=30, unique=True)
-    order = models.PositiveSmallIntegerField(unique=True)
-
-    class Meta:
-        db_table = "BookType"
-        verbose_name = "Book Type"
-        verbose_name_plural = "Book Types"
-        ordering = ['order']
-
-    def __str__(self):
-        return self.name
-
-
 class Book(models.Model):
     book_id = models.AutoField(primary_key=True)
     book_type = models.ForeignKey('BookType', db_column='book_type_id',
@@ -33,19 +18,6 @@ class Book(models.Model):
         verbose_name = "Book"
         verbose_name_plural = "Books"
         ordering = ['order']
-
-    def __str__(self):
-        return self.name
-
-
-class LinkType(models.Model):
-    link_type_id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=30, unique=True)
-
-    class Meta:
-        db_table = "LinkType"
-        verbose_name = "Link Type"
-        verbose_name_plural = "Link Types"
 
     def __str__(self):
         return self.name
@@ -92,19 +64,6 @@ class VideoLink(models.Model):
         return self.name
 
 
-class DocumentType(models.Model):
-    document_type_id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=30, unique=True)
-
-    class Meta:
-        db_table = "DocumentType"
-        verbose_name = "Document Type"
-        verbose_name_plural = "Document Types"
-
-    def __str__(self):
-        return self.name
-
-
 class Document(models.Model):
     document_id = models.AutoField(primary_key=True)
     document_type = models.ForeignKey('DocumentType', db_column='document_type_id',
@@ -121,6 +80,47 @@ class Document(models.Model):
         verbose_name = "Document"
         verbose_name_plural = "Documents"
         ordering = ['order']
+
+    def __str__(self):
+        return self.name
+
+
+class BookType(models.Model):
+    book_type_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=30, unique=True)
+    order = models.PositiveSmallIntegerField(unique=True)
+
+    class Meta:
+        db_table = "BookType"
+        verbose_name = "Book Type"
+        verbose_name_plural = "Book Types"
+        ordering = ['order']
+
+    def __str__(self):
+        return self.name
+
+
+class DocumentType(models.Model):
+    document_type_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=30, unique=True)
+
+    class Meta:
+        db_table = "DocumentType"
+        verbose_name = "Document Type"
+        verbose_name_plural = "Document Types"
+
+    def __str__(self):
+        return self.name
+
+
+class LinkType(models.Model):
+    link_type_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=30, unique=True)
+
+    class Meta:
+        db_table = "LinkType"
+        verbose_name = "Link Type"
+        verbose_name_plural = "Link Types"
 
     def __str__(self):
         return self.name
