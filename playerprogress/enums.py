@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class LiftType(str, Enum):
+class LiftTypes(str, Enum):
     DEADLIFT = "Deadlift"
     TRAP_BAR_DEADLIFT = "Trap Bar Deadlift"
     BACK_SQUAT = "Squat"
@@ -9,7 +9,7 @@ class LiftType(str, Enum):
     BENCH_PRESS = "Bench Press"
 
 
-class VelocityType(str, Enum):
+class VelocityTypes(str, Enum):
     EXIT = "Exit"
     PITCHING = "Pitching"
     OUTFIELD = "Outfield"
@@ -17,13 +17,13 @@ class VelocityType(str, Enum):
     CATCHER = "Catcher"
 
 
-class TimeType(str, Enum):
+class TimeTypes(str, Enum):
     SIXTY_YARD_DASH = "60-yd Dash"
     THIRTY_YARD_DASH = "30-yd Dash"
     POP_TIME = "Pop"
     MILE = "Mile"
 
 
-class DistanceType(str, Enum):
+class DistanceTypes(str, Enum):
     BROAD_JUMP = "Broad Jump"
     LATERAL_HOP = "Lateral Hop"

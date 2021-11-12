@@ -5,7 +5,7 @@ from .models import VelocityType, Velocity
 from .models import TimeType, Time
 from .models import DistanceType, Distance
 from .models import BodyWeight, BodyWeightImprovement
-from .enums import LiftType, VelocityType, TimeType
+from .enums import LiftTypes, VelocityTypes, TimeTypes
 
 
 # Global for number of Leaderboard players
@@ -14,32 +14,32 @@ top = 10
 
 # Lifting
 def get_player_deadlift_lifts(player_id):
-    return _get_player_lifts_by_lift_name(player_id, LiftType.DEADLIFT)
+    return _get_player_lifts_by_lift_name(player_id, LiftTypes.DEADLIFT)
 
 def get_player_squat_lifts(player_id):
-    return _get_player_lifts_by_lift_name(player_id, LiftType.BACK_SQUAT)
+    return _get_player_lifts_by_lift_name(player_id, LiftTypes.BACK_SQUAT)
 
 def get_player_bench_lifts(player_id):
-    return _get_player_lifts_by_lift_name(player_id, LiftType.BENCH_PRESS)
+    return _get_player_lifts_by_lift_name(player_id, LiftTypes.BENCH_PRESS)
 
 
 # Velocities
 def get_player_exit_velocities(player_id):
-    return _get_player_velocities_by_velocity_name(player_id, VelocityType.EXIT)
+    return _get_player_velocities_by_velocity_name(player_id, VelocityTypes.EXIT)
 
 def get_player_pitching_velocities(player_id):
-    return _get_player_velocities_by_velocity_name(player_id, VelocityType.PITCHING)
+    return _get_player_velocities_by_velocity_name(player_id, VelocityTypes.PITCHING)
 
 def get_player_outfield_velocities(player_id):
-    return _get_player_velocities_by_velocity_name(player_id, VelocityType.OUTFIELD)
+    return _get_player_velocities_by_velocity_name(player_id, VelocityTypes.OUTFIELD)
 
 def get_player_infield_velocities(player_id):
-    return _get_player_velocities_by_velocity_name(player_id, VelocityType.INFIELD)
+    return _get_player_velocities_by_velocity_name(player_id, VelocityTypes.INFIELD)
 
 
 # Times
 def get_player_sixty_times(player_id):
-    return _get_player_times_by_time_name(player_id, TimeType.SIXTY_YARD_DASH)
+    return _get_player_times_by_time_name(player_id, TimeTypes.SIXTY_YARD_DASH)
 
 
 # Misc
