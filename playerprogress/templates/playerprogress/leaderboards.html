@@ -147,6 +147,27 @@
 	-->
 
 	<div class="container text-center mt-3 pt-2">
+			
+		<hr>
+		<h2 class="text-shadow-lg display-4">Velocity</h2>
+		<div class="row">
+			<div class="col-md-3"></div>
+			<div class="col-md-6 mx-auto px-4">
+				<div class="card shadow border border-dark">
+					<img class="card-img-top" src="{% static 'img/playerprogress/velocity-improvement.jpeg' %}" alt="Velocity improvement leaderboard card image cap">
+					<div class="card-body">
+					<h3 class="card-title text-shadow-sm">Improvement</h3>
+					<a href="{% url 'playerprogress:velocity-improvement-leaderboards' %}" class="btn btn-dark">
+						View Leaderboards
+					</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3"></div>
+		</div>
+	</div>
+
+	<div class="container text-center mt-3 pt-2">
 		
 		<hr>
 		<h2 class="text-shadow-lg display-4">Misc.</h2>
@@ -154,7 +175,7 @@
 			<div class="col-md-3"></div>
 			<div class="col-md-6 mx-auto px-4">
 				<div class="card shadow border border-dark">
-					<img class="card-img-top" src="{% static 'img/playerprogress/misc-improvement.jpeg' %}" alt="Misc improvement leaderboard card image cap">
+					<img class="card-img-top" src="{% static 'img/playerprogress/misc-improvement.jpeg' %}" alt="Miscellaneous improvement leaderboard card image cap">
 					<div class="card-body">
 					<h3 class="card-title text-shadow-sm">Improvement</h3>
 					<a href="{% url 'playerprogress:misc-improvement-leaderboards' %}" class="btn btn-dark">
