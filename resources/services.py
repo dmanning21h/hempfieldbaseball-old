@@ -9,12 +9,8 @@ def get_all_diet_articles():
     return LinkType.objects.get(name=ResourceTypes.DIET).articles.all()
 
 
-def get_all_books_grouped_by_type():
-    books_grouped = {}
-    for book_type in BookType.objects.exclude(name=ResourceTypes.LIFTING):
-        books_grouped[book_type.name] = book_type.books.all()
-
-    return books_grouped
+def get_mental_baseball_books():
+    return BookType.objects.get(name=ResourceTypes.MENTAL_BASEBALL).books.all()
 
 
 def get_all_hitting_videos():

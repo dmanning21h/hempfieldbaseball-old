@@ -23,14 +23,14 @@ def diet(request):
     return render(request, 'resources/diet.html', context)
 
 
-def books(request):
-    books = rs.get_all_books_grouped_by_type()
+def mental_baseball(request):
+    books = rs.get_mental_baseball_books()
 
     context = {
-        'books_by_type': books,
+        'books': books,
     }
 
-    return render(request, 'resources/books.html', context)
+    return render(request, 'resources/mental-baseball.html', context)
 
 
 def hitting_videos(request):
