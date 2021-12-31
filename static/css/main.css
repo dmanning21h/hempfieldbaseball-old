@@ -150,9 +150,9 @@ td small {
   height: 40px;
   display: none;
   cursor: pointer;
-  padding: .25rem .75rem;
+  padding: 4px 12px;
   border: 1px solid;
-  border-radius: .25rem;
+  border-radius: 4px;
   border-color: var(--main-gray);
 }
 
