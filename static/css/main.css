@@ -147,6 +147,8 @@ td small {
 }
 
 .burger {
+  height: 39px;
+  width: 61px;
   display: none;
   cursor: pointer;
   padding: .25rem .75rem;
