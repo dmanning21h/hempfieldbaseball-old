@@ -154,6 +154,7 @@ td small {
   -webkit-border-radius: .25rem;
   border-radius: .25rem;
   border-color: var(--main-gray);
+  border-collapse: separate;
   overflow: hidden;
 }
 
