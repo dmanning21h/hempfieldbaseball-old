@@ -17,6 +17,9 @@
 }
 
 /* FONTS AND SIZING */
+html {
+  font-size: 16px;
+}
 
 h1,
 h2,
@@ -92,17 +95,17 @@ td small {
 
 /* SCROLL BAR */
 
-#pageContainer::-webkit-scrollbar {
+#page-container::-webkit-scrollbar {
   width: .55rem;
 }
-#pageContainer::-webkit-scrollbar-track {
+#page-container::-webkit-scrollbar-track {
   background: var(--main-black);
 }
-#pageContainer::-webkit-scrollbar-thumb {
+#page-container::-webkit-scrollbar-thumb {
   background: var(--main-red);
   border-radius: 15px;
 }
-#pageContainer::-webkit-scrollbar-thumb:hover {
+#page-container::-webkit-scrollbar-thumb:hover {
   background: var(--dark-red);
 }
 
@@ -118,31 +121,31 @@ td small {
   text-shadow: .25px .25px .5px #222629;
 }
 
-#pageContainer a {
+#page-container a {
   color: var(--main-red);
 }
-#pageContainer a:hover {
+#page-container a:hover {
   color: var(--dark-red);
 }
-#pageContainer a:active {
+#page-container a:active {
   color: var(--light-red);
 }
 
 /* NAVIGATION */
 
-#pageContainer .navbar {
+#page-container .navbar {
   position: fixed;
   top: 0;
   width: 100%;
   background-color: var(--main-black);
 }
-#pageContainer .navbar a {
+#page-container .navbar a {
   color: var(--light-gray);
 }
-#pageContainer .navbar a:hover {
+#page-container .navbar a:hover {
   color: var(--main-red);
 }
-#pageContainer .navbar a:active {
+#page-container .navbar a:active {
   color: var(--dark-red);
 }
 
@@ -150,10 +153,9 @@ td small {
   display: none;
   cursor: pointer;
   padding: .25rem .75rem;
-  border: 1px solid transparent;
+  border: 1px solid;
   border-radius: .25rem;
   border-color: var(--main-gray);
-  overflow: hidden;
 }
 
 .burger div {
@@ -188,14 +190,14 @@ td small {
   }
 }
 
-#pageContainer .navbar-toggler {
+#page-container .navbar-toggler {
   color: var(--light-gray);
 }
 
-#pageContainer .dropdown-menu a {
+#page-container .dropdown-menu a {
   color: var(--dark-gray);
 }
-#pageContainer .dropdown-menu a:active {
+#page-container .dropdown-menu a:active {
   color: var(--dark-red);
   background-color: var(--light-gray);
 }
@@ -214,18 +216,14 @@ td small {
 
 /* MAIN PAGE FORMATTING */
 
-#pageContainer {
+#page-container {
   position: relative;
   min-height: 100vh;
-  padding-bottom: 2.5rem;
-}
-
-#content-wrap {
-  padding-bottom: 2.5rem;
 }
 
 #main-content {
   margin-top: 56px;
+  padding-bottom: 5rem;
 }
 
 /* FOOTER */
@@ -271,37 +269,37 @@ td small {
 
 /* CUSTOM ACCORDION WITH TABS */
 
-#pageContainer .accordion-button {
+#page-container .accordion-button {
   background-color: var(--dark-gray);
 }
-#pageContainer .accordion-button:after {
+#page-container .accordion-button:after {
   width: 0;
   height: 0;
   margin-left: 0;
   background-image: none;
 }
-#pageContainer .accordion-button:focus {
+#page-container .accordion-button:focus {
   border-color: var(--main-red);
   box-shadow: 0 0 0 0.25rem rgba(223, 35, 35, 0.3);
 }
 
-#pageContainer .accordion-button h3 {
+#page-container .accordion-button h3 {
   margin: auto;
   color: var(--light-red);
 }
-#pageContainer .accordion-button h3 .fa {
+#page-container .accordion-button h3 .fa {
   color: var(--off-white);
 }
 
-#pageContainer .nav-tabs li a.active,
-#pageContainer .nav-tabs li a.active:hover,
-#pageContainer .nav-tabs li a.active:focus {
+#page-container .nav-tabs li a.active,
+#page-container .nav-tabs li a.active:hover,
+#page-container .nav-tabs li a.active:focus {
   color: var(--light-red);
   background-color: var(--dark-gray);
 }
-#pageContainer .nav-tabs li a {
+#page-container .nav-tabs li a {
   color: var(--dark-gray);
 }
-#pageContainer .nav-tabs li a:hover {
+#page-container .nav-tabs li a:hover {
   color: var(--light-red);
 }
