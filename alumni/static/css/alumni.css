@@ -37,11 +37,11 @@ a, a:hover {
 @media (max-width: 768px) {
     .alumni-card {
         width: 95%;
-        height: 140px;
+        height: 145px;
         padding: 0px;
     }
 
     .alumni-card-img img {
-      height: 134px;
+      height: 139px;
     }
 }
