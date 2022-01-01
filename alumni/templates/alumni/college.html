@@ -29,15 +29,19 @@
     <div class="container">
   	  <div class="row">
   	    {% for player in class.players.all %}
-  	      <div class="col-lg-3 col-md-4 mx-auto mt-3 mb-4">
+  	      <div class="col-lg-4 col-md-6 mx-auto mt-3 mb-4">
 
-  	        <div class="card shadow-lg mx-auto">
+  	        <div class="alumni-card shadow-lg mx-auto">
   	  	      <a href="{{ player.college_roster_link }}" target="_blank">
-		        <img class="card-img-top img-thumbnail" src="{{ player.college_roster_photo.url }}" alt="{{ player.first_name }} {{ player.last_name }} college roster photo">
-		        <div class="card-body">
-		          <h4 class="card-title text-dark text-shadow-sm text-center">{{ player.first_name }} {{ player.last_name }}</h4>
-		          <p class="card-text text-danger text-shadow-sm text-center">{{ player.college }}</p>
-		        </div>
+				<div class="row">
+					<div class="alumni-card-img col-5 pe-0">
+						<img class="" src="{{ player.college_roster_photo.url }}" alt="{{ player.first_name }} {{ player.last_name }} college roster photo">
+					</div>
+					<div class="alumni-card-info col-7 ps-2 pe-1 pt-5 ps-md-3 pe-md-3 pt-md-4 pt-lg-5 ps-lg-0">
+						<h4 class="text-shadow-sm">{{ player.first_name }} {{ player.last_name }}</h4>
+						<p class="text-shadow-sm">{{ player.college }}</p>
+					</div>
+				</div>
 	          </a> 
 		    </div>
 

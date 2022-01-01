@@ -1,21 +1,46 @@
 /* ALUMNI PLAYER CARDS */
-@media (max-width: 768px) {
-    .card {
-        max-width: 250px;
-    }
-}
 
-.card {
+.alumni-card {
   transition: transform 0.2s ease;
-  border: 4px solid black;
+  border: 3px solid var(--main-black);
+  border-radius: 7px;
   width: 100%;
   height: 100%;
 }
 
-.card:hover {
+.alumni-card:hover {
   transform: scale(1.05);
 }
 
 a, a:hover {
     text-decoration: none;
+}
+
+.alumni-card-img img {
+  height: 164px;
+  border-right: 3px solid var(--main-black);
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.alumni-card-info h4 {
+  color: var(--main-black);
+}
+
+.alumni-card-info p {
+  columns: var(--main-red);
+}
+
+/* MOBILE FORMATTING */
+
+@media (max-width: 768px) {
+    .alumni-card {
+        width: 95%;
+        height: 140px;
+        padding: 0px;
+    }
+
+    .alumni-card-img img {
+      height: 134px;
+    }
 }
