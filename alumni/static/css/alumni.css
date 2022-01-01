@@ -28,7 +28,8 @@ a, a:hover {
 }
 
 .alumni-card-info p {
-  columns: var(--main-red);
+  color: var(--main-red);
+  font-family: 'Ubuntu', sans-serif;
 }
 
 /* MOBILE FORMATTING */
