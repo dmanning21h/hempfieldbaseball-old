@@ -47,6 +47,7 @@ def get_player_body_weights(player_id):
     body_weight_data = (
             BodyWeight.objects
             .filter(player=player_id)
+            .order_by('date')
         )
 
     return body_weight_data
@@ -69,6 +70,7 @@ def _get_model_records_by_player_id_and_ttype_name(model, player_id, ttype_name)
             model.objects
             .filter(player=player_id)
             .filter(ttype__name=ttype_name)
+            .order_by('date')
         )
 
 
