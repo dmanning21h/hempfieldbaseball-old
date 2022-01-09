@@ -242,13 +242,14 @@ td small {
     align-items: center;
     width: 70%;
     transform: translateX(-100%);
-    transition: transform 0.3s ease-in;
+    transition: transform 0.2s ease-in;
   }
   .nav-links li {
     opacity: 0;
   }
   .nav-links a {
     font-size: 14px;
+    letter-spacing: 3px;
   }
 
   .logo {
