@@ -54,49 +54,47 @@
     <!-- End Google Tag Manager (noscript) -->
 
     <header>
-      <nav class="sticky-top navbar navbar-expand-md">
-        <div class="container-fluid">
+      <nav>
+        <div class="burger" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <div class="burger-line-1"></div>
+          <div class="burger-line-2"></div>
+          <div class="burger-line-3"></div>
+        </div>
 
-          <div class="burger" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <div class="burger-line-1"></div>
-            <div class="burger-line-2"></div>
-            <div class="burger-line-3"></div>
-          </div>
-          <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-            <ul class="navbar-nav">
+        <ul class="nav-links">
+          <!--li class="">
+            <a class="" href="{% url 'sitemanagement:site-index' %}">HOME</a>
+          </li-->
 
-              <li class="nav-item text-left">
-                <a class="nav-link" href="{% url 'sitemanagement:site-index' %}">HOME</a>
-              </li>
+          <li class="">
+            <a class="" href="{% url 'teammanagement:current-roster' %}">ROSTER</a>
+          </li>
 
-              <li class="nav-item text-left">
-                <a class="nav-link" href="{% url 'teammanagement:current-roster' %}">ROSTER</a>
-              </li>
-
-              <li class="nav-item text-left">
-                <a class="nav-link" href="{% url 'alumni:college-alumni' %}">ALUMNI</a>
-              </li>
-
-              <li class="nav-item text-left">
-                <a class="nav-link" href="{% url 'playerprogress:leaderboards-index' %}">LEADERBOARDS</a>
-              </li>
-  
-              <li class="nav-item dropdown text-left">
-                <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  RESOURCES
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <li class="text-left">
-                    <a class="dropdown-item" href="{% url 'resources:resources-diet' %}">DIET</a>
-                  </li>
-                  <li class="text-left">
-                    <a class="dropdown-item" href="{% url 'resources:resources-mental-baseball' %}">MENTAL BASEBALL</a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
+          <li class="">
+            <a class="" href="{% url 'playerprogress:leaderboards-index' %}">LEADERBOARDS</a>
+          </li>
+          
+          <div class="logo">
+            <li class="">
+              <a class="" href="{% url 'sitemanagement:site-index' %}">
+                <img class="" src="{% static 'img/favicon.ico' %}" alt="Hempfield Logo">
+              </a>
+            </li>
           </div>
 
+          <li class="">
+            <a class="" href="{% url 'resources:resources-index' %}">RESOURCES</a>
+          </li>
+
+          <li class="">
+            <a class="" href="{% url 'alumni:college-alumni' %}">ALUMNI</a>
+          </li>
+        </ul>
+
+        <div class="mobile-logo">
+          <a class="" href="{% url 'sitemanagement:site-index' %}">
+            <img class="" src="{% static 'img/favicon.ico' %}" alt="Hempfield Logo">
+          </a>
         </div>
       </nav>
     </header>
