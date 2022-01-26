@@ -16,6 +16,11 @@ p {
     color: var(--dark-gray);
 }
 
+.player-number {
+    color: var(--main-red);
+    background-color: var(--main-black);
+}
+
 @media (max-width: 768px) {
     .team-picture { display: none; }
 }

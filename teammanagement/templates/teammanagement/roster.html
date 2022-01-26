@@ -47,7 +47,7 @@
                       / {{ player.personal_info.bats }}/{{ player.personal_info.throws }}
                     </p>
                     <h4 class="mb-3">
-                      <span class="text-danger px-1" style="background-color: black; display: inline-block; border-radius: 4px;">{{ player.number }}</span>
+                      <span class="player-number px-1" style="display: inline-block; border-radius: 4px;">{{ player.number }}</span>
                       <a href="{% url 'teammanagement:player-page' player.personal_info.player_link %}" class="text-shadow-sm text-decoration-none">
                         {{ player.personal_info.full_name|upper }}
                       </a>

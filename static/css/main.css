@@ -3,16 +3,15 @@
 :root {
   scroll-behavior: auto;
 
-  --main-black: #1f1f1f;
-  --dark-gray: #303030;
-  --main-gray: #707070;
-  --light-gray: #D3D3D3;
-  --off-white: #f8f8ff;
+  --off-white: hsl(240, 100%, 99%);
+  --light-gray: hsl(0, 0%, 80%);
+  --main-gray: hsl(0, 0%, 45%);
+  --dark-gray: hsl(0, 0%, 20%);
+  --main-black: hsl(0, 0%, 10%);
 
-  --main-red: #C5050C;
-  --dark-red: DarkRed;
-  --dull-red: #731010;
-  --light-red: #ff3b3b;
+  --light-red: hsl(0, 100%, 55%);
+  --main-red: hsl(355, 100%, 40%);
+  --dark-red: hsl(355, 100%, 25%);
 
 }
 
