@@ -1,0 +1,17 @@
+@use "../abstracts/colors" as *;
+
+#page-container {
+  &::-webkit-scrollbar {
+    width: 0.6rem;
+  }
+  &::-webkit-scrollbar-track {
+    background: $clr-neutral-900;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $clr-primary-500;
+    border-radius: 15px;
+    &:hover {
+      background: $clr-primary-700;
+    }
+  }
+}

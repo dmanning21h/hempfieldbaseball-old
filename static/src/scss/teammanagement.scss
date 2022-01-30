@@ -1,0 +1,84 @@
+@use "abstracts" as *;
+
+/* FONTS AND SIZING */
+p {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+/* MOBILE */
+#rosterHeading, #coachesHeading{
+    font-size: 1.5rem;
+}
+
+#playerInfo p {
+    font-size: 1rem;
+}
+
+#progressHeader h3 {
+    color: $clr-neutral-800;
+}
+
+.player-number {
+    color: $clr-primary-500;
+    background-color: $clr-neutral-900;
+}
+
+.team-picture { 
+    display: none;
+}
+
+/* CUSTOM ACCORDION WITH TABS */
+
+#page-container .accordion-button {
+    background-color: $clr-neutral-800;
+  }
+  #page-container .accordion-button:after {
+    width: 0;
+    height: 0;
+    margin-left: 0;
+    background-image: none;
+  }
+  #page-container .accordion-button:focus {
+    border-color: $clr-primary-500;
+    box-shadow: 0 0 0 0.25rem rgba(223, 35, 35, 0.3);
+  }
+  
+  #page-container .accordion-button h3 {
+    margin: auto;
+    color: $clr-primary-300;
+  }
+  #page-container .accordion-button h3 .fa {
+    color: $clr-neutral-100;
+  }
+  
+  #page-container .nav-tabs li a.active,
+  #page-container .nav-tabs li a.active:hover,
+  #page-container .nav-tabs li a.active:focus {
+    color: $clr-primary-300;
+    background-color: $clr-neutral-800;
+  }
+  #page-container .nav-tabs li a {
+    color: $clr-neutral-800;
+  }
+  #page-container .nav-tabs li a:hover {
+    color: $clr-primary-300;
+  }
+
+/* NON-MOBILE */
+@media (min-width: 768px) {
+    #rosterHeading {
+        font-size: 2.5rem;
+    }
+
+    #coachesHeading {
+        font-size: 2rem;
+    }
+
+    #rosterHeading, #coachesHeading {
+        letter-spacing: 2px;
+    }
+
+    .team-picture {
+        display: block;
+    }
+}

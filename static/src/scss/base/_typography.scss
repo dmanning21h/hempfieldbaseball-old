@@ -1,0 +1,98 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+th,
+td,
+li,
+a {
+  font-family: "Ubuntu", sans-serif;
+}
+
+p {
+  font-family: "Lora", serif;
+}
+
+/* Mobile Screen Sizes */
+
+h1 {
+  font-size: 1.75rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+h4 {
+  font-size: 1.05rem;
+}
+
+h5,
+th,
+td,
+p {
+  font-size: 0.75rem;
+}
+
+td small {
+  font-size: 0.55rem;
+}
+
+/* Non-Mobile */
+
+@media (min-width: 768px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h3 {
+    font-size: 1.75rem;
+  }
+
+  h4 {
+    font-size: 1.5rem;
+  }
+
+  h5 {
+    font-size: 1.25rem;
+  }
+
+  th,
+  td,
+  p {
+    font-size: 1rem;
+  }
+
+  td small {
+    font-size: 0.9rem;
+  }
+}
+
+/* TEXT DECORATION */
+
+.text-shadow-lg {
+  text-shadow: 1px 1px 2px #222629;
+}
+.text-shadow-md {
+  text-shadow: 0.5px 0.5px 1px #222629;
+}
+.text-shadow-sm {
+  text-shadow: 0.25px 0.25px 0.5px #222629;
+}
+
+/* RESPONSIVE STYLING */
+
+.short-text {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .short-text {
+    display: inline-block;
+  }
+  .full-text {
+    display: none;
+  }
+}

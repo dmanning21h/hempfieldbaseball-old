@@ -116,10 +116,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 STATIC_ROOT = os.environ.get('STATIC_ROOT')
 
-STATIC_URL = '/static/'
+STATIC_URL = '/static/dist/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'static/dist/'),
 ]
 
 MEDIA_URL = '/media/'

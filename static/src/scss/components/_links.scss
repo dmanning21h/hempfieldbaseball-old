@@ -1,0 +1,11 @@
+@use "../abstracts/colors" as *;
+
+a {
+  color: $clr-primary-500;
+  &:hover {
+    color: $clr-primary-700;
+  }
+  &:active {
+    color: $clr-primary-300;
+  }
+}

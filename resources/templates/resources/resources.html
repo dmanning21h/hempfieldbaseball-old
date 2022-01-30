@@ -4,10 +4,6 @@
 {% block title %}Resources{% endblock %}
 {% block description %}<meta name="description" content="Player resources landing page.">{% endblock %}
 
-{% block stylesheet %}
-	<link rel="stylesheet" href="{% static 'css/resources.css' %}">
-{% endblock %}
-
 {% block content %}
 	
 	<div class="container text-center pt-2">
@@ -19,11 +15,9 @@
 				<div class="card shadow border border-dark">
 					<img class="card-img-top" src="{% static 'img/resources/diet.jpg' %}" alt="Diet card image cap">
 					<div class="card-body">
-						<hr>
-						<a href="{% url 'resources:resources-diet' %}" class="btn btn-dark shadow pb-0 px-4">
-							<h3>Diet</h3>
+						<a href="{% url 'resources:resources-diet' %}" class="button">
+							Diet
 						</a>
-						<hr>
 					</div>
 				</div>
 			</div>
@@ -33,11 +27,9 @@
 				<div class="card shadow border border-dark">
 					<img class="card-img-top" src="{% static 'img/resources/books.jpg' %}" alt="Books card image cap">
 					<div class="card-body">
-						<hr>
-						<a href="{% url 'resources:resources-mental-baseball' %}" class="btn btn-dark shadow pb-0 px-4">
-					    	<h3>Mental Baseball</h3>
+						<a href="{% url 'resources:resources-mental-baseball' %}" class="button">
+					    	Mental Baseball
 						</a>
-						<hr>
 					</div>
 				</div>
 			</div>
