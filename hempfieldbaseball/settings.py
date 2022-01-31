@@ -26,7 +26,7 @@ INSTALLED_APPS = [
     'alumni.apps.AlumniConfig',
     'playerprogress.apps.PlayerprogressConfig',
     #'postgradprep.apps.PostgradprepConfig',
-    'resources.apps.ResourcesConfig',
+    'playerresources.apps.PlayerresourcesConfig',
     'sitemanagement.apps.SitemanagementConfig',
     'teammanagement.apps.TeammanagementConfig',
 

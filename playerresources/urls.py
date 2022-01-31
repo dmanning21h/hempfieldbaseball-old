@@ -5,7 +5,7 @@ from django.conf import settings
 
 from . import views
 
-app_name = "resources"
+app_name = "playerresources"
 urlpatterns = [
     path('', views.index, name='resources-index'),
     path('diet', views.diet, name='resources-diet'),

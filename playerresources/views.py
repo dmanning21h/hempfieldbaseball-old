@@ -6,7 +6,7 @@ from . import services as rs
 def index(request):
     context = {}
 
-    return render(request, 'resources/resources.html', context)
+    return render(request, 'playerresources/resources.html', context)
 
 
 def diet(request):
@@ -20,7 +20,7 @@ def diet(request):
             diet_website_links
     }
 
-    return render(request, 'resources/diet.html', context)
+    return render(request, 'playerresources/diet.html', context)
 
 
 def mental_baseball(request):
@@ -30,7 +30,7 @@ def mental_baseball(request):
         'books': books,
     }
 
-    return render(request, 'resources/mental-baseball.html', context)
+    return render(request, 'playerresources/mental-baseball.html', context)
 
 
 def hitting_videos(request):
@@ -40,7 +40,7 @@ def hitting_videos(request):
         'hitting_video_links': hitting_videos
     }
 
-    return render(request, 'resources/hitting-videos.html', context)
+    return render(request, 'playerresources/hitting-videos.html', context)
 
 
 def hitting_articles(request):
@@ -50,4 +50,4 @@ def hitting_articles(request):
         'hitting_article_links': hitting_articles
     }
 
-    return render(request, 'resources/hitting-articles.html', context)
+    return render(request, 'playerresources/hitting-articles.html', context)

@@ -7,13 +7,13 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('resources', '0005_auto_20210813_1724'),
+        ('playerresources', '0005_auto_20210813_1724'),
     ]
 
     operations = [
         migrations.AlterField(
             model_name='articlelink',
             name='link_type_id',
-            field=models.ForeignKey(db_column='link_type_id', on_delete=django.db.models.deletion.PROTECT, related_name='article_links', to='resources.linktype', verbose_name='Link Type'),
+            field=models.ForeignKey(db_column='link_type_id', on_delete=django.db.models.deletion.PROTECT, related_name='article_links', to='playerresources.linktype', verbose_name='Link Type'),
         ),
     ]

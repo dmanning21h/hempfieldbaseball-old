@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Resources{% endblock %}
+{% block description %}<meta name="description" content="Player resources landing page.">{% endblock %}
+
+{% block content %}
+	
+	<div class="container text-center pt-2">
+		<hr>
+		<h2 class="text-shadow-lg display-3">Resources</h2>
+		<div class="row">
+
+			<div class="col-md-6 mb-4 mx-auto px-4">
+				<div class="card shadow border border-dark">
+					<img class="card-img-top" src="{% static 'img/playerresources/diet.jpg' %}" alt="Diet card image cap">
+					<div class="card-body">
+						<a href="{% url 'playerresources:resources-diet' %}" class="button">
+							Diet
+						</a>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="col-md-6 mb-4 mx-auto px-4">
+				<div class="card shadow border border-dark">
+					<img class="card-img-top" src="{% static 'img/playerresources/books.jpg' %}" alt="Books card image cap">
+					<div class="card-body">
+						<a href="{% url 'playerresources:resources-mental-baseball' %}" class="button">
+					    	Mental Baseball
+						</a>
+					</div>
+				</div>
+			</div>
+
+	    </div>
+
+	</div>
+
+{% endblock %}

@@ -7,14 +7,14 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('resources', '0008_alter_linktype_name'),
+        ('playerresources', '0008_alter_linktype_name'),
     ]
 
     operations = [
         migrations.AlterField(
             model_name='book',
             name='book_type_id',
-            field=models.ForeignKey(db_column='book_type_id', on_delete=django.db.models.deletion.CASCADE, related_name='books', to='resources.booktype', verbose_name='Book Type'),
+            field=models.ForeignKey(db_column='book_type_id', on_delete=django.db.models.deletion.CASCADE, related_name='books', to='playerresources.booktype', verbose_name='Book Type'),
         ),
         migrations.AlterField(
             model_name='booktype',
@@ -24,7 +24,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='document',
             name='document_type_id',
-            field=models.ForeignKey(db_column='document_type_id', on_delete=django.db.models.deletion.CASCADE, related_name='documents', to='resources.documenttype', verbose_name='Document Type'),
+            field=models.ForeignKey(db_column='document_type_id', on_delete=django.db.models.deletion.CASCADE, related_name='documents', to='playerresources.documenttype', verbose_name='Document Type'),
         ),
         migrations.AlterField(
             model_name='documenttype',

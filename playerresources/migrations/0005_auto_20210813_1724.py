@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('resources', '0004_auto_20210813_1707'),
+        ('playerresources', '0004_auto_20210813_1707'),
     ]
 
     operations = [
@@ -33,7 +33,7 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=100)),
                 ('url', models.URLField(max_length=150)),
                 ('order', models.PositiveSmallIntegerField(unique=True)),
-                ('link_type_id', models.ForeignKey(db_column='link_type_id', on_delete=django.db.models.deletion.PROTECT, related_name='video_links', to='resources.linktype', verbose_name='Link Type')),
+                ('link_type_id', models.ForeignKey(db_column='link_type_id', on_delete=django.db.models.deletion.PROTECT, related_name='video_links', to='playerresources.linktype', verbose_name='Link Type')),
             ],
             options={
                 'verbose_name': 'Video Link',

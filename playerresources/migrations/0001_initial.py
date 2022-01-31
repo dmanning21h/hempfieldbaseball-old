@@ -59,7 +59,7 @@ class Migration(migrations.Migration):
                 ('url', models.URLField(max_length=100)),
                 ('image', models.ImageField(blank=True, null=True, upload_to='resources-website-link-images')),
                 ('order', models.PositiveSmallIntegerField(unique=True)),
-                ('website_link_type_id', models.ForeignKey(db_column='website_link_type_id', on_delete=django.db.models.deletion.PROTECT, related_name='website_links', to='resources.websitelinktype', verbose_name='Website Link Type')),
+                ('website_link_type_id', models.ForeignKey(db_column='website_link_type_id', on_delete=django.db.models.deletion.PROTECT, related_name='website_links', to='playerresources.websitelinktype', verbose_name='Website Link Type')),
             ],
             options={
                 'verbose_name': 'Website Link',
@@ -76,7 +76,7 @@ class Migration(migrations.Migration):
                 ('file', models.FileField(upload_to='resources-documents')),
                 ('image', models.ImageField(upload_to='resources-documents-images')),
                 ('order', models.PositiveSmallIntegerField(unique=True)),
-                ('document_type_id', models.ForeignKey(db_column='document_type_id', on_delete=django.db.models.deletion.PROTECT, related_name='documents', to='resources.documenttype', verbose_name='Document Type')),
+                ('document_type_id', models.ForeignKey(db_column='document_type_id', on_delete=django.db.models.deletion.PROTECT, related_name='documents', to='playerresources.documenttype', verbose_name='Document Type')),
             ],
             options={
                 'verbose_name': 'Document',
@@ -94,7 +94,7 @@ class Migration(migrations.Migration):
                 ('amazon_url', models.URLField(max_length=125)),
                 ('image', models.ImageField(upload_to='resources-book-images')),
                 ('order', models.PositiveSmallIntegerField(unique=True)),
-                ('book_type_id', models.ForeignKey(db_column='book_type_id', on_delete=django.db.models.deletion.PROTECT, related_name='books', to='resources.booktype', verbose_name='Book Type')),
+                ('book_type_id', models.ForeignKey(db_column='book_type_id', on_delete=django.db.models.deletion.PROTECT, related_name='books', to='playerresources.booktype', verbose_name='Book Type')),
             ],
             options={
                 'verbose_name': 'Book',

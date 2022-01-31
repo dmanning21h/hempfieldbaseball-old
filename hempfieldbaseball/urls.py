@@ -9,5 +9,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('alumni/', include('alumni.urls')),
     path('leaderboards/', include('playerprogress.urls')),
-    path('resources/', include('resources.urls')),
+    path('resources/', include('playerresources.urls')),
 ]
