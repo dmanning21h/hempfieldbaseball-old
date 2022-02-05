@@ -87,27 +87,26 @@
 		var playerId = "{{ player.player_id }}";
 
 		var bodyWeightsRequest = fetchBodyWeightDataAsync(playerId);
-		var liftsRequest = fetchLiftingDataAsync(playerId);
 		var velocitiesRequest = fetchVelocityDataAsync(playerId);
 		var timesRequest = fetchTimeDataAsync(playerId);
+		// var liftsRequest = fetchLiftingDataAsync(playerId);
 
 		// Fetch All Data async and await together
 		$.when(bodyWeightsRequest).done(function(bodyWeightsResponse) {
 
 				generateBodyWeightTab(playerId, bodyWeightsResponse);
 
-				$.when(liftsRequest).done(function (liftsResponse) {
-					generateLiftingTab(playerId, liftsResponse);
+				$.when(velocitiesRequest).done(function (velocitiesResponse) {
+					generateVelocityTab(playerId, velocitiesResponse);
 
-					$.when(velocitiesRequest).done(function (velocitiesResponse) {
-						generateVelocityTab(playerId, velocitiesResponse);
+					$.when(timesRequest).done(function (timesResponse) {
+						generateTimesTab(playerId, timesResponse);
 
-						$.when(timesRequest).done(function (timesResponse) {
-							generateTimesTab(playerId, timesResponse);
-
-						});
 					});
 				});
+				//$.when(liftsRequest).done(function (liftsResponse) {
+					//generateLiftingTab(playerId, liftsResponse);
+				//});
 			});
 	}
 
