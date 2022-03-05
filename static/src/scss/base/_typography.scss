@@ -1,11 +1,9 @@
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-th,
-td,
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6,
+th, td,
 li,
 a {
   font-family: "Ubuntu", sans-serif;

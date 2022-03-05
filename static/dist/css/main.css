@@ -1,11 +1,9 @@
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-th,
-td,
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6,
+th, td,
 li,
 a {
   font-family: "Ubuntu", sans-serif;
@@ -165,9 +163,8 @@ a:active {
 }
 
 .nav-links {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
   padding: 0;
   margin: 0;
   width: 100%;
@@ -176,8 +173,9 @@ a:active {
   list-style: none;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
-.nav-links a {
+.nav-links li a {
   text-decoration: none;
   letter-spacing: 5px;
   font-weight: bold;
@@ -212,7 +210,7 @@ a:active {
 }
 
 @media screen and (max-width: 1024px) {
-  .nav-links a {
+  .nav-links li a {
     font-size: 16px;
     letter-spacing: 4px;
   }
@@ -238,6 +236,7 @@ a:active {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-around;
     width: 70%;
     transform: translateX(-100%);
     transition: transform 0.25s ease-in;
@@ -245,7 +244,7 @@ a:active {
   .nav-links li {
     opacity: 0;
   }
-  .nav-links a {
+  .nav-links li a {
     font-size: 14px;
     letter-spacing: 3px;
   }
