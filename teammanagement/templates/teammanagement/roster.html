@@ -47,8 +47,8 @@
                       / {{ player.personal_info.bats }}/{{ player.personal_info.throws }}
                     </p>
                     <h4 class="mb-3">
-                      <span class="player-number px-1" style="display: inline-block; border-radius: 4px;">{{ player.number }}</span>
-                      <a href="{% url 'teammanagement:player-page' player.personal_info.player_link %}" class="text-shadow-sm text-decoration-none">
+                      <span class="player-number px-1">{{ player.number }}</span>
+                      <a href="{% url 'teammanagement:player-page' player.personal_info.player_link %}" class="link text-shadow-sm">
                         {{ player.personal_info.full_name|upper }}
                       </a>
                     </h4>
@@ -91,7 +91,7 @@
                     <b>{{ coach.role.name|upper }} COACH</b>
                   </p>
                   <h4>
-                    <a href="" class="text-shadow-sm text-decoration-none">
+                    <a href="" class="text-shadow-sm link">
                       {{ coach.personal_info.full_name|upper }}
                     </a>
                   </h4>

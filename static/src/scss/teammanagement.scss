@@ -19,8 +19,10 @@ p {
 }
 
 .player-number {
+    display: inline-block;
     color: $clr-primary-500;
     background-color: $clr-neutral-900;
+    border-radius: .15em;
 }
 
 .team-picture { 
@@ -28,41 +30,52 @@ p {
 }
 
 /* CUSTOM ACCORDION WITH TABS */
+#accordion {
+  .accordion-button {
+    background-color: $clr-neutral-800;
 
-#page-container .accordion-button {
-    background-color: $clr-neutral-800;
+    &:after {
+      width: 0;
+      height: 0;
+      margin-left: 0;
+      background-image: none;
+    }
+    &:focus {
+      border-color: $clr-primary-500;
+      box-shadow: 0 0 0 0.25rem rgba(223, 35, 35, 0.3);
+    }
+
+    h3 {
+      margin: auto;
+      color: $clr-primary-300;
+
+      .fa {
+        color: $clr-neutral-100;
+      }
+    }
   }
-  #page-container .accordion-button:after {
-    width: 0;
-    height: 0;
-    margin-left: 0;
-    background-image: none;
+
+  .nav-tabs {
+    position: relative;
+    background-color: white;
+    min-height: 0; // override default nav class needed for bootstrap
+
+    li a {
+      color: $clr-neutral-800;
+
+      &:hover {
+        color: $clr-primary-300;
+        
+      }
+
+      &.active, &.active:hover, &.active:focus {
+        color: $clr-primary-300;
+        background-color: $clr-neutral-800;
+
+      }
+    }
   }
-  #page-container .accordion-button:focus {
-    border-color: $clr-primary-500;
-    box-shadow: 0 0 0 0.25rem rgba(223, 35, 35, 0.3);
-  }
-  
-  #page-container .accordion-button h3 {
-    margin: auto;
-    color: $clr-primary-300;
-  }
-  #page-container .accordion-button h3 .fa {
-    color: $clr-neutral-100;
-  }
-  
-  #page-container .nav-tabs li a.active,
-  #page-container .nav-tabs li a.active:hover,
-  #page-container .nav-tabs li a.active:focus {
-    color: $clr-primary-300;
-    background-color: $clr-neutral-800;
-  }
-  #page-container .nav-tabs li a {
-    color: $clr-neutral-800;
-  }
-  #page-container .nav-tabs li a:hover {
-    color: $clr-primary-300;
-  }
+}
 
 /* NON-MOBILE */
 @media (min-width: 768px) {

@@ -1,14 +1,14 @@
 const navSlide = () => {
   const burger = document.querySelector('.burger');
-  const nav = document.querySelector('.nav-links');
-  const navLinks = document.querySelectorAll('.nav-links li');
+  const nav = document.querySelector('.nav__list');
+  const navLinks = document.querySelectorAll('.nav__link');
 
   burger.addEventListener('click', () => {
     // Burger Animation
-    burger.classList.toggle('toggle');
+    burger.classList.toggle('burger--toggle');
 
     // Nav Slide In
-    nav.classList.toggle('nav-active');
+    nav.classList.toggle('nav__list--active');
 
     // Animate Links
     navLinks.forEach((link, index) => {

@@ -98,31 +98,37 @@ p {
   padding: 0.25em 1em;
   margin: 0.25em 0;
   font-size: 20px;
+  color: #cccccc;
   text-shadow: 0.2px 0.2px 0.4px #f2f2f2;
   text-decoration: none;
-  color: #cccccc;
   background-color: #333333;
   border: #1a1a1a 0.125em solid;
   border-radius: 0.25em;
   box-shadow: 0em 0em 0.15em 0 #1a1a1a;
+  transition: all 0.15s ease-in-out;
 }
 .button:hover, .button:active {
   color: #ff1a1a;
   background-color: #1a1a1a;
+  text-shadow: 0.2px 0.2px 0.4px #cc0011;
   box-shadow: 0em 0em 0.15em 0 #80000b;
 }
 
-a {
+.link {
   color: #cc0011;
+  text-decoration: none;
 }
-a:hover {
+.link:hover {
   color: #80000b;
 }
-a:active {
+.link:active {
   color: #ff1a1a;
 }
+.link--underlined {
+  text-decoration: underline;
+}
 
-#navigation {
+.nav {
   position: fixed;
   display: flex;
   align-items: center;
@@ -132,101 +138,86 @@ a:active {
   background-color: #1a1a1a;
   z-index: 9999;
 }
-#navigation a {
-  color: #d9d9d9;
-  text-shadow: 0.1px 0.1px 0.2px #f2f2f2;
-}
-#navigation a:hover {
-  color: #cc0011;
-  text-shadow: 0.1px 0.1px 0.2px #a6000e;
-}
-#navigation a:active {
-  color: #ff1a1a;
-}
-
-.burger {
-  display: none;
-  cursor: pointer;
-  margin-left: 12px;
-  padding: 0.25rem 0.75rem;
-  border: 1px solid;
-  border-radius: 0.25rem;
-  border-color: #cccccc;
-}
-.burger div {
-  width: 25px;
-  height: 3px;
-  background-color: #cccccc;
-  margin: 5px;
-  border-radius: 2px;
-  transition: all 0.3s ease;
-}
-
-.nav-links {
+.nav__list {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   padding: 0;
   margin: 0;
   width: 100%;
 }
-.nav-links li {
+.nav__item {
   list-style: none;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.nav-links li a {
+.nav__link {
+  color: #d9d9d9;
+  position: relative;
+  text-shadow: 0.1px 0.1px 0.2px #f2f2f2;
   text-decoration: none;
   letter-spacing: 5px;
   font-weight: bold;
   font-size: 18px;
+  transition: all 0.15s ease-out;
+}
+.nav__link:before, .nav__link:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  left: 0;
+  background: #cc0011;
+  visibility: hidden;
+  transform: scaleX(0);
+  transition: all 0.2s ease-in-out 0s;
+}
+.nav__link:before {
+  bottom: 101%;
+}
+.nav__link:after {
+  bottom: -3px;
+}
+.nav__link:hover {
+  color: #cc0011;
+  text-shadow: 0.1px 0.1px 0.2px #a6000e;
+  transition: all 0.1s ease-out;
+}
+.nav__link:hover:before, .nav__link:hover:after {
+  visibility: visible;
+  transform: scaleX(1);
+}
+.nav__link:active {
+  color: #ff1a1a;
 }
 
-.logo {
+.logo__image {
   transition: transform 200ms ease;
 }
-.logo:hover {
+.logo__image:hover {
   transform: scale(1.05);
 }
-
-.mobile-logo {
+.logo-mobile {
   display: none;
 }
 
-.toggle {
-  border-color: #cc0011;
-  transition: all 0.3s ease;
-}
-.toggle .burger-line-1 {
-  transform: rotate(-45deg) translate(-5px, 6px);
-  background-color: #cc0011;
-}
-.toggle .burger-line-2 {
-  opacity: 0;
-}
-.toggle .burger-line-3 {
-  transform: rotate(45deg) translate(-5px, -6px);
-  background-color: #cc0011;
+.burger {
+  display: none;
 }
 
 @media screen and (max-width: 1024px) {
-  .nav-links li a {
+  .nav__link {
     font-size: 16px;
     letter-spacing: 4px;
   }
 }
 @media screen and (max-width: 768px) {
-  /* For Mobile Navigation */
-  body {
+  /* Mobile Navigation */
+  #page {
     overflow-x: hidden;
   }
 
-  .burger {
-    display: block;
-    position: absolute;
-  }
-
-  .nav-links {
+  .nav__list {
     position: absolute;
     top: 9vh;
     left: 0px;
@@ -241,19 +232,30 @@ a:active {
     transform: translateX(-100%);
     transition: transform 0.25s ease-in;
   }
-  .nav-links li {
-    opacity: 0;
+  .nav__list--active {
+    transform: translateX(0%);
   }
-  .nav-links li a {
+
+  .nav__link {
+    opacity: 0;
     font-size: 14px;
     letter-spacing: 3px;
   }
 
+  @keyframes navLinkFade {
+    from {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0px);
+    }
+  }
   .logo {
     display: none;
   }
-
-  .mobile-logo {
+  .logo-mobile {
     display: block;
     width: 150px;
     height: 9vh;
@@ -262,36 +264,56 @@ a:active {
     text-align: center;
     font-size: 24px;
   }
-  .mobile-logo img {
+  .logo-mobile__image {
     padding: 1.5vh 0;
     height: 9vh;
   }
-}
-.nav-active {
-  transform: translateX(0%);
-}
 
-@keyframes navLinkFade {
-  from {
-    opacity: 0;
-    transform: translateX(-50px);
+  .burger {
+    display: block;
+    position: absolute;
+    cursor: pointer;
+    margin-left: 12px;
+    padding: 0.25rem 0.75rem;
+    border: 1px solid;
+    border-radius: 0.25rem;
+    border-color: #cccccc;
   }
-  to {
-    opacity: 1;
-    transform: translateX(0px);
+  .burger__line {
+    width: 25px;
+    height: 3px;
+    background-color: #cccccc;
+    margin: 5px;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  .burger--toggle {
+    border-color: #cc0011;
+    transition: all 0.3s ease;
+  }
+  .burger--toggle .burger__line-1 {
+    transform: rotate(-45deg) translate(-5px, 6px);
+    background-color: #cc0011;
+  }
+  .burger--toggle .burger__line-2 {
+    opacity: 0;
+  }
+  .burger--toggle .burger__line-3 {
+    transform: rotate(45deg) translate(-5px, -6px);
+    background-color: #cc0011;
   }
 }
-#page-container::-webkit-scrollbar {
+#page::-webkit-scrollbar {
   width: 0.6rem;
 }
-#page-container::-webkit-scrollbar-track {
+#page::-webkit-scrollbar-track {
   background: #1a1a1a;
 }
-#page-container::-webkit-scrollbar-thumb {
+#page::-webkit-scrollbar-thumb {
   background: #cc0011;
   border-radius: 15px;
 }
-#page-container::-webkit-scrollbar-thumb:hover {
+#page::-webkit-scrollbar-thumb:hover {
   background: #80000b;
 }
 
@@ -314,35 +336,25 @@ a:active {
 
 :root {
   scroll-behavior: auto;
-  --off-white: hsl(240, 100%, 99%);
-  --light-gray: hsl(0, 0%, 80%);
-  --main-gray: hsl(0, 0%, 45%);
-  --dark-gray: hsl(0, 0%, 20%);
-  --main-black: hsl(0, 0%, 10%);
-  --light-red: hsl(0, 100%, 55%);
-  --main-red: hsl(355, 100%, 40%);
-  --dark-red: hsl(355, 100%, 25%);
 }
 
-#page-container {
+#page {
   position: relative;
   min-height: 100vh;
 }
-
-#main-content {
+#page__content {
   margin-top: 9vh;
   padding-bottom: 5rem;
   z-index: -1;
 }
-
-#footer {
+#page__footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   height: 2.5rem;
   z-index: -1;
 }
-#footer p {
+#page__footer p {
   font-family: "Ubuntu", sans-serif;
   font-size: 1rem;
 }

@@ -1,11 +1,17 @@
 @use "../abstracts/colors" as *;
 
-a {
+.link {
   color: $clr-primary-500;
+  text-decoration: none;
+
   &:hover {
     color: $clr-primary-700;
   }
   &:active {
     color: $clr-primary-300;
+  }
+
+  &--underlined {
+    text-decoration: underline;
   }
 }

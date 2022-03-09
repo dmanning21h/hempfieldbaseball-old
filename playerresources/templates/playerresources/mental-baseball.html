@@ -14,7 +14,7 @@
             <div class="mb-4">
                 <hr>
                 <h4 class="text-shadow-sm mb-1">
-                    <a href="{{ book.amazon_url }}" class="text-decoration-underline" target="_blank">
+                    <a href="{{ book.amazon_url }}" class="link link--underlined" target="_blank">
                         {{ book.name }}
                     </a>
                 </h4>
@@ -22,7 +22,7 @@
                     by {{ book.author }}
                 </h5>
                 <div class="container text-center">
-                    <a href="{{ book.amazon_url }}" class="text-decoration-underline" target="_blank">
+                    <a href="{{ book.amazon_url }}" target="_blank">
                         <img src="{{ book.image.url }}" width="25%" class="rounded border border-dark shadow" alt="{{ book.name }} book cover image">
                     </a>
                     </div>

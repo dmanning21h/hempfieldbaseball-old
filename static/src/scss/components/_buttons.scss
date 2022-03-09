@@ -7,19 +7,22 @@
     margin: 0.25em 0;
 
     font-size: 20px;
+    color: $clr-neutral-400;
     text-shadow: 0.2px 0.2px 0.4px $clr-neutral-200;
     text-decoration: none;
 
-    color: $clr-neutral-400;
     background-color: $clr-neutral-800;
     border: $clr-neutral-900 .125em solid;
     border-radius: 0.25em;
 
     box-shadow: 0em 0em 0.15em 0 $clr-neutral-900;
 
+    transition: all 0.15s ease-in-out;
+
     &:hover, &:active {
         color: $clr-primary-300;
         background-color: $clr-neutral-900;
+        text-shadow: 0.2px 0.2px 0.4px $clr-primary-500;
 
         box-shadow: 0em 0em 0.15em 0 $clr-primary-700;
     }
