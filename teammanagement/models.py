@@ -89,7 +89,7 @@ class TeamPlayer(models.Model):
         ordering = ['number']
 
     def __str__(self):
-        return f"{self.team.year} {self.info.full_name()}"
+        return f"{self.team.year} {self.personal_info.full_name()}"
 
 
 class Position(models.Model):
@@ -143,7 +143,7 @@ class TeamCoach(models.Model):
         verbose_name_plural = "Team Coaches"
 
     def __str__(self):
-        return f"{self.team.year} {self.info.full_name()}"
+        return f"{self.team.year} {self.personal_info.full_name()}"
 
 
 class CoachRole(models.Model):
