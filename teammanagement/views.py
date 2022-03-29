@@ -19,7 +19,7 @@ def roster(request, year=None):
 
 def player(request, player_link):
     player = tms.get_player_from_link(player_link)
-    roster_info = player.roster_infos.last()
+    roster_info = list(player.roster_infos.all())[-1]
     
     context = {
         'player': player,
