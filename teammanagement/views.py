@@ -19,8 +19,8 @@ def roster(request, year=None):
 
 def player(request, player_link):
     player = tms.get_player_from_link(player_link)
-    roster_info = list(player.roster_infos.all())[-1]
-    
+    roster_info = player.roster_infos.order_by('-team__year').first()
+
     context = {
         'player': player,
         'roster_info': roster_info
