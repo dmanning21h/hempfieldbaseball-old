@@ -9,7 +9,7 @@ from .enums import LiftTypes, VelocityTypes, TimeTypes
 
 
 # Global for number of Leaderboard players
-top = 10
+top = 15
 
 
 # Lifting
@@ -162,8 +162,6 @@ def get_distance_improvement_leaders():
 
 
 def get_body_weight_improvement_leaders():
-    top = 10
-
     improvement_leaders = (
         BodyWeightImprovement.objects
         .filter(player__is_active=True)
