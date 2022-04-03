@@ -50,6 +50,7 @@ p {
 }
 #accordion .nav-tabs {
   position: relative;
+  z-index: 1;
   background-color: white;
   min-height: 0;
 }

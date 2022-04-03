@@ -219,6 +219,7 @@ p {
 
   .nav__list {
     position: absolute;
+    z-index: 9999;
     top: 9vh;
     left: 0px;
     padding-left: 0px;

@@ -57,6 +57,7 @@ p {
 
   .nav-tabs {
     position: relative;
+    z-index: 1;
     background-color: white;
     min-height: 0; // override default nav class needed for bootstrap
 
