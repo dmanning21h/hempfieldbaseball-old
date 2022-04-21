@@ -25,10 +25,6 @@ p {
     border-radius: .15em;
 }
 
-.team-picture { 
-    display: none;
-}
-
 /* CUSTOM ACCORDION WITH TABS */
 #accordion {
   .accordion-button {
@@ -90,9 +86,5 @@ p {
 
     #rosterHeading, #coachesHeading {
         letter-spacing: 2px;
-    }
-
-    .team-picture {
-        display: block;
     }
 }

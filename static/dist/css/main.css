@@ -37,6 +37,27 @@ td small {
   font-size: 0.55rem;
 }
 
+/* TEXT DECORATION */
+.text-shadow-lg {
+  text-shadow: 1px 1px 2px #222629;
+}
+
+.text-shadow-md {
+  text-shadow: 0.5px 0.5px 1px #222629;
+}
+
+.text-shadow-sm {
+  text-shadow: 0.25px 0.25px 0.5px #222629;
+}
+
+.short-text {
+  display: inline-block;
+}
+
+.full-text {
+  display: none;
+}
+
 /* Non-Mobile */
 @media (min-width: 768px) {
   h1 {
@@ -64,32 +85,13 @@ p {
   td small {
     font-size: 0.9rem;
   }
-}
-/* TEXT DECORATION */
-.text-shadow-lg {
-  text-shadow: 1px 1px 2px #222629;
-}
 
-.text-shadow-md {
-  text-shadow: 0.5px 0.5px 1px #222629;
-}
-
-.text-shadow-sm {
-  text-shadow: 0.25px 0.25px 0.5px #222629;
-}
-
-/* RESPONSIVE STYLING */
-.short-text {
-  display: none;
-}
-
-@media (max-width: 768px) {
   .short-text {
-    display: inline-block;
+    display: none;
   }
 
   .full-text {
-    display: none;
+    display: inline-block;
   }
 }
 .button {
@@ -105,15 +107,19 @@ p {
   border: #1a1a1a 0.125em solid;
   border-radius: 0.25em;
   box-shadow: 0em 0em 0.15em 0 #1a1a1a;
-  transition: all 0.15s ease-in-out;
 }
-.button:hover, .button:active {
+.button:hover, .button:focus {
   color: #ff1a1a;
   background-color: #1a1a1a;
   text-shadow: 0.2px 0.2px 0.4px #cc0011;
   box-shadow: 0em 0em 0.15em 0 #80000b;
 }
 
+@media (min-width: 1024px) {
+  .button {
+    transition: all 0.15s ease-in-out;
+  }
+}
 .link {
   color: #cc0011;
   text-decoration: none;
@@ -187,7 +193,7 @@ p {
   visibility: visible;
   transform: scaleX(1);
 }
-.nav__link:active {
+.nav__link:focus {
   color: #ff1a1a;
 }
 
@@ -211,8 +217,8 @@ p {
     letter-spacing: 4px;
   }
 }
+/* Mobile Nav */
 @media screen and (max-width: 768px) {
-  /* Mobile Navigation */
   #page {
     overflow-x: hidden;
   }
@@ -241,6 +247,13 @@ p {
     opacity: 0;
     font-size: 14px;
     letter-spacing: 3px;
+    transition: none;
+  }
+  .nav__link:before, .nav__link:after {
+    content: none;
+  }
+  .nav__link:hover {
+    transition: none;
   }
 
   @keyframes navLinkFade {

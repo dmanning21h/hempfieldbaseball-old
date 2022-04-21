@@ -65,7 +65,7 @@
         transform: scaleX(1);
       }
     }
-    &:active {
+    &:focus {
       color: $clr-primary-300;
     }
   }
@@ -96,8 +96,8 @@
   }
 }
 
+/* Mobile Nav */
 @media screen and (max-width: 768px) {
-  /* Mobile Navigation */
   #page {
     overflow-x: hidden;
   }
@@ -127,6 +127,15 @@
     opacity: 0;
     font-size: 14px;
     letter-spacing: 3px;
+    transition: none;
+
+    &:before, &:after {
+      content: none;
+    }
+
+    &:hover {
+      transition: none;
+    }
   }
   
   @keyframes navLinkFade {

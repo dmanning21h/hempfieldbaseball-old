@@ -14,7 +14,6 @@ p {
 }
 
 /* Mobile Screen Sizes */
-
 h1 {
   font-size: 1.75rem;
 }
@@ -38,8 +37,25 @@ td small {
   font-size: 0.55rem;
 }
 
-/* Non-Mobile */
+/* TEXT DECORATION */
+.text-shadow-lg {
+  text-shadow: 1px 1px 2px #222629;
+}
+.text-shadow-md {
+  text-shadow: 0.5px 0.5px 1px #222629;
+}
+.text-shadow-sm {
+  text-shadow: 0.25px 0.25px 0.5px #222629;
+}
 
+.short-text {
+  display: inline-block;
+}
+.full-text {
+  display: none;
+}
+
+/* Non-Mobile */
 @media (min-width: 768px) {
   h1 {
     font-size: 2.5rem;
@@ -66,31 +82,11 @@ td small {
   td small {
     font-size: 0.9rem;
   }
-}
 
-/* TEXT DECORATION */
-
-.text-shadow-lg {
-  text-shadow: 1px 1px 2px #222629;
-}
-.text-shadow-md {
-  text-shadow: 0.5px 0.5px 1px #222629;
-}
-.text-shadow-sm {
-  text-shadow: 0.25px 0.25px 0.5px #222629;
-}
-
-/* RESPONSIVE STYLING */
-
-.short-text {
-  display: none;
-}
-
-@media (max-width: 768px) {
   .short-text {
-    display: inline-block;
+    display: none;
   }
   .full-text {
-    display: none;
+    display: inline-block;
   }
 }
