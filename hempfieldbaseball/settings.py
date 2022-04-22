@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'alumni.apps.AlumniConfig',
+    'logistics.apps.LogisticsConfig',
     'playerprogress.apps.PlayerprogressConfig',
     #'postgradprep.apps.PostgradprepConfig',
     'playerresources.apps.PlayerresourcesConfig',
