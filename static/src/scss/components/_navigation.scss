@@ -68,7 +68,7 @@
     font-weight: bold;
     opacity: 0;
 
-    &:focus {
+    &:active, &:focus {
       color: $clr-primary-300;
     }
   }

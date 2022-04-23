@@ -52,6 +52,8 @@ urlpatterns = [
          views.velocity_improvement_leaderboards,
          name='velocity-improvement-leaderboards'),
 
+     
+
     path('improvement/time',
          views.time_improvement_leaderboards,
          name='time-improvement-leaderboards'),
