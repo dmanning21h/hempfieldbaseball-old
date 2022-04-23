@@ -68,7 +68,7 @@
     font-weight: bold;
     opacity: 0;
 
-    &:active, &:focus {
+    &:hover, &:focus {
       color: $clr-primary-300;
     }
   }
