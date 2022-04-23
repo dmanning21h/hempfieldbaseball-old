@@ -134,22 +134,48 @@ p {
   text-decoration: underline;
 }
 
+@keyframes navLinkFade {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+#page {
+  overflow-x: hidden;
+}
+
 .nav {
   position: fixed;
   display: flex;
   align-items: center;
+  z-index: 9999;
   min-height: 9vh;
   width: 100%;
   top: 0;
   background-color: #1a1a1a;
-  z-index: 9999;
 }
 .nav__list {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  z-index: 9999;
+  width: 70%;
+  height: 91vh;
+  top: 9vh;
+  left: 0px;
   padding: 0;
-  margin: 0;
-  width: 100%;
+  background-color: #1a1a1a;
+  transform: translateX(-100%);
+  transition: transform 0.25s ease-in;
+}
+.nav__list--active {
+  transform: translateX(0%);
 }
 .nav__item {
   list-style: none;
@@ -162,159 +188,131 @@ p {
   position: relative;
   text-shadow: 0.1px 0.1px 0.2px #f2f2f2;
   text-decoration: none;
-  letter-spacing: 5px;
+  font-size: 14px;
+  letter-spacing: 3px;
   font-weight: bold;
-  font-size: 18px;
-  transition: all 0.15s ease-out;
-}
-.nav__link:before, .nav__link:after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  left: 0;
-  background: #cc0011;
-  visibility: hidden;
-  transform: scaleX(0);
-  transition: all 0.2s ease-in-out 0s;
-}
-.nav__link:before {
-  bottom: 101%;
-}
-.nav__link:after {
-  bottom: -3px;
-}
-.nav__link:hover {
-  color: #cc0011;
-  text-shadow: 0.1px 0.1px 0.2px #a6000e;
-  transition: all 0.1s ease-out;
-}
-.nav__link:hover:before, .nav__link:hover:after {
-  visibility: visible;
-  transform: scaleX(1);
+  opacity: 0;
 }
 .nav__link:focus {
   color: #ff1a1a;
 }
 
-.logo__image {
-  transition: transform 200ms ease;
+.burger {
+  display: block;
+  position: absolute;
+  cursor: pointer;
+  margin-left: 12px;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid;
+  border-radius: 0.25rem;
+  border-color: #cccccc;
 }
-.logo__image:hover {
-  transform: scale(1.05);
+.burger__line {
+  width: 25px;
+  height: 3px;
+  background-color: #cccccc;
+  margin: 5px;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+.burger--toggle {
+  border-color: #cc0011;
+  transition: all 0.3s ease;
+}
+.burger--toggle .burger__line-1 {
+  transform: rotate(-45deg) translate(-5px, 6px);
+  background-color: #cc0011;
+}
+.burger--toggle .burger__line-2 {
+  opacity: 0;
+}
+.burger--toggle .burger__line-3 {
+  transform: rotate(45deg) translate(-5px, -6px);
+  background-color: #cc0011;
+}
+
+.logo {
+  display: none;
 }
 .logo-mobile {
-  display: none;
+  display: block;
+  width: 150px;
+  height: 9vh;
+  margin: auto;
+  padding: 0;
+  text-align: center;
+  font-size: 24px;
+}
+.logo-mobile__image {
+  padding: 1.5vh 0;
+  height: 9vh;
 }
 
-.burger {
-  display: none;
-}
+@media screen and (min-width: 768px) {
+  .nav__list {
+    position: static;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    width: 100%;
+    height: 9vh;
+    margin: 0;
+    transform: none;
+    transition: none;
+  }
 
-@media screen and (max-width: 1024px) {
   .nav__link {
     font-size: 16px;
     letter-spacing: 4px;
+    opacity: 1;
+    transition: all 0.15s ease-out;
   }
-}
-/* Mobile Nav */
-@media screen and (max-width: 768px) {
-  #page {
-    overflow-x: hidden;
-  }
-
-  .nav__list {
+  .nav__link:after {
+    content: "";
     position: absolute;
-    z-index: 9999;
-    top: 9vh;
-    left: 0px;
-    padding-left: 0px;
-    height: 91vh;
-    background-color: #1a1a1a;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    width: 70%;
-    transform: translateX(-100%);
-    transition: transform 0.25s ease-in;
-  }
-  .nav__list--active {
-    transform: translateX(0%);
-  }
-
-  .nav__link {
-    opacity: 0;
-    font-size: 14px;
-    letter-spacing: 3px;
-    transition: none;
-  }
-  .nav__link:before, .nav__link:after {
-    content: none;
+    visibility: hidden;
+    width: 100%;
+    height: 3px;
+    bottom: -4px;
+    left: 0;
+    background: #cc0011;
+    transform: scaleX(0);
+    transition: all 0.2s ease-in-out 0s;
   }
   .nav__link:hover {
+    color: #cccccc;
+    text-shadow: 0.1px 0.1px 0.2px #737373;
+    transition: all 0.1s ease-out;
+  }
+  .nav__link:hover:after {
+    visibility: visible;
+    transform: scaleX(1);
+  }
+  .nav__link:focus {
+    color: #fafaff;
     transition: none;
-  }
-
-  @keyframes navLinkFade {
-    from {
-      opacity: 0;
-      transform: translateX(-50px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0px);
-    }
-  }
-  .logo {
-    display: none;
-  }
-  .logo-mobile {
-    display: block;
-    width: 150px;
-    height: 9vh;
-    margin: auto;
-    padding: 0;
-    text-align: center;
-    font-size: 24px;
-  }
-  .logo-mobile__image {
-    padding: 1.5vh 0;
-    height: 9vh;
   }
 
   .burger {
+    display: none;
+  }
+
+  .logo {
     display: block;
-    position: absolute;
-    cursor: pointer;
-    margin-left: 12px;
-    padding: 0.25rem 0.75rem;
-    border: 1px solid;
-    border-radius: 0.25rem;
-    border-color: #cccccc;
   }
-  .burger__line {
-    width: 25px;
-    height: 3px;
-    background-color: #cccccc;
-    margin: 5px;
-    border-radius: 2px;
-    transition: all 0.3s ease;
+  .logo__image {
+    transition: transform 200ms ease;
   }
-  .burger--toggle {
-    border-color: #cc0011;
-    transition: all 0.3s ease;
+  .logo__image:hover {
+    transform: scale(1.05);
   }
-  .burger--toggle .burger__line-1 {
-    transform: rotate(-45deg) translate(-5px, 6px);
-    background-color: #cc0011;
+  .logo-mobile {
+    display: none;
   }
-  .burger--toggle .burger__line-2 {
-    opacity: 0;
-  }
-  .burger--toggle .burger__line-3 {
-    transform: rotate(45deg) translate(-5px, -6px);
-    background-color: #cc0011;
+}
+@media screen and (min-width: 1024px) {
+  .nav__link {
+    font-size: 18px;
+    letter-spacing: 5px;
   }
 }
 #page::-webkit-scrollbar {
