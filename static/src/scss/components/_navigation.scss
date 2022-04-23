@@ -69,7 +69,8 @@
     opacity: 0;
 
     &:hover, &:focus {
-      color: $clr-primary-300;
+      color: $clr-primary-400;
+      text-shadow: 0.1px 0.1px 0.2px $clr-primary-300;
     }
   }
 }
