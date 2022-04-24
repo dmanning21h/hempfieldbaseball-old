@@ -2,6 +2,78 @@ from django.http import JsonResponse
 from django.shortcuts import render
 
 from . import services as pps
+from .enums import VelocityTypes
+
+
+def leaderboards(request):
+    context = {}
+
+    return render(request, 'playerprogress/leaderboards.html',
+                  context)
+
+
+def velocity_performance_leaderboards(request):
+    velocity_leader_data = pps.get_velocity_leaders()
+
+    context = {
+        'velocity_leader_data': velocity_leader_data,
+    }
+
+    return render(request, 'playerprogress/performance/velocity.html',
+                  context)
+
+
+def time_performance_leaderboards(request):
+    time_leader_data = pps.get_time_leaders()
+
+    context = {
+        'time_leader_data': time_leader_data,
+    }
+
+    return render(request, 'playerprogress/performance/time.html',
+                  context)
+
+
+def pitching_velocity_improvement_leaderboards(request):
+    return _render_velocity_improvement_leaderboard(request, VelocityTypes.PITCHING.value)
+
+
+def exit_velocity_improvement_leaderboards(request):
+    return _render_velocity_improvement_leaderboard(request, VelocityTypes.EXIT.value)
+
+
+def _render_velocity_improvement_leaderboard(request, velocity_name):
+    top_improvements = pps.get_velocity_improvement_leaders(velocity_name)
+
+    context = {
+        'velocity_name': velocity_name,
+        'top_improvements': top_improvements,
+    }
+
+    return render(request, 'playerprogress/improvement/velocity.html',
+                  context)
+
+
+def time_improvement_leaderboards(request):
+    time_improvement_leader_data = pps.get_time_improvement_leaders()
+
+    context = {
+        'time_improvement_leader_data': time_improvement_leader_data
+    }
+
+    return render(request, 'playerprogress/improvement/time.html',
+                  context)
+
+
+def misc_improvement_leaderboards(request):
+    body_weight_improvement_leaders = pps.get_body_weight_improvement_leaders()
+
+    context = {
+        'body_weight_improvement_leaders':
+            body_weight_improvement_leaders,
+    }
+
+    return render(request, 'playerprogress/improvement/misc.html', context)
 
 
 def get_player_body_weights_with_dates(request):
@@ -112,109 +184,3 @@ def get_player_times_with_dates(request):
     }
     
     return JsonResponse(response)
-
-
-def leaderboards(request):
-    context = {}
-
-    return render(request, 'playerprogress/leaderboards.html',
-                  context)
-
-
-def lifting_performance_leaderboards(request):
-    lift_leader_data = pps.get_lift_leaders()
-
-    context = {
-        'lift_leader_data': lift_leader_data,
-    }
-
-    return render(request, 'playerprogress/performance/lifting.html',
-                  context)
-
-
-def velocity_performance_leaderboards(request):
-    velocity_leader_data = pps.get_velocity_leaders()
-
-    context = {
-        'velocity_leader_data': velocity_leader_data,
-    }
-
-    return render(request, 'playerprogress/performance/velocity.html',
-                  context)
-
-
-def time_performance_leaderboards(request):
-    time_leader_data = pps.get_time_leaders()
-
-    context = {
-        'time_leader_data': time_leader_data,
-    }
-
-    return render(request, 'playerprogress/performance/time.html',
-                  context)
-
-
-def distance_performance_leaderboards(request):
-    distance_leader_data = pps.get_distance_leaders()
-
-    context = {
-        'distance_leader_data': distance_leader_data,
-    }
-
-    return render(request, 'playerprogress/performance/distance.html',
-                  context)
-
-
-def lifting_improvement_leaderboards(request):
-    lift_improvement_leader_data = pps.get_lift_improvement_leaders()
-
-    context = {
-        'lift_improvement_leader_data': lift_improvement_leader_data,
-    }
-
-    return render(request, 'playerprogress/improvement/lifting.html',
-                  context)
-
-
-def velocity_improvement_leaderboards(request):
-    velocity_improvement_leader_data = pps.get_velocity_improvement_leaders()
-
-    context = {
-        'velocity_improvement_leader_data': velocity_improvement_leader_data,
-    }
-
-    return render(request, 'playerprogress/improvement/velocity.html',
-                  context)
-
-
-def time_improvement_leaderboards(request):
-    time_improvement_leader_data = pps.get_time_improvement_leaders()
-
-    context = {
-        'time_improvement_leader_data': time_improvement_leader_data
-    }
-
-    return render(request, 'playerprogress/improvement/time.html',
-                  context)
-
-
-def distance_improvement_leaderboards(request):
-    distance_improvement_leader_data = pps.get_distance_improvement_leaders()
-
-    context = {
-        'distance_improvement_leader_data': distance_improvement_leader_data
-    }
-
-    return render(request, 'playerprogress/improvement/distance.html',
-                  context)
-
-
-def misc_improvement_leaderboards(request):
-    body_weight_improvement_leaders = pps.get_body_weight_improvement_leaders()
-
-    context = {
-        'body_weight_improvement_leaders':
-            body_weight_improvement_leaders,
-    }
-
-    return render(request, 'playerprogress/improvement/misc.html', context)

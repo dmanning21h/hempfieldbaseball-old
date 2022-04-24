@@ -150,18 +150,26 @@
 		<hr>
 		<h2 class="text-shadow-lg display-4">Velocity</h2>
 		<div class="row">
-			<div class="col-md-3"></div>
-			<div class="col-md-6 mx-auto px-4">
+			<div class="col-md-6 mb-5 mx-auto px-4">
 				<div class="card shadow border border-dark">
-					<img class="card-img-top" src="{% static 'img/playerprogress/velocity-improvement.jpeg' %}" alt="Velocity improvement leaderboard card image cap">
+					<img class="card-img-top" src="{% static 'img/playerprogress/velocity-improvement.jpeg' %}" alt="Pitching Velocity improvement leaderboard card image cap">
 					<div class="card-body">
-						<a href="{% url 'playerprogress:velocity-improvement-leaderboards' %}" class="button">
-							Improvement
+						<a href="{% url 'playerprogress:pitching-velocity-improvement-leaderboards' %}" class="button">
+							Pitching Velocity
 						</a>
 					</div>
 				</div>
 			</div>
-			<div class="col-md-3"></div>
+			<div class="col-md-6 mx-auto px-4">
+				<div class="card shadow border border-dark">
+					<img class="card-img-top" src="{% static 'img/playerprogress/exit-velocity-improvement.jpeg' %}" alt="Exit Velocity improvement leaderboard card image cap">
+					<div class="card-body">
+						<a href="{% url 'playerprogress:exit-velocity-improvement-leaderboards' %}" class="button">
+							Exit Velocity
+						</a>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 
@@ -175,7 +183,7 @@
 					<img class="card-img-top" src="{% static 'img/playerprogress/misc-improvement.jpeg' %}" alt="Miscellaneous improvement leaderboard card image cap">
 					<div class="card-body">
 						<a href="{% url 'playerprogress:misc-improvement-leaderboards' %}" class="button">
-							Improvement
+							Body Weight
 						</a>
 					</div>
 				</div>
