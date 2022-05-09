@@ -1,5 +1,6 @@
 from django.db import models
 
+from postgradprep.models import College
 from teammanagement.models import Player
 
 
@@ -11,14 +12,20 @@ class AlumniPlayer(models.Model):
                              on_delete=models.CASCADE)
     first_name = models.CharField(max_length=15)
     last_name = models.CharField(max_length=15)
-    college = models.CharField(max_length=50)
+    college_name = models.CharField(max_length=50)
     alumni_class = models.ForeignKey('AlumniClass',
                                      db_column='alumni_class_id',
                                      verbose_name="Alumni Class",
                                      related_name='players',
-                                     on_delete=models.CASCADE)
+                                     on_delete=models.PROTECT)
+    college = models.ForeignKey(College, db_column='college_id',
+                                verbose_name="College",
+                                related_name='alumni_players',
+                                blank=True, null=True,
+                                on_delete=models.PROTECT)
     college_roster_link = models.URLField(max_length=75, unique=True)
-    college_roster_photo = models.ImageField(upload_to='alumni-portraits')
+    college_roster_photo = models.ImageField(upload_to='alumni-portraits',
+                                            blank=True, null=True)
 
     class Meta:
         db_table = "AlumniPlayer"
