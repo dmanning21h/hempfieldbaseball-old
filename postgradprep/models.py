@@ -19,6 +19,9 @@ class College(models.Model):
         verbose_name_plural = "Colleges"
         ordering = ['name']
 
+    def __str__(self):
+        return self.name
+
 
 class Division(models.Model):
     division_id = models.SmallAutoField(primary_key=True)
@@ -30,3 +33,6 @@ class Division(models.Model):
         verbose_name = "Division"
         verbose_name_plural = "Divisions"
         ordering = ['name']
+
+    def __str__(self):
+        return self.name
