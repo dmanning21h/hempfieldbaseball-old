@@ -12,7 +12,6 @@ class AlumniPlayer(models.Model):
                              on_delete=models.CASCADE)
     first_name = models.CharField(max_length=15)
     last_name = models.CharField(max_length=15)
-    college_name = models.CharField(max_length=50)
     alumni_class = models.ForeignKey('AlumniClass',
                                      db_column='alumni_class_id',
                                      verbose_name="Alumni Class",
@@ -21,7 +20,6 @@ class AlumniPlayer(models.Model):
     college = models.ForeignKey(College, db_column='college_id',
                                 verbose_name="College",
                                 related_name='alumni_players',
-                                blank=True, null=True,
                                 on_delete=models.PROTECT)
     college_roster_link = models.URLField(max_length=75, unique=True)
     college_roster_photo = models.ImageField(upload_to='alumni-portraits',

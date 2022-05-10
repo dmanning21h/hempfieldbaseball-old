@@ -22,7 +22,11 @@ class Player(models.Model):
     player_id = models.AutoField(primary_key=True)
     first_name = models.CharField(max_length=15)
     last_name = models.CharField(max_length=15)
-    player_link = models.CharField(max_length=30, unique=True)
+    player_link = models.CharField(max_length=30,
+                                   unique=True,
+                                   blank=True,
+                                   null=True,
+                                   default=None)
     graduation_year = models.PositiveSmallIntegerField()
     bats = models.CharField(max_length=1, choices=BATS_CHOICES,
                             default='R')
