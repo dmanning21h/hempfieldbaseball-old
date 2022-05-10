@@ -8,10 +8,7 @@ class AlumniPlayer(models.Model):
     alumni_player_id = models.AutoField(primary_key=True)
     info = models.ForeignKey(Player, db_column='player_id',
                              verbose_name='Player',
-                             blank=True, null=True,
                              on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=15)
-    last_name = models.CharField(max_length=15)
     alumni_class = models.ForeignKey('AlumniClass',
                                      db_column='alumni_class_id',
                                      verbose_name="Alumni Class",
@@ -29,10 +26,10 @@ class AlumniPlayer(models.Model):
         db_table = "AlumniPlayer"
         verbose_name = "Alumni Player"
         verbose_name_plural = "Alumni Players"
-        ordering = ['last_name']
+        ordering = ['info__last_name']
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name} Alumni"
+        return f"{self.info.first_name} {self.info.last_name} Alumni"
 
 
 class AlumniClass(models.Model):
