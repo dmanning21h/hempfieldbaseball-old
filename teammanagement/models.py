@@ -1,12 +1,39 @@
 from datetime import datetime
 
 from django.db import models
+from django.db.models import Prefetch
 
 
 class PlayerPageManager(models.Manager):
     def get_queryset(self):
         return (super().get_queryset()
-            .prefetch_related('roster_infos')) # Future Potential: 'body_weights', 'lifts', 'velocities__ttype', 'times__ttype'
+                .prefetch_related(
+                    Prefetch('roster_infos',
+                             TeamPlayer.objects.select_related(
+                                 'team',
+                                 'position',
+                                 'height'))
+                    )
+                )
+        
+        
+class TeamPageManager(models.Manager):
+    def get_queryset(self):
+        return (super().get_queryset()
+                .prefetch_related(
+                    Prefetch('players', 
+                             TeamPlayer.objects.select_related(
+                                 'personal_info',
+                                 'position',
+                                 'height')),
+                    Prefetch('coaches',
+                             TeamCoach.objects.select_related(
+                                 'personal_info',
+                                 'role'
+                             ))
+                    )
+                )
+
 
 class Player(models.Model):
     BATS_CHOICES = (
@@ -35,7 +62,7 @@ class Player(models.Model):
     is_active = models.BooleanField(default=True)
 
     objects = models.Manager()
-    page_object = PlayerPageManager()
+    page_objects = PlayerPageManager()
 
     class Meta:
         db_table = "Player"
@@ -170,6 +197,9 @@ class Team(models.Model):
     year = models.PositiveSmallIntegerField(unique=True)
     team_photo = models.ImageField(upload_to='team-photos', blank=True,
                                    null=True)
+
+    objects = models.Manager()
+    page_objects = TeamPageManager()
 
     class Meta:
         db_table = "Team"

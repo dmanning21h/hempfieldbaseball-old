@@ -2,8 +2,29 @@ import math
 from datetime import timedelta
 
 from django.db import models
+from django.db.models import Prefetch
 
 from teammanagement.models import Player
+
+
+class BodyWeightLeaderboardManager(models.Manager):
+    def get_queryset(self):
+        return (super().get_queryset().select_related(
+            'player',
+            'baseline',
+            'latest'))
+
+
+class VelocityLeaderboardManager(models.Manager):
+    def get_queryset(self):
+        return (super().get_queryset()
+                .prefetch_related(
+                    Prefetch('improvements',
+                             VelocityImprovement.objects.select_related(
+                                 'ttype',
+                                 'player',
+                                 'baseline',
+                                 'latest'))))
 
 
 class LiftType(models.Model):
@@ -138,6 +159,8 @@ class VelocityType(models.Model):
     velocity_type_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=25, unique=True)
     order = models.PositiveSmallIntegerField(default=0)
+
+    leaderboard_objects = VelocityLeaderboardManager()
 
     class Meta:
         db_table = "VelocityType"
@@ -413,6 +436,8 @@ class BodyWeightImprovement(models.Model):
                                null=True,
                                on_delete=models.PROTECT)
     improvement = models.FloatField(default=0)
+
+    leaderboard_objects = BodyWeightLeaderboardManager()
 
     class Meta:
         db_table = "BodyWeightImprovement"

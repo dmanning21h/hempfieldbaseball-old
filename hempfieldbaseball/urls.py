@@ -10,4 +10,6 @@ urlpatterns = [
     path('alumni/', include('alumni.urls')),
     path('leaderboards/', include('playerprogress.urls')),
     path('resources/', include('playerresources.urls')),
+    
+    path('__debug__/', include('debug_toolbar.urls')),
 ]

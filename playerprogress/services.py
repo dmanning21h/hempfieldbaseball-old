@@ -137,13 +137,24 @@ def get_velocity_improvement_leaders(velocity_name):
     
 
 def _get_model_improvement_leaders(type_model, type_model_name, zero_value=0):
-    ttype = type_model.objects.get(name=type_model_name)
+    ttype = type_model.leaderboard_objects.get(name=type_model_name)
     return (
             ttype.improvements
             .filter(player__is_active=True)
             .filter(improvement__gt=zero_value)
             .order_by('-improvement')
         )[:top]
+
+
+def get_body_weight_improvement_leaders():
+    improvement_leaders = (
+        BodyWeightImprovement.leaderboard_objects
+        .filter(player__is_active=True)
+        .filter(improvement__gt=0)
+        .order_by('-improvement')
+    )[:top]
+
+    return improvement_leaders
 
 
 #def get_lift_improvement_leaders():
@@ -156,14 +167,3 @@ def _get_model_improvement_leaders(type_model, type_model_name, zero_value=0):
 
 # def get_distance_improvement_leaders():
 #    return _get_model_improvement_leaders(DistanceType)
-
-
-def get_body_weight_improvement_leaders():
-    improvement_leaders = (
-        BodyWeightImprovement.objects
-        .filter(player__is_active=True)
-        .filter(improvement__gt=0)
-        .order_by('-improvement')
-    )[:top]
-
-    return improvement_leaders

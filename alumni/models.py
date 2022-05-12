@@ -1,7 +1,18 @@
 from django.db import models
+from django.db.models import Prefetch
 
 from postgradprep.models import College
 from teammanagement.models import Player
+
+
+class AlumniClassManager(models.Manager):
+    def get_queryset(self):
+        return (super().get_queryset()
+                .prefetch_related(
+                    Prefetch('players',
+                             AlumniPlayer.objects.select_related(
+                                 'info',
+                                 'college'))))
 
 
 class AlumniPlayer(models.Model):
@@ -35,6 +46,8 @@ class AlumniPlayer(models.Model):
 class AlumniClass(models.Model):
     alumni_class_id = models.AutoField(primary_key=True)
     year = models.PositiveSmallIntegerField(unique=True)
+
+    objects = AlumniClassManager()
 
     class Meta:
         db_table = "AlumniClass"
