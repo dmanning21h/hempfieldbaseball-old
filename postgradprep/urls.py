@@ -8,6 +8,10 @@ from . import views
 app_name = 'postgradprep'
 urlpatterns = [
 
+     path('college-camps',
+          views.college_camps,
+          name='college-camps'),
+
 ]
 
 urlpatterns += staticfiles_urlpatterns()

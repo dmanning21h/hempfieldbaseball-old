@@ -1,0 +1,58 @@
+@use "abstracts" as *;
+
+.camp-card {
+  width: 75%;
+  height: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 0px;
+
+  border: 3px solid $clr-neutral-900;
+  border-radius: 7px;
+
+  box-shadow: 0px 2px 4px $clr-neutral-700;
+  
+  &__logo { 
+
+    img {
+        height: 94px;
+        padding: 9px;
+    }
+  }
+
+  &__info {
+    padding: 5px;
+  
+    h4 {
+      color: $clr-neutral-900;
+    }
+  
+    p {
+      margin: .3rem;
+      color: $clr-primary-500;
+      font-family: 'Ubuntu', sans-serif;
+    }
+  }
+}
+
+/* NON-MOBILE FORMATTING */
+
+@media (min-width: 768px) {
+    .camp-card {
+      width: 350px;
+      height: 120px;
+
+      &__logo img {
+        height: 114px;
+      }
+    }
+}
+
+@media (min-width: 1024px) {
+    .camp-card {
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+}

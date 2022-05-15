@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}College Camps{% endblock %}
+{% block description %}<meta name="description" content="College baseball prospect camps for high school players.">{% endblock %}
+
+{% block stylesheet %}
+  <link rel="stylesheet" href="{% static 'css/postgradprep.css' %}">
+{% endblock %}
+
+{% block content %}
+  <div class="container pt-3">
+  	<h1 class="text-shadow-lg text-center px-3">
+  		COLLEGE SHOWCASE CAMPS
+  	</h1>
+    <hr>
+  </div>
+
+  <div class="container">
+    <div class="row">
+    {% for camp in college_camps %}
+        <div class="col-lg-4 mx-auto">
+        <div class="camp-card">
+            <div class="row">
+                <div class="camp-card__logo col-3">
+                    <img class="" src="{{ camp.college.logo.url }}" alt="{{ camp.college.name }} logo">
+                </div>
+                <div class="camp-card__info col-9 text-center">
+                    <p class="text-shadow-md" style="color: {{ camp.college.primary_color }}">{{ camp.college.name }}</p>
+                    <p class="text-shadow-sm">{{ camp.date|date:"l F j" }}</p>
+                    <a class="button button--small" href="{{ camp.link }}" target="_blank">Camp Link</a>
+                </div>
+            </div>
+        </div>
+        </div>
+    {% endfor %}
+    </div>
+  </div>
+{% endblock %}

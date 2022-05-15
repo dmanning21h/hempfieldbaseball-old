@@ -116,9 +116,14 @@ p {
 }
 
 .button--small {
-  font-size: 14px;
+  font-size: 12px;
 }
 
+@media (min-width: 768px) {
+  .button--small {
+    font-size: 14px;
+  }
+}
 @media (min-width: 1024px) {
   .button {
     transition: all 0.15s ease-in-out;
