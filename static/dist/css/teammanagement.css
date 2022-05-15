@@ -13,19 +13,19 @@ p {
 }
 
 #progressHeader h3 {
-  color: #333333;
+  color: hsl(0deg, 0%, 20%);
 }
 
 .player-number {
   display: inline-block;
-  color: #cc0011;
-  background-color: #1a1a1a;
+  color: hsl(355deg, 100%, 40%);
+  background-color: hsl(0deg, 0%, 10%);
   border-radius: 0.15em;
 }
 
 /* CUSTOM ACCORDION WITH TABS */
 #accordion .accordion-button {
-  background-color: #333333;
+  background-color: hsl(0deg, 0%, 20%);
 }
 #accordion .accordion-button:after {
   width: 0;
@@ -34,15 +34,15 @@ p {
   background-image: none;
 }
 #accordion .accordion-button:focus {
-  border-color: #cc0011;
+  border-color: hsl(355deg, 100%, 40%);
   box-shadow: 0 0 0 0.25rem rgba(223, 35, 35, 0.3);
 }
 #accordion .accordion-button h3 {
   margin: auto;
-  color: #ff1a1a;
+  color: hsl(0deg, 100%, 55%);
 }
 #accordion .accordion-button h3 .fa {
-  color: #fafaff;
+  color: hsl(240deg, 100%, 99%);
 }
 #accordion .nav-tabs {
   position: relative;
@@ -51,14 +51,14 @@ p {
   min-height: 0;
 }
 #accordion .nav-tabs li a {
-  color: #333333;
+  color: hsl(0deg, 0%, 20%);
 }
 #accordion .nav-tabs li a:hover {
-  color: #ff1a1a;
+  color: hsl(0deg, 100%, 55%);
 }
 #accordion .nav-tabs li a.active, #accordion .nav-tabs li a.active:hover, #accordion .nav-tabs li a.active:focus {
-  color: #ff1a1a;
-  background-color: #333333;
+  color: hsl(0deg, 100%, 55%);
+  background-color: hsl(0deg, 0%, 20%);
 }
 
 /* NON-MOBILE */
