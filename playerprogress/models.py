@@ -437,6 +437,7 @@ class BodyWeightImprovement(models.Model):
                                on_delete=models.PROTECT)
     improvement = models.FloatField(default=0)
 
+    objects = models.Manager()
     leaderboard_objects = BodyWeightLeaderboardManager()
 
     class Meta:
