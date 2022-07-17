@@ -2,7 +2,7 @@ from django.db import models
 from django.db.models import Prefetch
 
 from postgradprep.models import College
-from teammanagement.models import Player
+from teammanagement.enums import TeamManagementModels
 
 
 class AlumniClassManager(models.Manager):
@@ -17,7 +17,7 @@ class AlumniClassManager(models.Manager):
 
 class AlumniPlayer(models.Model):
     alumni_player_id = models.AutoField(primary_key=True)
-    info = models.ForeignKey(Player, db_column='player_id',
+    info = models.ForeignKey(TeamManagementModels.PLAYER, db_column='player_id',
                              verbose_name='Player',
                              on_delete=models.CASCADE)
     alumni_class = models.ForeignKey('AlumniClass',

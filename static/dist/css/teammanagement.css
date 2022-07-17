@@ -12,6 +12,9 @@ p {
   font-size: 1rem;
 }
 
+#progressHeader {
+  opacity: 0;
+}
 #progressHeader h3 {
   color: hsl(0deg, 0%, 20%);
 }
@@ -23,7 +26,9 @@ p {
   border-radius: 0.15em;
 }
 
-/* CUSTOM ACCORDION WITH TABS */
+#accordion .accordion-item {
+  opacity: 0;
+}
 #accordion .accordion-button {
   background-color: hsl(0deg, 0%, 20%);
 }
@@ -66,11 +71,9 @@ p {
   #rosterHeading {
     font-size: 2.5rem;
   }
-
   #coachesHeading {
     font-size: 2rem;
   }
-
   #rosterHeading, #coachesHeading {
     letter-spacing: 2px;
   }

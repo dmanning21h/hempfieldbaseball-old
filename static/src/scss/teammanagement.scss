@@ -14,8 +14,12 @@ p {
     font-size: 1rem;
 }
 
-#progressHeader h3 {
+#progressHeader {
+  opacity: 0;
+
+  h3 {
     color: $clr-neutral-800;
+  }
 }
 
 .player-number {
@@ -25,8 +29,11 @@ p {
     border-radius: .15em;
 }
 
-/* CUSTOM ACCORDION WITH TABS */
 #accordion {
+  .accordion-item {
+    opacity: 0;
+  }
+
   .accordion-button {
     background-color: $clr-neutral-800;
 

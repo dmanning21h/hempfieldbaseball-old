@@ -63,33 +63,26 @@ td small {
   h1 {
     font-size: 2.5rem;
   }
-
   h3 {
     font-size: 1.75rem;
   }
-
   h4 {
     font-size: 1.5rem;
   }
-
   h5 {
     font-size: 1.25rem;
   }
-
   th,
 td,
 p {
     font-size: 1rem;
   }
-
   td small {
     font-size: 0.9rem;
   }
-
   .short-text {
     display: none;
   }
-
   .full-text {
     display: inline-block;
   }
@@ -269,7 +262,6 @@ p {
     transform: none;
     transition: none;
   }
-
   .nav__link {
     font-size: 16px;
     letter-spacing: 4px;
@@ -301,11 +293,9 @@ p {
     color: hsl(240deg, 100%, 99%);
     transition: none;
   }
-
   .burger {
     display: none;
   }
-
   .logo {
     display: block;
   }

@@ -7,68 +7,135 @@
 {% block description %}<meta name="description" content="{{ player.full_name }} extended roster details and player progress.">{% endblock %}
 
 {% block stylesheet %}
-	<link rel="stylesheet" href="{% static 'css/teammanagement.css' %}">
+<link rel="stylesheet" href="{% static 'css/teammanagement.css' %}">
 {% endblock %}
 
 {% block content %}
-	<div class="container pt-2">
-		<hr>
-	</div>
+<div class="container pt-2">
+	<hr>
+</div>
 
-	<div id="playerInfo" class="container pt-2">
-		<div class="row">
-			<div class="col-md-3 text-center mb-3 pl-md-4 pl-lg-5">
-				{% if roster_info.roster_photo %}
-					<img src="{{ roster_info.roster_photo.url }}" width="175px" class="rounded border border-dark shadow-lg" alt="{{ player.full_name }} roster photo">
-				{% endif %}
+<div id="playerInfo" class="container pt-2">
+	<div class="row">
+		<div class="col-md-3 text-center mb-3 pl-md-4 pl-lg-5">
+		{% if roster_info.roster_photo %}
+			<img src="{{ roster_info.roster_photo.url }}" width="175px" class="rounded border border-dark shadow-lg" alt="{{ player.full_name }} roster photo">
+		{% endif %}
+		</div>
+
+		<div class="col-md-7 px-4 px-md-4 ms-md-4 ms-lg-2">
+			<h1>
+				<span class="player-number px-2 pb-1">{{ roster_info.number }}</span>
+				<span class="text-shadow-md" style="font-size: smaller;">{{ player.full_name|upper }}</span>
+			</h1>
+			<hr>
+			<div class="row">
+				<div class="col-md-6">
+					<p><b>CLASS:</b> {{ player.graduation_year }}</p>
+					<hr>
+					<p><b>POSITION:</b> {{ roster_info.position }}</p>
+					<hr>
+					<p><b>BATS/THROWS:</b> {{ player.bats }}/{{ player.throws }}</p>
+					<hr>
+				</div>
+				<div class="col-md-6">
+					<p><b>HEIGHT:</b> {{ roster_info.height }}</p>
+					<hr>
+					<p><b>WEIGHT:</b> {{ roster_info.weight }} lbs</p>
+					<hr>
+				</div>
 			</div>
+		</div>
 
-			<div class="col-md-7 px-4 px-md-4 ms-md-4 ms-lg-2">
-				<h1>
-					<span class="player-number px-2 pb-1">{{ roster_info.number }}</span>
-					<span class="text-shadow-md" style="font-size: smaller;">{{ player.full_name|upper }}</span>
-				</h1>
+	</div>
+</div>
+<br>
 
-				<hr>
-
-				<div class="row">
-					<div class="col-md-6">
-						<p>
-							<b>CLASS:</b> {{ player.graduation_year }}
-						</p>
-						<hr>
-						<p>
-							<b>POSITION:</b> {{ roster_info.position }}
-						</p>
-						<hr>
-						<p>
-							<b>BATS/THROWS:</b> {{ player.bats }}/{{ player.throws }}
-						</p>
-						<hr>
-					</div>
-					<div class="col-md-6">
-						<p>
-							<b>HEIGHT:</b> {{ roster_info.height }}
-						</p>
-						<hr>
-							<p>
-								<b>WEIGHT:</b> {{ roster_info.weight }} lbs
-							</p>
-							<hr>
+{% if has_data %}
+<div id="playerProgress">
+	<div id="progressHeader" class="text-center text-shadow-md">
+		<h3 class="">Player Progress</h3>
+	</div>
+	<div id="accordion" class="container">
+	{% if has_body_weights %}
+		<div id="bodyWeightData" class="accordion-item">
+			<div id="bodyWeightHeading" class="accordion-header text-center">
+				<button id="bodyWeightButton" class="accordion-button collapsed text-center" type="button" data-bs-toggle="collapse" data-bs-target="#bodyWeightContent" aria-expanded="false" aria-controls="bodyWeightContent">
+					<h3>
+						<span class="text-shadow-md">Body Weights</span>
+						<span><i class="fa fa-plus-square"></i></span>
+					</h3>
+				</button>
+			</div>
+	
+			<div id="bodyWeightContent" class="accordion-collapse collapse" aria-labelledby="$bodyWeightHeading" data-bs-parent="#accordion">
+				<div id="bodyWeightDataBody" class="accordion-body">
+					<ul id="bodyWeightTabs" class="nav nav-tabs justify-content-center" role="tablist">
+						<li class="nav-item" role="presentation">
+							<a id="bodyWeightChartTab" class="nav-link active" data-bs-toggle="tab" href="#bodyWeightChartContainer" role="tab" aria-controls="bodyWeightChartContainer" aria-selected="true">Graph</a>
+						</li>`
+					</ul>
+					<br>
+					<div id="bodyWeightTabContent" class="tab-content">
+						<div id="bodyWeightChartContainer" class="tab-pane fade show active" style="height: 50vh; width: 100%" role="tabpanel" aria-labelledby="bodyWeightChartTab">
+							<canvas id="bodyWeightChart"></canvas>
+						</div>
 					</div>
 				</div>
 			</div>
-
 		</div>
-	</div>
-	<br>
+	{% endif %}
+	{% if has_velocities %}
+		<div id="velocityData" class="accordion-item">
+			<div id="velocityHeading" class="accordion-header text-center">
+				<button id="velocityButton" class="accordion-button collapsed text-center" type="button" data-bs-toggle="collapse" data-bs-target="#velocityContent" aria-expanded="false" aria-controls="velocityContent">
+					<h3>
+						<span class="text-shadow-md">Velocities</span>
+						<span><i class="fa fa-plus-square"></i></span>
+					</h3>
+				</button>
+			</div>
 
-	<div id="playerProgress">
-		<div id="progressHeader" class="text-center text-shadow-md" style="display: none">
-			<h3 class="">Player Progress</h3>
+			<div id="velocityContent" class="accordion-collapse collapse" aria-labelledby="$velocityHeading" data-bs-parent="#accordion">
+				<div id="velocityDataBody" class="accordion-body">
+					<ul id="velocityTabs" class="nav nav-tabs justify-content-center" role="tablist">
+						<li class="nav-item" role="presentation">
+							<a id="velocityChartTab" class="nav-link active" data-bs-toggle="tab" href="#velocityChartContainer" role="tab" aria-controls="velocityChartContainer" aria-selected="true">Graph</a>
+						</li>`
+					</ul>
+					<br>
+					<div id="velocityTabContent" class="tab-content">
+						<div id="velocityChartContainer" class="tab-pane fade show active" style="height: 50vh; width: 100%" role="tabpanel" aria-labelledby="velocityChartTab">
+							<canvas id="velocityChart"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-		<div id="accordion" class="container"></div>
+	{% endif %}
+	{% if has_times %}
+		<div id="timeData" class="accordion-item">
+			<div id="timeHeading" class="accordion-header text-center">
+				<button id="timeButton" class="accordion-button collapsed text-center" type="button" data-bs-toggle="collapse" data-bs-target="#timeContent" aria-expanded="false" aria-controls="timeContent">
+					<h3>
+						<span class="text-shadow-md">Times</span>
+						<span><i class="fa fa-plus-square"></i></span>
+					</h3>
+				</button>
+			</div>
+
+			<div id="timeContent" class="accordion-collapse collapse" aria-labelledby="$timeHeading" data-bs-parent="#accordion">
+				<div id="timeDataBody" class="accordion-body">
+					<ul id="timeTabs" class="nav nav-tabs justify-content-center" role="tablist"></ul>
+					<br>
+					<div id="timeTabContent" class="tab-content"></div>
+				</div>
+			</div>
+		</div>
+	{% endif %}
 	</div>
+</div>
+{% endif %}
 
 {% endblock %}
 
@@ -79,7 +146,6 @@
 <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@0.1.1"></script>
 <script src="{% static 'js/teammanagement.js' %}"></script>
-
 <script>
 	generateAccordionTabs();
 
@@ -89,23 +155,24 @@
 		var bodyWeightsRequest = fetchBodyWeightDataAsync(playerId);
 		var velocitiesRequest = fetchVelocityDataAsync(playerId);
 		var timesRequest = fetchTimeDataAsync(playerId);
-		// var liftsRequest = fetchLiftingDataAsync(playerId);
+		//var liftsRequest = fetchLiftingDataAsync(playerId);
 
 		// Fetch All Data async and await together
 		$.when(bodyWeightsRequest).done(function(bodyWeightsResponse) {
+				populateBodyWeightTab(playerId, bodyWeightsResponse);
 
-				generateBodyWeightTab(playerId, bodyWeightsResponse);
+				//$.when(liftsRequest).done(function (liftsResponse) {
+					//populateLiftingTab(playerId, liftsResponse);
 
 				$.when(velocitiesRequest).done(function (velocitiesResponse) {
-					generateVelocityTab(playerId, velocitiesResponse);
+					populateVelocityTab(playerId, velocitiesResponse);
 
 					$.when(timesRequest).done(function (timesResponse) {
-						generateTimesTab(playerId, timesResponse);
+						populateTimesTab(playerId, timesResponse);
 
 					});
 				});
-				//$.when(liftsRequest).done(function (liftsResponse) {
-					//generateLiftingTab(playerId, liftsResponse);
+
 				//});
 			});
 	}

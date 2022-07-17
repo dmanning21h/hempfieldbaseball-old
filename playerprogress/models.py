@@ -4,7 +4,7 @@ from datetime import timedelta
 from django.db import models
 from django.db.models import Prefetch
 
-from teammanagement.models import Player
+from teammanagement.enums import TeamManagementModels
 
 
 class BodyWeightLeaderboardManager(models.Manager):
@@ -44,7 +44,7 @@ class LiftType(models.Model):
 
 class Lift(models.Model):
     lift_id = models.AutoField(primary_key=True)
-    player = models.ForeignKey(Player, db_column='player_id',
+    player = models.ForeignKey(TeamManagementModels.PLAYER, db_column='player_id',
                                verbose_name="Player",
                                related_name='lifts',
                                on_delete=models.CASCADE)
@@ -82,7 +82,7 @@ class Lift(models.Model):
 
     class Meta:
         db_table = "Lift"
-        ordering = ['-date']
+        ordering = ['date']
 
     def __str__(self):
         return f"{self.date} {self.player} {self.ttype} ({self.sets()})"
@@ -125,7 +125,7 @@ class StrengthIncrement(models.Model):
 
 class LiftImprovement(models.Model):
     lift_improvement_id = models.AutoField(primary_key=True)
-    player = models.ForeignKey(Player, db_column='player_id',
+    player = models.ForeignKey(TeamManagementModels.PLAYER, db_column='player_id',
                                verbose_name="Player",
                                related_name='lift_improvements',
                                on_delete=models.CASCADE)
@@ -174,7 +174,7 @@ class VelocityType(models.Model):
 
 class Velocity(models.Model):
     velocity_id = models.AutoField(primary_key=True)
-    player = models.ForeignKey(Player, db_column='player_id',
+    player = models.ForeignKey(TeamManagementModels.PLAYER, db_column='player_id',
                                verbose_name="Player",
                                related_name='velocities',
                                on_delete=models.CASCADE)
@@ -189,7 +189,7 @@ class Velocity(models.Model):
     class Meta:
         db_table = "Velocity"
         verbose_name_plural = "Velocities"
-        ordering = ['-date']
+        ordering = ['date']
 
     def __str__(self):
         return f"{self.player} {self.date} {self.ttype} Velocity"
@@ -197,7 +197,7 @@ class Velocity(models.Model):
 
 class VelocityImprovement(models.Model):
     velocity_improvement_id = models.AutoField(primary_key=True)
-    player = models.ForeignKey(Player, db_column='player_id',
+    player = models.ForeignKey(TeamManagementModels.PLAYER, db_column='player_id',
                                verbose_name="Player",
                                related_name='velocity_improvements',
                                on_delete=models.CASCADE)
@@ -246,7 +246,7 @@ class TimeType(models.Model):
 
 class Time(models.Model):
     time_id = models.AutoField(primary_key=True)
-    player = models.ForeignKey(Player, db_column='player_id',
+    player = models.ForeignKey(TeamManagementModels.PLAYER, db_column='player_id',
                                verbose_name="Player",
                                related_name='times',
                                on_delete=models.CASCADE)
@@ -274,7 +274,7 @@ class Time(models.Model):
 
     class Meta:
         db_table = "Time"
-        ordering = ['-date']
+        ordering = ['date']
 
     def __str__(self):
         return f"{self.player} {self.date} {self.ttype} Time"
@@ -282,7 +282,7 @@ class Time(models.Model):
 
 class TimeImprovement(models.Model):
     time_improvement_id = models.AutoField(primary_key=True)
-    player = models.ForeignKey(Player, db_column='player_id',
+    player = models.ForeignKey(TeamManagementModels.PLAYER, db_column='player_id',
                                verbose_name="Player",
                                related_name='time_improvements',
                                on_delete=models.CASCADE)
@@ -345,7 +345,7 @@ class DistanceType(models.Model):
 
 class Distance(models.Model):
     distance_id = models.AutoField(primary_key=True)
-    player = models.ForeignKey(Player, db_column='player_id',
+    player = models.ForeignKey(TeamManagementModels.PLAYER, db_column='player_id',
                                verbose_name="Player",
                                related_name='distances',
                                on_delete=models.CASCADE)
@@ -359,7 +359,7 @@ class Distance(models.Model):
 
     class Meta:
         db_table = "Distance"
-        ordering = ['-date']
+        ordering = ['date']
 
     def __str__(self):
         return f"{self.player} {self.date} {self.ttype} Distance"
@@ -367,7 +367,7 @@ class Distance(models.Model):
 
 class DistanceImprovement(models.Model):
     distance_improvement_id = models.AutoField(primary_key=True)
-    player = models.ForeignKey(Player, db_column='player_id',
+    player = models.ForeignKey(TeamManagementModels.PLAYER, db_column='player_id',
                                verbose_name="Player",
                                related_name='distance_improvements',
                                on_delete=models.CASCADE)
@@ -400,7 +400,7 @@ class DistanceImprovement(models.Model):
 
 class BodyWeight(models.Model):
     body_weight_id = models.AutoField(primary_key=True)
-    player = models.ForeignKey(Player, db_column='player_id',
+    player = models.ForeignKey(TeamManagementModels.PLAYER, db_column='player_id',
                                verbose_name="Player",
                                related_name='body_weights',
                                on_delete=models.CASCADE)
@@ -411,7 +411,7 @@ class BodyWeight(models.Model):
         db_table = "BodyWeight"
         verbose_name = "Body Weight"
         verbose_name_plural = "Body Weights"
-        ordering = ['-date']
+        ordering = ['date']
 
     def __str__(self):
         return f"{self.player} {self.date} Body Weight"
@@ -419,7 +419,7 @@ class BodyWeight(models.Model):
 
 class BodyWeightImprovement(models.Model):
     body_weight_improvement_id = models.AutoField(primary_key=True)
-    player = models.ForeignKey(Player, db_column='player_id',
+    player = models.ForeignKey(TeamManagementModels.PLAYER, db_column='player_id',
                                verbose_name="Player",
                                related_name='body_weight_improvements',
                                on_delete=models.CASCADE)

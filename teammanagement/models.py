@@ -12,7 +12,7 @@ class PlayerPageManager(models.Manager):
                              TeamPlayer.objects.select_related(
                                  'team',
                                  'position',
-                                 'height'))
+                                 'height').order_by('-team__year'))
                     )
                 )
         

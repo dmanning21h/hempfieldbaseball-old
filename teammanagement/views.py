@@ -19,11 +19,22 @@ def roster(request, year=None):
 
 def player(request, player_link):
     player = tms.get_player_from_link(player_link)
-    roster_info = player.roster_infos.order_by('-team__year').first()
+    roster_info = player.roster_infos.first()
+
+    has_body_weights = player.body_weights.exists()
+    has_velocities = player.velocities.exists()
+    has_times = player.times.exists()
+    has_data = has_body_weights or has_velocities or has_times
+
 
     context = {
         'player': player,
-        'roster_info': roster_info
+        'roster_info': roster_info,
+
+        'has_body_weights': has_body_weights,
+        'has_velocities': has_velocities,
+        'has_times': has_times,
+        'has_data': has_data
     }
 
     return render(request, 'teammanagement/player.html', context)

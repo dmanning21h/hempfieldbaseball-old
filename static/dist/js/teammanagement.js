@@ -1,3 +1,13 @@
+const accordionTabSlide = () => {
+  $("#progressHeader")
+    .animate({opacity: 1}, {queue: false, duration: 100});
+  
+  $(".accordion-item")
+    .animate({opacity: 1}, {queue: false, duration: 150});
+}
+
+accordionTabSlide();
+
 $("#accordion").on("hide.bs.collapse show.bs.collapse", e => {
     $(e.target)
   .prev()
@@ -28,21 +38,19 @@ function fetchDataWithDatesAsync(url, playerId)
   });
 }
 
-function generateBodyWeightTab(playerId, dataResponse) {
+function populateBodyWeightTab(playerId, dataResponse) {
   var sectionData = GetBodyWeightSectionData();
 
   sectionData.dataToDisplay.bodyWeight.data = dataResponse.bodyWeight;
   sectionData.allDates = dataResponse.allDates;
 
   if (sectionData.allDates.length > 0) {
-    createTabScaffolding(sectionData.idPrefix, sectionData.title, sectionData.graph.hasGraph);
-    fadeInTab(sectionData.idPrefix);
     generateChart(sectionData);
     generateTables(sectionData);
   }
 }
 
-function generateLiftingTab(playerId, dataResponse) {
+function populateLiftingTab(playerId, dataResponse) {
   var sectionData = getLiftSectionData();
 
   sectionData.dataToDisplay.deadlift.data = dataResponse.deadlift;
@@ -51,14 +59,12 @@ function generateLiftingTab(playerId, dataResponse) {
   sectionData.allDates = dataResponse.allDates;
   
   if (sectionData.allDates.length > 0) {
-    createTabScaffolding(sectionData.idPrefix, sectionData.title, sectionData.graph.hasGraph);
-    fadeInTab(sectionData.idPrefix);
     generateChart(sectionData);
     generateTables(sectionData);
   }
 }
 
-function generateVelocityTab(playerId, dataResponse) {
+function populateVelocityTab(playerId, dataResponse) {
   var sectionData = getVelocitySectionData();
 
   sectionData.dataToDisplay.exit.data = dataResponse.exit;
@@ -68,236 +74,131 @@ function generateVelocityTab(playerId, dataResponse) {
   sectionData.allDates = dataResponse.allDates;
   
   if (sectionData.allDates.length > 0) {
-    createTabScaffolding(sectionData.idPrefix, sectionData.title, sectionData.graph.hasGraph);
-    fadeInTab(sectionData.idPrefix);
     generateChart(sectionData);
     generateTables(sectionData);
   }
 }
 
-function generateTimesTab(playerId, dataResponse) {
+function populateTimesTab(playerId, dataResponse) {
   var sectionData = getTimeSectionData();
 
   sectionData.dataToDisplay.sixty.data = dataResponse.sixty;
   sectionData.allDates = dataResponse.allDates;
 
   if (sectionData.allDates.length > 0) {
-    createTabScaffolding(sectionData.idPrefix, sectionData.title, sectionData.graph.hasGraph);
-    fadeInTab(sectionData.idPrefix);
     generateTables(sectionData);
   }
 }
 
-function fadeInTab(idPrefix) {
-  if ($("#progressHeader").is(":hidden")) {
-    $("#progressHeader").fadeIn(300);
-  }
-
-  $(`#${idPrefix}Data`).hide()  
-    .slideDown(400, 'swing')  
-    .css('opacity', 0)  
-    .animate({opacity: 1}, {queue: false, duration: 100});
-}
-
 function GetBodyWeightSectionData() {
-  return {
-    allDates: [],
-    dataToDisplay: {
-      bodyWeight: {
-        chartColor: 'rgb(199, 44, 58)',
-        data: [],
-        idPrefix: "bodyWeightData",
-        table: {
-          tabTitle: "Table"
-        },
-        title: "Body Weight"
-      }
-    },
-    graph: {
-      hasGraph: true,
-      timeUnit: 'week',
-      title: "Body Weight (lbs)",
-    },
-    idPrefix: "bodyWeight",
-    metricLabel: "lbs",
-    table: {
-      columns: ['Date', 'Body Weight (lbs)']
-    },
-    title: "Body Weight"
-  }
+  const bodyWeightMeta = createMetricTypeMetaDataObject("rgb(199, 44, 58)", "bodyWeight", "Table", "Weight");
+
+  const bodyWeightTypeMetas = [bodyWeightMeta];
+  const bodyWeightMainMeta = createMetricMetaDataObject("bodyWeight", "Body Weight", "lbs", true, bodyWeightTypeMetas);
+
+  return createMetricSectionDataObject(bodyWeightMainMeta);
 }
 
 function getLiftSectionData() {
-  return {
-    allDates: [],
-    dataToDisplay: {
-      deadlift: {
-        chartColor: 'rgb(199, 44, 58)',
-        data: [],
-        idPrefix: "deadlift",
-        table: {
-          tabTitle: "Deadlift"
-        },
-        title: "Deadlift"
-      },
-      squat: {
-        chartColor: 'black',
-        data: [],
-        idPrefix: "squat",
-        table: {
-          tabTitle: "Squat"
-        },
-        title: "Squat"
-      },
-      benchPress: {
-        chartColor: 'Gold',
-        data: [],
-        idPrefix: "benchPress",
-        table: {
-          tabTitle: "Bench"
-        },
-        title: "Bench Press"
-      }
-    },
-    graph: {
-      hasGraph: true,
-      timeUnit: 'day',
-      title: "Lift Results in Strength Points (SP)",
-    },
-    idPrefix: "lifting",
-    metricLabel: "SP",
-    table: {
-      columns: ['Date', 'Strength Points (SP)', 'Lift Sets']
-    },
-    title: "Lifting"
-  }
+  const deadliftMeta = createMetricTypeMetaDataObject("rgb(199, 44, 58)", "deadlift");
+  const squatMeta = createMetricTypeMetaDataObject("black", "squat");
+  const benchPressMeta = createMetricTypeMetaDataObject("gold", "benchPress", "Bench Press");
+
+  const liftTypeMetas = [deadliftMeta, squatMeta, benchPressMeta];
+  const liftMeta = createMetricMetaDataObject("lift", "Lift", "SP", true, liftTypeMetas, "Lift Sets");
+
+  return createMetricSectionDataObject(liftMeta);
 };
 
 function getVelocitySectionData() {
-  return {
-    allDates: [],
-    dataToDisplay: {
-      exit: {
-        chartColor: 'rgb(199, 44, 58)',
-        data: [],
-        idPrefix: "exit",
-        table: {
-          tabTitle: "Exit"
-        },
-        title: "Exit"
-      },
-      pitching: {
-        chartColor: 'black',
-        data: [],
-        idPrefix: "pitching",
-        table: {
-          tabTitle: "Pitching"
-        },
-        title: "Pitching"
-      },
-      outfield: {
-        chartColor: 'Gold',
-        data: [],
-        idPrefix: "outfield",
-        table: {
-          tabTitle: "Outfield"
-        },
-        title: "Outfield"
-      },
-      infield: {
-        chartColor: 'Purple',
-        data: [],
-        idPrefix: "infield",
-        table: {
-          tabTitle: "Infield"
-        },
-        title: "Infield",
-      }
-    },
-    graph: {
-      hasGraph: true,
-      timeUnit: 'month',
-      title: "Velocity (MPH)"
-    },
-    idPrefix: "velocity",
-    metricLabel: "MPH",
-    table: {
-      columns: ['Date', 'Velocity (MPH)']
-    },
-    title: "Velocities"
-  }
+  const exitMeta = createMetricTypeMetaDataObject("rgb(199, 44, 58)", "exit");
+  const pitchingMeta = createMetricTypeMetaDataObject("black", "pitching");
+  const outfieldMeta = createMetricTypeMetaDataObject("gold", "outfield");
+  const infieldMeta = createMetricTypeMetaDataObject("purple", "infield");
+
+  const velocityTypeMetas = [exitMeta, pitchingMeta, outfieldMeta, infieldMeta];
+  const velocityMeta = createMetricMetaDataObject("velocity", "Velocity", "MPH", true, velocityTypeMetas);
+
+  return createMetricSectionDataObject(velocityMeta);
 }
 
 function getTimeSectionData() {
+  const sixtyMeta = createMetricTypeMetaDataObject("rgb(199, 44, 58)", "sixty", "60-yd Dash");
+
+  const timeTypeMetas = [sixtyMeta];
+  const timeMeta = createMetricMetaDataObject("time", "Time", "s", false, timeTypeMetas);
+
+  return createMetricSectionDataObject(timeMeta);
+}
+
+function createMetricTypeMetaDataObject(lineColor, name, alternateTabTitle = null, alternateGraphLabel = null)
+{
   return {
-    allDates: [],
-    dataToDisplay: {
-      sixty: {
-        chartColor: 'rgb(199, 44, 58)',
-        data: [],
-        idPrefix: "sixty",
-        table: {
-          tabTitle: "60-yd Dash"
-        },
-        title: "60-yd Dash"
-      }
-    },
-    graph: {
-      hasGraph: false,
-      timeUnit: 'month',
-      title: "Time (s)"
-    },
-    idPrefix: "time",
-    metricLabel: "s",
-    table: {
-      columns: ['Date', 'Time']
-    },
-    title: "Times"
+    lineColor: lineColor,
+    lowerName: name,
+    upperName: name.charAt(0).toUpperCase() + name.slice(1),
+    alternateTabTitle: alternateTabTitle,
+    alternateGraphLabel: alternateGraphLabel
   }
 }
 
-function createTabScaffolding(idPrefix, accordionTabTitle, hasGraph)
+function createMetricTypeDataToDisplayObject(metricTypeMetaData)
 {
-  var tabAppend = $(`
-    <div id="${idPrefix}Data" class="accordion-item">
-      <div id="${idPrefix}Heading" class="accordion-header text-center">
-        <button id="${idPrefix}Button" class="accordion-button collapsed text-center" type="button" data-bs-toggle="collapse" data-bs-target="#${idPrefix}Content" aria-expanded="false" aria-controls="${idPrefix}Content">
-          <h3>
-            <span class="text-shadow-md">
-              ${accordionTabTitle}
-            </span>
-            <span>
-                <i class="fa fa-plus-square"></i>
-            </span>
-          </h3>
-        </button>
-      </div>
+  const tabTitle = metricTypeMetaData.alternateTabTitle == null ? 
+    metricTypeMetaData.upperName : metricTypeMetaData.alternateTabTitle;
+  const graphLabel = metricTypeMetaData.alternateGraphLabel == null ?
+    metricTypeMetaData.upperName : metricTypeMetaData.alternateGraphLabel;
 
-      <div id="${idPrefix}Content" class="accordion-collapse collapse" aria-labelledby="${idPrefix}Heading" data-bs-parent="#accordion">
-        <div id="${idPrefix}DataBody" class="accordion-body">
-          <ul id="${idPrefix}Tabs" class="nav nav-tabs justify-content-center" role="tablist"></ul>
-          <br>
-          <div id="${idPrefix}TabContent" class="tab-content"></div>
-        </div>
-      </div>
+  return {
+    chartColor: metricTypeMetaData.lineColor,
+    data: [],
+    idPrefix: metricTypeMetaData.lowerName,
+    table: {
+      tabTitle: tabTitle
+    },
+    title: graphLabel
+  }
+}
 
-    </div>
-  `);
-
-  if (hasGraph) {
-    $(tabAppend).find(`#${idPrefix}Tabs`).append(
-      `<li class="nav-item" role="presentation">
-        <a id="${idPrefix}ChartTab" class="nav-link active" data-bs-toggle="tab" href="#${idPrefix}ChartContainer" role="tab" aria-controls="${idPrefix}ChartContainer" aria-selected="true">Graph</a>
-      </li>`
-    );
-    $(tabAppend).find(`#${idPrefix}TabContent`).append(
-      `<div id="${idPrefix}ChartContainer" class="tab-pane fade show active" style="height: 50vh; width: 100%" role="tabpanel" aria-labelledby="${idPrefix}ChartTab">
-        <canvas id="${idPrefix}Chart"></canvas>
-      </div>`
-    );
+function createMetricMetaDataObject(name, title, unitOfMeasure, hasGraph, metricTypeMetaDatas, additionalColumn = null){
+  const upperName = name.charAt(0).toUpperCase() + name.slice(1);
+  const titleString = `${title} (${unitOfMeasure})`;
+  
+  const columns = [titleString];
+  if (additionalColumn != null)
+  {
+    columns.push(additionalColumn);
   }
 
-  $("#accordion").append(tabAppend);
+  return {
+    lowerName: name,
+    upperName: upperName,
+    metricTypes: metricTypeMetaDatas,
+    unitOfMeasure: unitOfMeasure,
+    hasGraph: hasGraph,
+    columns: columns
+  }
+}
+
+function createMetricSectionDataObject(metricMetaData) {
+  return {
+    allDates: [],
+    dataToDisplay: 
+      metricMetaData.metricTypes.reduce(function(map, metricType) {
+        map[metricType.lowerName] = createMetricTypeDataToDisplayObject(metricType);
+        return map;
+      }, {}),
+    graph: {
+      hasGraph: metricMetaData.hasGraph,
+      timeUnit: 'month',
+      title: metricMetaData.columns[0]
+    },
+    idPrefix: metricMetaData.lowerName,
+    metricLabel: metricMetaData.unitOfMeasure,
+    table: {
+      columns: ['Date', ...metricMetaData.columns]
+    }
+  }
 }
 
 function getDatasetDataArray(data) {
