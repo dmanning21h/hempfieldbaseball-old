@@ -2,6 +2,7 @@ from django.shortcuts import render
 
 from . import services as tms
 from playerprogress import services as pps
+from playerprogress.enums import TimeTypes
 
 
 def roster(request, year=None):
@@ -23,7 +24,8 @@ def player(request, player_link):
 
     has_body_weights = player.body_weights.exists()
     has_velocities = player.velocities.exists()
-    has_times = player.times.exists()
+    has_pulldowns = player.pulldowns.exists()
+    has_times = player.times.filter(ttype__name=TimeTypes.SIXTY_YARD_DASH).exists()
     has_data = has_body_weights or has_velocities or has_times
 
 
@@ -33,6 +35,7 @@ def player(request, player_link):
 
         'has_body_weights': has_body_weights,
         'has_velocities': has_velocities,
+        'has_pulldowns': has_pulldowns,
         'has_times': has_times,
         'has_data': has_data
     }

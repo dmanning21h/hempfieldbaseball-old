@@ -27,3 +27,11 @@ class TimeTypes(str, Enum):
 class DistanceTypes(str, Enum):
     BROAD_JUMP = "Broad Jump"
     LATERAL_HOP = "Lateral Hop"
+
+
+class BallWeights(str, Enum):
+    THREE_OUNCE = "3"
+    FOUR_OUNCE = "4"
+    FIVE_OUNCE = "5"
+    SIX_OUNCE = "6"
+    SEVEN_OUNCE = "7"

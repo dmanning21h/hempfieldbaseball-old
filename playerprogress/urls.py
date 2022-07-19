@@ -44,6 +44,10 @@ urlpatterns = [
           views.get_player_velocities_with_dates,
           name='get-player-velocities-with-dates'),
 
+     path('ajax/get-player-pulldowns-with-dates',
+          views.get_player_pulldowns_with_dates,
+          name='get-player-pulldowns-with-dates'),
+
      path('ajax/get-player-times-with-dates',
           views.get_player_times_with_dates,
           name='get-player-times-with-dates'),

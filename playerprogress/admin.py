@@ -5,6 +5,7 @@ from django.contrib import admin
 from teammanagement.models import Player
 from .models import LiftType, Lift, LiftImprovement, LiftSet, StrengthIncrement
 from .models import VelocityType, Velocity, VelocityImprovement
+from .models import Pulldown
 from .models import TimeType, Time, TimeImprovement
 from .models import DistanceType, Distance, DistanceImprovement
 from .models import BodyWeight, BodyWeightImprovement
@@ -125,6 +126,14 @@ class VelocityAdmin(admin.ModelAdmin):
 class VelocityImprovementAdmin(admin.ModelAdmin):
     list_display = ('player', 'ttype', 'baseline', 'latest')
     list_filter = ['player',]
+
+
+class PulldownAdmin(admin.ModelAdmin):
+    list_display = ['date', 'player', 'ball_weight', 'velocity']
+    list_filter = ['player', 'date']
+
+    fields = ['player', 'date', 'ball_weight', 'velocity']
+    autocomplete_fields = ['player']
 
 
 class TimeTypeAdmin(admin.ModelAdmin):
@@ -284,6 +293,8 @@ admin.site.register(StrengthIncrement, StrengthIncrementAdmin)
 admin.site.register(VelocityType, VelocityTypeAdmin)
 admin.site.register(Velocity, VelocityAdmin)
 admin.site.register(VelocityImprovement, VelocityImprovementAdmin)
+
+admin.site.register(Pulldown, PulldownAdmin)
 
 admin.site.register(TimeType, TimeTypeAdmin)
 admin.site.register(Time, TimeAdmin)

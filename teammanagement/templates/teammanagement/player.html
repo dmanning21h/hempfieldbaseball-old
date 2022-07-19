@@ -68,7 +68,7 @@
 				</button>
 			</div>
 	
-			<div id="bodyWeightContent" class="accordion-collapse collapse" aria-labelledby="$bodyWeightHeading" data-bs-parent="#accordion">
+			<div id="bodyWeightContent" class="accordion-collapse collapse" aria-labelledby="bodyWeightHeading" data-bs-parent="#accordion">
 				<div id="bodyWeightDataBody" class="accordion-body">
 					<ul id="bodyWeightTabs" class="nav nav-tabs justify-content-center" role="tablist">
 						<li class="nav-item" role="presentation">
@@ -96,7 +96,7 @@
 				</button>
 			</div>
 
-			<div id="velocityContent" class="accordion-collapse collapse" aria-labelledby="$velocityHeading" data-bs-parent="#accordion">
+			<div id="velocityContent" class="accordion-collapse collapse" aria-labelledby="velocityHeading" data-bs-parent="#accordion">
 				<div id="velocityDataBody" class="accordion-body">
 					<ul id="velocityTabs" class="nav nav-tabs justify-content-center" role="tablist">
 						<li class="nav-item" role="presentation">
@@ -107,6 +107,34 @@
 					<div id="velocityTabContent" class="tab-content">
 						<div id="velocityChartContainer" class="tab-pane fade show active" style="height: 50vh; width: 100%" role="tabpanel" aria-labelledby="velocityChartTab">
 							<canvas id="velocityChart"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	{% endif %}
+	{% if has_pulldowns %}
+		<div id="pulldownData" class="accordion-item">
+			<div id="pulldownHeading" class="accordion-header text-center">
+				<button id="pulldownButton" class="accordion-button collapsed text-center" type="button" data-bs-toggle="collapse" data-bs-target="#pulldownContent" aria-expanded="false" aria-controls="pulldownContent">
+					<h3>
+						<span class="text-shadow-md">Pulldowns</span>
+						<span><i class="fa fa-plus-square"></i></span>
+					</h3>
+				</button>
+			</div>
+
+			<div id="pulldownContent" class="accordion-collapse collapse" aria-labelledby="pulldownHeading" data-bs-parent="#accordion">
+				<div id="pulldownDataBody" class="accordion-body">
+					<ul id="pulldownTabs" class="nav nav-tabs justify-content-center" role="tablist">
+						<li class="nav-item" role="presentation">
+							<a id="pulldownChartTab" class="nav-link active" data-bs-toggle="tab" href="#pulldownChartContainer" role="tab" aria-controls="pulldownChartContainer" aria-selected="true">Graph</a>
+						</li>`
+					</ul>
+					<br>
+					<div id="pulldownTabContent" class="tab-content">
+						<div id="pulldownChartContainer" class="tab-pane fade show active" style="height: 50vh; width: 100%" role="tabpanel" aria-labelledby="pulldownChartTab">
+							<canvas id="pulldownChart"></canvas>
 						</div>
 					</div>
 				</div>
@@ -124,7 +152,7 @@
 				</button>
 			</div>
 
-			<div id="timeContent" class="accordion-collapse collapse" aria-labelledby="$timeHeading" data-bs-parent="#accordion">
+			<div id="timeContent" class="accordion-collapse collapse" aria-labelledby="timeHeading" data-bs-parent="#accordion">
 				<div id="timeDataBody" class="accordion-body">
 					<ul id="timeTabs" class="nav nav-tabs justify-content-center" role="tablist"></ul>
 					<br>
@@ -150,26 +178,31 @@
 	generateAccordionTabs();
 
 	function generateAccordionTabs() {
-		var playerId = "{{ player.player_id }}";
+		const playerId = "{{ player.player_id }}";
 
-		var bodyWeightsRequest = fetchBodyWeightDataAsync(playerId);
-		var velocitiesRequest = fetchVelocityDataAsync(playerId);
-		var timesRequest = fetchTimeDataAsync(playerId);
+		let bodyWeightsRequest = fetchBodyWeightDataAsync(playerId);
+		let velocitiesRequest = fetchVelocityDataAsync(playerId);
+		let pulldownsRequest = fetchPulldownDataAsync(playerId);
+		let timesRequest = fetchTimeDataAsync(playerId);
 		//var liftsRequest = fetchLiftingDataAsync(playerId);
 
 		// Fetch All Data async and await together
 		$.when(bodyWeightsRequest).done(function(bodyWeightsResponse) {
-				populateBodyWeightTab(playerId, bodyWeightsResponse);
+				populateBodyWeightTab(bodyWeightsResponse);
 
 				//$.when(liftsRequest).done(function (liftsResponse) {
-					//populateLiftingTab(playerId, liftsResponse);
+					//populateLiftingTab(liftsResponse);
 
 				$.when(velocitiesRequest).done(function (velocitiesResponse) {
-					populateVelocityTab(playerId, velocitiesResponse);
+					populateVelocityTab(velocitiesResponse);
 
-					$.when(timesRequest).done(function (timesResponse) {
-						populateTimesTab(playerId, timesResponse);
+					$.when(pulldownsRequest).done(function (pulldownsResponse) {
+						populatePulldownTab(pulldownsResponse);
 
+						$.when(timesRequest).done(function (timesResponse) {
+							populateTimesTab(timesResponse);
+	
+						});
 					});
 				});
 
@@ -189,6 +222,11 @@
 
 	function fetchVelocityDataAsync(playerId) {
 		url = "{% url 'playerprogress:get-player-velocities-with-dates' %}";
+		return fetchDataWithDatesAsync(url, playerId);
+	}
+
+	function fetchPulldownDataAsync(playerId) {
+		url = "{% url 'playerprogress:get-player-pulldowns-with-dates' %}";
 		return fetchDataWithDatesAsync(url, playerId);
 	}
 

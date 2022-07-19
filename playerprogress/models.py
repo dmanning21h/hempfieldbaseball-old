@@ -15,6 +15,12 @@ class BodyWeightLeaderboardManager(models.Manager):
             'latest'))
 
 
+class VelocityWithTypeManager(models.Manager):
+    def get_queryset(self):
+        return (super().get_queryset().select_related(
+            'ttype'))
+
+
 class VelocityLeaderboardManager(models.Manager):
     def get_queryset(self):
         return (super().get_queryset()
@@ -186,6 +192,9 @@ class Velocity(models.Model):
                               on_delete=models.CASCADE)
     velocity = models.PositiveSmallIntegerField()
 
+    objects = models.Manager()
+    velocities_with_types = VelocityWithTypeManager()
+
     class Meta:
         db_table = "Velocity"
         verbose_name_plural = "Velocities"
@@ -226,6 +235,33 @@ class VelocityImprovement(models.Model):
 
     def __str__(self):
         return f"{self.player} {self.ttype} Improvement"
+
+
+class Pulldown(models.Model):
+    ball_weights = [
+        ("3", "3oz"),
+        ("4", "4oz"),
+        ("5", "5oz"),
+        ("6", "6oz"),
+        ("7", "7oz")
+    ]
+    pulldown_id = models.AutoField(primary_key=True)
+    player = models.ForeignKey(TeamManagementModels.PLAYER, db_column='player_id',
+                               verbose_name="Player",
+                               related_name='pulldowns',
+                               on_delete=models.CASCADE)
+    date = models.DateField()
+    ball_weight = models.CharField(max_length=1, choices=ball_weights)
+    velocity = models.PositiveSmallIntegerField()
+
+    objects = models.Manager()
+
+    class Meta:
+        db_table = "Pulldown"
+        ordering = ['date']
+
+    def __str__(self):
+        return f"{self.player} {self.date} {self.get_ball_weight_display()} Pulldown"
 
 
 class TimeType(models.Model):

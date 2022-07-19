@@ -15,3 +15,7 @@ def get_team_by_year(year):
 # Individual Player Page
 def get_player_from_link(player_link):
     return get_object_or_404(Player.page_objects, player_link=player_link)
+
+
+def get_player_by_id(player_id):
+    return get_object_or_404(Player, pk=player_id)

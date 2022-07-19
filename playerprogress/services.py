@@ -23,20 +23,6 @@ def get_player_bench_lifts(player_id):
     return _get_player_lifts_by_lift_name(player_id, LiftTypes.BENCH_PRESS)
 
 
-# Velocities
-def get_player_exit_velocities(player_id):
-    return _get_player_velocities_by_velocity_name(player_id, VelocityTypes.EXIT)
-
-def get_player_pitching_velocities(player_id):
-    return _get_player_velocities_by_velocity_name(player_id, VelocityTypes.PITCHING)
-
-def get_player_outfield_velocities(player_id):
-    return _get_player_velocities_by_velocity_name(player_id, VelocityTypes.OUTFIELD)
-
-def get_player_infield_velocities(player_id):
-    return _get_player_velocities_by_velocity_name(player_id, VelocityTypes.INFIELD)
-
-
 # Times
 def get_player_sixty_times(player_id):
     return _get_player_times_by_time_name(player_id, TimeTypes.SIXTY_YARD_DASH)
@@ -56,9 +42,6 @@ def get_player_body_weights(player_id):
 # More General Model Functions
 def _get_player_lifts_by_lift_name(player_id, lift_name):
     return _get_model_records_by_player_id_and_ttype_name(Lift, player_id, lift_name)
-
-def _get_player_velocities_by_velocity_name(player_id, velocity_name):
-    return _get_model_records_by_player_id_and_ttype_name(Velocity, player_id, velocity_name)
 
 def _get_player_times_by_time_name(player_id, time_name):
     return _get_model_records_by_player_id_and_ttype_name(Time, player_id, time_name)

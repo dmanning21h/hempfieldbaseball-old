@@ -1,8 +1,10 @@
+from xml.dom import pulldom
 from django.http import JsonResponse
 from django.shortcuts import render
 
 from . import services as pps
-from .enums import VelocityTypes
+from .enums import BallWeights, VelocityTypes
+from teammanagement import services as tms
 
 
 def leaderboards(request):
@@ -80,16 +82,18 @@ def get_player_body_weights_with_dates(request):
     """
     Returns all body weights (date, body weight) for a given player.
     """
-    player_id = player_id = request.GET.get('player_id')
+    player_id = request.GET.get('player_id')
+    player = tms.get_player_by_id(player_id)
 
-    body_weight_records = pps.get_player_body_weights(player_id)
-    body_weight_dates = [body_weight.date.strftime('%m/%d/%y') for body_weight in body_weight_records]
-    body_weights = [body_weight.weight for body_weight in body_weight_records]
-    body_weight_return_data = list(zip(body_weight_dates, body_weights))
+    body_weights, all_dates = ([] for _ in range(2))
+    for body_weight in player.body_weights.all():
+        date = body_weight.date.strftime('%m/%d/%y')
+        body_weights.append((date, body_weight.weight))
+        all_dates.append(date)
 
     response = {
-        "bodyWeight": body_weight_return_data,
-        "allDates": body_weight_dates
+        "bodyWeight": body_weights,
+        "allDates": all_dates
     }
 
     return JsonResponse(response)
@@ -100,7 +104,7 @@ def get_player_lifts_with_dates(request):
     Returns all lifts (date, sets, strength points) of each type for a given player.
     Also returns a list of all dates for lifts for use with Chart.js.
     """
-    player_id = player_id = request.GET.get('player_id')
+    player_id = request.GET.get('player_id')
 
     deadlift_records = pps.get_player_deadlift_lifts(player_id)
     deadlift_dates = [lift.date.strftime('%m/%d/%y') for lift in deadlift_records]
@@ -131,35 +135,71 @@ def get_player_velocities_with_dates(request):
     Returns all velocities (date, velocity) of each type for a given player.
     Also returns a list of all dates for velocities for use with Chart.js.
     """
-    player_id = player_id = request.GET.get('player_id')
+    player_id = request.GET.get('player_id')
+    player = tms.get_player_by_id(player_id)
+    all_velocities = player.velocities(manager='velocities_with_types').all()
 
-    exit_velocity_records = pps.get_player_exit_velocities(player_id)
-    exit_velocity_dates = [velocity.date.strftime('%m/%d/%y') for velocity in exit_velocity_records]
-    exit_velocities = [velocity.velocity for velocity in exit_velocity_records]
-    exit_velocity_return_data = list(zip(exit_velocity_dates, exit_velocities))
+    exit, pitching, outfield, infield, catcher, all_dates = (
+        [] for _ in range(6))
+    list_map = {
+        VelocityTypes.EXIT: exit,
+        VelocityTypes.PITCHING: pitching,
+        VelocityTypes.OUTFIELD: outfield,
+        VelocityTypes.INFIELD: infield,
+        VelocityTypes.CATCHER: catcher
+    }
 
-    pitching_velocity_records = pps.get_player_pitching_velocities(player_id)
-    pitching_velocity_dates = [velocity.date.strftime('%m/%d/%y') for velocity in pitching_velocity_records]
-    pitching_velocities = [velocity.velocity for velocity in pitching_velocity_records]
-    pitching_velocity_return_data = list(zip(pitching_velocity_dates, pitching_velocities))
+    for velocity in all_velocities:
+        ttype = velocity.ttype.name
+        date = velocity.date.strftime('%m/%d/%y')
+        velo = velocity.velocity
 
-    outfield_velocity_records = pps.get_player_outfield_velocities(player_id)
-    outfield_velocity_dates = [velocity.date.strftime('%m/%d/%y') for velocity in outfield_velocity_records]
-    outfield_velocities = [velocity.velocity for velocity in outfield_velocity_records]
-    outfield_velocity_return_data = list(zip(outfield_velocity_dates, outfield_velocities))
-
-    infield_velocity_records = pps.get_player_infield_velocities(player_id)
-    infield_velocity_dates = [velocity.date.strftime('%m/%d/%y') for velocity in infield_velocity_records]
-    infield_velocities = [velocity.velocity for velocity in infield_velocity_records]
-    infield_velocity_return_data = list(zip(infield_velocity_dates, infield_velocities))
-
-    all_dates = sorted(exit_velocity_dates + pitching_velocity_dates + outfield_velocity_dates + infield_velocity_dates) 
+        list_map[ttype].append((date, velo))
+        all_dates.append(date)
 
     response = {
-        "exit": exit_velocity_return_data,
-        "pitching": pitching_velocity_return_data,
-        "outfield": outfield_velocity_return_data,
-        "infield": infield_velocity_return_data,
+        "exit": exit,
+        "pitching": pitching,
+        "outfield": outfield,
+        "infield": infield,
+        "allDates": all_dates
+    }
+    
+    return JsonResponse(response)
+
+
+def get_player_pulldowns_with_dates(request):
+    """
+    Returns all pulldowns (date, velocity) of each type for a given player.
+    Also returns a list of all dates for velocities for use with Chart.js.
+    """
+    player_id = request.GET.get('player_id')
+    player = tms.get_player_by_id(player_id)
+
+    three, four, five, six, seven, all_dates = (
+        [] for _ in range(6))
+    list_map = {
+        BallWeights.THREE_OUNCE: three,
+        BallWeights.FOUR_OUNCE: four,
+        BallWeights.FIVE_OUNCE: five,
+        BallWeights.SIX_OUNCE: six,
+        BallWeights.SEVEN_OUNCE: seven
+    }
+
+    for pulldown in player.pulldowns.all():
+        weight = pulldown.ball_weight
+        date = pulldown.date.strftime('%m/%d/%y')
+        velo = pulldown.velocity
+
+        list_map[weight].append((date, velo))
+        all_dates.append(date)
+
+    response = {
+        "three": three,
+        "four": four,
+        "five": five,
+        "six": six,
+        "seven": seven,
         "allDates": all_dates
     }
     
@@ -171,7 +211,7 @@ def get_player_times_with_dates(request):
     Returns all times (date, time) of each type for a given player.
     Also returns a list of all dates for times for use with Chart.js.
     """
-    player_id = player_id = request.GET.get('player_id')
+    player_id = request.GET.get('player_id')
 
     sixty_records = pps.get_player_sixty_times(player_id)
     sixty_dates = [time.date.strftime('%m/%d/%y') for time in sixty_records]

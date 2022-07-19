@@ -38,7 +38,7 @@ function fetchDataWithDatesAsync(url, playerId)
   });
 }
 
-function populateBodyWeightTab(playerId, dataResponse) {
+function populateBodyWeightTab(dataResponse) {
   var sectionData = GetBodyWeightSectionData();
 
   sectionData.dataToDisplay.bodyWeight.data = dataResponse.bodyWeight;
@@ -50,7 +50,7 @@ function populateBodyWeightTab(playerId, dataResponse) {
   }
 }
 
-function populateLiftingTab(playerId, dataResponse) {
+function populateLiftingTab(dataResponse) {
   var sectionData = getLiftSectionData();
 
   sectionData.dataToDisplay.deadlift.data = dataResponse.deadlift;
@@ -64,7 +64,7 @@ function populateLiftingTab(playerId, dataResponse) {
   }
 }
 
-function populateVelocityTab(playerId, dataResponse) {
+function populateVelocityTab(dataResponse) {
   var sectionData = getVelocitySectionData();
 
   sectionData.dataToDisplay.exit.data = dataResponse.exit;
@@ -79,7 +79,23 @@ function populateVelocityTab(playerId, dataResponse) {
   }
 }
 
-function populateTimesTab(playerId, dataResponse) {
+function populatePulldownTab(dataResponse) {
+  var sectionData = getPulldownSectionData();
+
+  sectionData.dataToDisplay.threeOunce.data = dataResponse.three;
+  sectionData.dataToDisplay.fourOunce.data = dataResponse.four;
+  sectionData.dataToDisplay.fiveOunce.data = dataResponse.five;
+  sectionData.dataToDisplay.sixOunce.data = dataResponse.six;
+  sectionData.dataToDisplay.sevenOunce.data = dataResponse.seven;
+  sectionData.allDates = dataResponse.allDates;
+  
+  if (sectionData.allDates.length > 0) {
+    generateChart(sectionData);
+    generateTables(sectionData);
+  }
+}
+
+function populateTimesTab(dataResponse) {
   var sectionData = getTimeSectionData();
 
   sectionData.dataToDisplay.sixty.data = dataResponse.sixty;
@@ -120,6 +136,19 @@ function getVelocitySectionData() {
   const velocityMeta = createMetricMetaDataObject("velocity", "Velocity", "MPH", true, velocityTypeMetas);
 
   return createMetricSectionDataObject(velocityMeta);
+}
+
+function getPulldownSectionData() {
+  const threeMeta = createMetricTypeMetaDataObject("lightskyblue", "threeOunce", "3oz", "3oz");
+  const fourMeta = createMetricTypeMetaDataObject("royalblue", "fourOunce", "4oz", "4oz");
+  const fiveMeta = createMetricTypeMetaDataObject("black", "fiveOunce", "5oz", "5oz");
+  const sixMeta = createMetricTypeMetaDataObject("orange", "sixOunce", "6oz", "6oz");
+  const sevenMeta = createMetricTypeMetaDataObject("red", "sevenOunce", "7oz", "7oz");
+
+  const pulldownTypeMetas = [threeMeta, fourMeta, fiveMeta, sixMeta, sevenMeta];
+  const pulldownMeta = createMetricMetaDataObject("pulldown", "Pulldown", "MPH", true, pulldownTypeMetas);
+
+  return createMetricSectionDataObject(pulldownMeta);
 }
 
 function getTimeSectionData() {
