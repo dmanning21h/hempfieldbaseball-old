@@ -1,0 +1,55 @@
+{% extends 'base_leaderboard.html' %}
+
+{% block title %}Time Leaderboards{% endblock %}
+{% block description %}<meta name="description" content="Player time improvement leaderboards.">{% endblock %}
+
+{% block leaderboards %}
+
+	{% for time_name, top_improvements in time_improvement_leader_data.items %}
+		{% if top_improvements %}
+			<br>
+
+			<div class="container">
+				<h2 class="text-shadow-lg display-4 text-center">{{ time_name }} Time</h2>
+		   		<table class="table table-dark table-striped table-bordered shadow">
+		      		<thead class="">
+		   				<tr class="text-center">
+		  					<th class="col-4">Player</th>
+		      				<th class="col-4">Improvement</th>
+		      				<th class="col-4">Period</th>
+		      			</tr>
+		   			</thead>
+		   			<tbody>
+						{% for improvement in top_improvements %}
+							<tr class="text-center">
+								<td class="align-middle">
+									<h5>
+										<a href="{% url 'teammanagement:player_page' improvement.player.player_link %}" class="link">
+											{{ improvement.player.full_name }}
+										</a>
+									</h5>
+								</td>
+								<td class="align-middle text-success">
+									{{ improvement.formatted_improvement }}
+									<small class="text-muted d-block">
+										{{ improvement.baseline.formatted_time }}
+										-
+										{{ improvement.latest.formatted_time }}
+									</small>
+								</td>
+								<td class="align-middle">
+									{{ improvement.baseline.date }}
+									-
+									{{ improvement.latest.date }}
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+
+			<br>
+		{% endif %}
+	{% endfor %}
+
+{% endblock %}

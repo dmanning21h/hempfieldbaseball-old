@@ -1,0 +1,5 @@
+-r base.txt
+
+django-debug-toolbar==3.4.0
+flake8
+black
