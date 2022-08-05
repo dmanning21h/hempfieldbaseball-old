@@ -54,7 +54,7 @@ class CollegeCamp(models.Model):
         on_delete=models.CASCADE,
     )
     date = models.DateField()
-    link = models.URLField(max_length=80)
+    link = models.URLField(max_length=100)
 
     objects = CollegeCampPageManager()
 
