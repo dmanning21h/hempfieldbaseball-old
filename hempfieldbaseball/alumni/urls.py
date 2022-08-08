@@ -7,7 +7,7 @@ from . import views
 
 app_name = "alumni"
 urlpatterns = [
-    path("college", views.college_alumni, name="college_alumni"),
+    path("college", views.college, name="college"),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
