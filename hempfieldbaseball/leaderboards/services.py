@@ -1,5 +1,8 @@
+from django.db.models import Prefetch
+
 from hempfieldbaseball.playerprogress.models import BodyWeightImprovement, TimeType
-from hempfieldbaseball.velocities.models import VelocityType
+from hempfieldbaseball.teammanagement.models import Player
+from hempfieldbaseball.velocities.models import Velocity, VelocityType
 
 
 # Global for number of Leaderboard players
@@ -49,16 +52,33 @@ def get_time_leaders():
 # IMPROVEMENT LEADERBOARDS
 #
 def get_velocity_improvement_leaders(velocity_name):
-    return _get_model_improvement_leaders(VelocityType, velocity_name)
+    improvement_leaders = []
 
+    for player in Player.active_players.prefetch_related(
+        Prefetch(
+            "velocity_records",
+            queryset=Velocity.objects.select_related("ttype").filter(
+                ttype__name=velocity_name
+            ),
+        )
+    ).all():
+        velocities = list(player.velocity_records.all())
+        if len(velocities) > 1:
+            baseline = velocities[0]
+            latest = velocities[-1]
+            improvement = latest.velocity - baseline.velocity
 
-def _get_model_improvement_leaders(type_model, type_model_name, zero_value=0):
-    ttype = type_model.leaderboard_objects.get(name=type_model_name)
-    return (
-        ttype.improvements.filter(player__is_active=True)
-        .filter(improvement__gt=zero_value)
-        .order_by("-improvement")
-    )[:top]
+            if improvement >= 0:
+                improvement_leaders.append(
+                    {
+                        "player": player,
+                        "improvement": improvement,
+                        "baseline": baseline,
+                        "latest": latest,
+                    }
+                )
+
+    return sorted(improvement_leaders, key=lambda l: l["improvement"], reverse=True)
 
 
 def get_body_weight_improvement_leaders():

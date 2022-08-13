@@ -1,5 +1,4 @@
 from django.db import models
-from django.db.models import Prefetch
 
 from hempfieldbaseball.teammanagement.models import Player
 from hempfieldbaseball.core.models import PlayerDateModel
@@ -8,22 +7,6 @@ from hempfieldbaseball.core.models import PlayerDateModel
 class VelocityWithTypeManager(models.Manager):
     def get_queryset(self):
         return super().get_queryset().select_related("ttype")
-
-
-class VelocityLeaderboardManager(models.Manager):
-    def get_queryset(self):
-        return (
-            super()
-            .get_queryset()
-            .prefetch_related(
-                Prefetch(
-                    "improvements",
-                    VelocityImprovement.objects.select_related(
-                        "ttype", "player", "baseline", "latest"
-                    ),
-                )
-            )
-        )
 
 
 class BaseVelocityModel(PlayerDateModel):
@@ -39,7 +22,6 @@ class VelocityType(models.Model):
     order = models.PositiveSmallIntegerField(default=0)
 
     objects = models.Manager()
-    leaderboard_objects = VelocityLeaderboardManager()
 
     class Meta:
         db_table = "VelocityType"
