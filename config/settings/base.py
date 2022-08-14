@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "hempfieldbaseball.alumni",
+    "hempfieldbaseball.colleges",
     "hempfieldbaseball.logistics",
     "hempfieldbaseball.playerprogress",
     "hempfieldbaseball.playerresources",

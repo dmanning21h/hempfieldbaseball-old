@@ -1,7 +1,7 @@
 from django.db import models
 from django.db.models import Prefetch
 
-from hempfieldbaseball.postgradprep.models import College
+from hempfieldbaseball.colleges.models import College
 from hempfieldbaseball.teammanagement.models import Player
 
 

@@ -1,6 +1,5 @@
 from django.db import models
 
-from hempfieldbaseball.teammanagement.models import Player
 from hempfieldbaseball.core.models import PlayerDateModel
 
 
@@ -55,50 +54,6 @@ class Velocity(BaseVelocityModel):
         return f"{self.player} {self.date} {self.ttype} Velocity"
 
 
-class VelocityImprovement(models.Model):
-    velocity_improvement_id = models.AutoField(primary_key=True)
-    player = models.ForeignKey(
-        Player,
-        db_column="player_id",
-        verbose_name="Player",
-        related_name="velocity_improvements",
-        on_delete=models.CASCADE,
-    )
-    ttype = models.ForeignKey(
-        "VelocityType",
-        db_column="velocity_type_id",
-        verbose_name="Velocity Type",
-        related_name="improvements",
-        on_delete=models.CASCADE,
-    )
-    baseline = models.ForeignKey(
-        "Velocity",
-        db_column="baseline_velocity_id",
-        verbose_name="Baseline",
-        related_name="baseline_velocity_improvements",
-        null=True,
-        on_delete=models.PROTECT,
-    )
-    latest = models.ForeignKey(
-        "Velocity",
-        db_column="latest_velocity_id",
-        verbose_name="Latest",
-        related_name="latest_velocity_improvements",
-        null=True,
-        on_delete=models.PROTECT,
-    )
-    improvement = models.SmallIntegerField(default=0)
-
-    class Meta:
-        db_table = "VelocityImprovement"
-        verbose_name = "Velocity Improvement"
-        verbose_name_plural = "Velocity Improvements"
-        ordering = ["-player__is_active", "player__last_name", "ttype__order"]
-
-    def __str__(self):
-        return f"{self.player} {self.ttype} Improvement"
-
-
 class Pulldown(BaseVelocityModel):
     class BallWeights(models.TextChoices):
         THREE_OUNCE = "3", "3oz"
@@ -120,10 +75,6 @@ class Pulldown(BaseVelocityModel):
         return f"{self.player} {self.date} {self.get_ball_weight_display()} Pulldown"
 
 
-# Funnel Front (Green, Blue, Red)
-# Step Back (Blue, Red, Yellow, Gray)
-# Drop Step (Blue, Red, Yellow, Gray)
-# Walking Windup (Blue, Red, Yellow, Gray)
 class PlyoDrillVelocity(BaseVelocityModel):
     class Drill(models.TextChoices):
         FUNNEL_FRONT = "FF", ("Funnel Front")

@@ -1,8 +1,6 @@
 from django.contrib import admin
 
-from .models import College, CollegeCamp, Division
+from .models import CollegeCamp
 
 
-admin.site.register(College)
 admin.site.register(CollegeCamp)
-admin.site.register(Division)
