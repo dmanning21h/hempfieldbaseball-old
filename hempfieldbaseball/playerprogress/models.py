@@ -4,7 +4,6 @@ from datetime import timedelta
 from django.db import models
 
 from hempfieldbaseball.core.models import PlayerDateModel
-from hempfieldbaseball.teammanagement.models import Player
 
 
 class BodyWeightLeaderboardManager(models.Manager):
@@ -120,50 +119,6 @@ class StrengthIncrement(models.Model):
         return f"{self.lift_type} ({self.lift_set}): {self.strength_points} SP"
 
 
-class LiftImprovement(models.Model):
-    lift_improvement_id = models.AutoField(primary_key=True)
-    player = models.ForeignKey(
-        Player,
-        db_column="player_id",
-        verbose_name="Player",
-        related_name="lift_improvements",
-        on_delete=models.CASCADE,
-    )
-    ttype = models.ForeignKey(
-        "LiftType",
-        db_column="lift_type_id",
-        verbose_name="Lift Type",
-        related_name="improvements",
-        on_delete=models.CASCADE,
-    )
-    baseline = models.ForeignKey(
-        "Lift",
-        db_column="baseline_lift_id",
-        verbose_name="Baseline",
-        related_name="baseline_lift_improvements",
-        null=True,
-        on_delete=models.PROTECT,
-    )
-    latest = models.ForeignKey(
-        "Lift",
-        db_column="latest_lift_id",
-        verbose_name="Latest",
-        related_name="latest_lift_improvements",
-        null=True,
-        on_delete=models.PROTECT,
-    )
-    improvement = models.FloatField(default=0)
-
-    class Meta:
-        db_table = "LiftImprovement"
-        verbose_name = "Lift Improvement"
-        verbose_name_plural = "Lift Improvements"
-        ordering = ["-player__is_active", "player__last_name", "ttype__order"]
-
-    def __str__(self):
-        return f"{self.player} {self.ttype} Improvement"
-
-
 class TimeType(models.Model):
     time_type_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=25, unique=True)
@@ -213,63 +168,17 @@ class Time(PlayerDateModel):
         return f"{self.player} {self.date} {self.ttype} Time"
 
 
-class TimeImprovement(models.Model):
-    time_improvement_id = models.AutoField(primary_key=True)
-    player = models.ForeignKey(
-        Player,
-        db_column="player_id",
-        verbose_name="Player",
-        related_name="time_improvements",
-        on_delete=models.CASCADE,
-    )
-    ttype = models.ForeignKey(
-        "TimeType",
-        db_column="time_type_id",
-        verbose_name="Time Type",
-        related_name="improvements",
-        on_delete=models.CASCADE,
-    )
-    baseline = models.ForeignKey(
-        "Time",
-        db_column="baseline_time_id",
-        verbose_name="Baseline",
-        related_name="baseline_time_improvements",
-        null=True,
-        on_delete=models.PROTECT,
-    )
-    latest = models.ForeignKey(
-        "Time",
-        db_column="latest_time_id",
-        verbose_name="Latest",
-        related_name="latest_time_improvements",
-        null=True,
-        on_delete=models.PROTECT,
-    )
-    improvement = models.DurationField(default=timedelta(0))
-    is_seconds = models.BooleanField(default=True)
-
-    def formatted_improvement(self):
-        improvement = self.improvement
-
-        if self.is_seconds:
-            seconds = improvement.seconds
-            hundredths = f"{improvement.microseconds:06}"[:2]
-            formatted_improvement = f"{seconds}.{hundredths} s"
-        else:
-            minutes = math.floor(improvement.seconds / 60)
-            seconds = f"{improvement.seconds % 60:02}"
-            formatted_improvement = f"{minutes}:{seconds}"
-
-        return formatted_improvement
-
-    class Meta:
-        db_table = "TimeImprovement"
-        verbose_name = "Time Improvement"
-        verbose_name_plural = "Time Improvements"
-        ordering = ["-player__is_active", "player__last_name", "ttype__order"]
-
-    def __str__(self):
-        return f"{self.player} {self.ttype} Improvement"
+# def formatted_improvement(self):
+#    improvement = self.improvement
+#     if self.is_seconds:
+#        seconds = improvement.seconds
+#        hundredths = f"{improvement.microseconds:06}"[:2]
+#        formatted_improvement = f"{seconds}.{hundredths} s"
+#    else:
+#        minutes = math.floor(improvement.seconds / 60)
+#        seconds = f"{improvement.seconds % 60:02}"
+#        formatted_improvement = f"{minutes}:{seconds}"
+#        return formatted_improvement
 
 
 class DistanceType(models.Model):
@@ -306,50 +215,6 @@ class Distance(PlayerDateModel):
         return f"{self.player} {self.date} {self.ttype} Distance"
 
 
-class DistanceImprovement(models.Model):
-    distance_improvement_id = models.AutoField(primary_key=True)
-    player = models.ForeignKey(
-        Player,
-        db_column="player_id",
-        verbose_name="Player",
-        related_name="distance_improvements",
-        on_delete=models.CASCADE,
-    )
-    ttype = models.ForeignKey(
-        "DistanceType",
-        db_column="distance_type_id",
-        verbose_name="Distance Type",
-        related_name="improvements",
-        on_delete=models.CASCADE,
-    )
-    baseline = models.ForeignKey(
-        "Distance",
-        db_column="baseline_distance_id",
-        verbose_name="Baseline",
-        related_name="baseline_distance_improvements",
-        null=True,
-        on_delete=models.PROTECT,
-    )
-    latest = models.ForeignKey(
-        "Distance",
-        db_column="latest_distance_id",
-        verbose_name="Latest",
-        related_name="latest_distance_improvements",
-        null=True,
-        on_delete=models.PROTECT,
-    )
-    improvement = models.FloatField(default=0)
-
-    class Meta:
-        db_table = "DistanceImprovement"
-        verbose_name = "Distance Improvement"
-        verbose_name_plural = "Distance Improvements"
-        ordering = ["-player__is_active", "player__last_name", "ttype__order"]
-
-    def __str__(self):
-        return f"{self.player} {self.ttype} Improvement"
-
-
 class BodyWeight(PlayerDateModel):
     body_weight_id = models.AutoField(primary_key=True)
     weight = models.FloatField(verbose_name="Body Weight")
@@ -362,40 +227,3 @@ class BodyWeight(PlayerDateModel):
 
     def __str__(self):
         return f"{self.player} {self.date} Body Weight"
-
-
-class BodyWeightImprovement(models.Model):
-    body_weight_improvement_id = models.AutoField(primary_key=True)
-    player = models.ForeignKey(
-        Player,
-        db_column="player_id",
-        verbose_name="Player",
-        related_name="body_weight_improvements",
-        on_delete=models.CASCADE,
-    )
-    baseline = models.ForeignKey(
-        "BodyWeight",
-        db_column="baseline_body_weight_id",
-        verbose_name="Baseline",
-        related_name="baseline_body_weight_improvements",
-        null=True,
-        on_delete=models.PROTECT,
-    )
-    latest = models.ForeignKey(
-        "BodyWeight",
-        db_column="latest_body_weight_id",
-        verbose_name="Latest",
-        related_name="latest_body_weight_improvements",
-        null=True,
-        on_delete=models.PROTECT,
-    )
-    improvement = models.FloatField(default=0)
-
-    objects = models.Manager()
-    leaderboard_objects = BodyWeightLeaderboardManager()
-
-    class Meta:
-        db_table = "BodyWeightImprovement"
-
-    def __str__(self):
-        return f"{self.player} Body Weight Improvement"
