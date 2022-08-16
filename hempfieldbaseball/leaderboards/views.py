@@ -51,14 +51,6 @@ def _render_velocity_improvement_leaderboard(request, velocity_name):
     return render(request, "leaderboards/improvement/velocity.html", context)
 
 
-def time_improvement(request):
-    time_improvement_leader_data = ls.get_time_improvement_leaders()
-
-    context = {"time_improvement_leader_data": time_improvement_leader_data}
-
-    return render(request, "leaderboards/improvement/time.html", context)
-
-
 def misc_improvement(request):
     body_weight_improvement_leaders = ls.get_body_weight_improvement_leaders()
 
