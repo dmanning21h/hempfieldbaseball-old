@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 from . import services as ls
-from hempfieldbaseball.velocities.enums import VelocityTypes
+from hempfieldbaseball.velocities.models import Velocity
 
 
 def index(request):
@@ -10,41 +10,19 @@ def index(request):
     return render(request, "leaderboards/index.html", context)
 
 
-def velocity_performance(request):
-    velocity_leader_data = ls.get_velocity_leaders()
-
-    context = {
-        "velocity_leader_data": velocity_leader_data,
-    }
-
-    return render(request, "leaderboards/performance/velocity.html", context)
-
-
-def time_performance(request):
-    time_leader_data = ls.get_time_leaders()
-
-    context = {
-        "time_leader_data": time_leader_data,
-    }
-
-    return render(request, "leaderboards/performance/time.html", context)
-
-
 def pitching_velocity_improvement(request):
-    return _render_velocity_improvement_leaderboard(
-        request, VelocityTypes.PITCHING.value
-    )
+    return _render_velocity_improvement_leaderboard(request, Velocity.Position.PITCHING)
 
 
 def exit_velocity_improvement(request):
-    return _render_velocity_improvement_leaderboard(request, VelocityTypes.EXIT.value)
+    return _render_velocity_improvement_leaderboard(request, Velocity.Position.EXIT)
 
 
-def _render_velocity_improvement_leaderboard(request, velocity_name):
-    top_improvements = ls.get_velocity_improvement_leaders(velocity_name)
+def _render_velocity_improvement_leaderboard(request, velocity_position):
+    top_improvements = ls.get_velocity_improvement_leaders(velocity_position.value)
 
     context = {
-        "velocity_name": velocity_name,
+        "velocity_name": velocity_position.label,
         "top_improvements": top_improvements,
     }
 

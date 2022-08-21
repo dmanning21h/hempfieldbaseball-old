@@ -2,8 +2,7 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 
 from hempfieldbaseball.teammanagement.models import Player
-from .enums import VelocityTypes
-from .models import Pulldown, PlyoDrillVelocity
+from .models import Velocity, Pulldown, PlyoDrillVelocity
 
 
 def get_player_velocities_with_dates(request):
@@ -13,7 +12,7 @@ def get_player_velocities_with_dates(request):
     """
     player_id = request.GET.get("player_id")
     player = get_object_or_404(Player, pk=player_id)
-    all_velocities = player.velocity_records(manager="velocities_with_types").all()
+    all_velocities = player.velocity_records.all()
 
     (
         exit_velocities,
@@ -24,19 +23,19 @@ def get_player_velocities_with_dates(request):
         all_dates,
     ) = ([] for _ in range(6))
     list_map = {
-        VelocityTypes.EXIT: exit_velocities,
-        VelocityTypes.PITCHING: pitching_velocities,
-        VelocityTypes.OUTFIELD: outfield_velocities,
-        VelocityTypes.INFIELD: infield_velocities,
-        VelocityTypes.CATCHER: catcher_velocities,
+        Velocity.Position.EXIT.value: exit_velocities,
+        Velocity.Position.PITCHING.value: pitching_velocities,
+        Velocity.Position.OUTFIELD.value: outfield_velocities,
+        Velocity.Position.INFIELD.value: infield_velocities,
+        Velocity.Position.CATCHING.value: catcher_velocities,
     }
 
     for velocity in all_velocities:
-        ttype = velocity.ttype.name
+        position = velocity.position
         date = velocity.date.strftime("%m/%d/%y")
         velo = velocity.velocity
 
-        list_map[ttype].append((date, velo))
+        list_map[position].append((date, velo))
         all_dates.append(date)
 
     response = {

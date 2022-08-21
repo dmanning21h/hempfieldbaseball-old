@@ -23,16 +23,6 @@ urlpatterns = [
         views.misc_improvement,
         name="misc_improvement",
     ),
-    path(
-        "performance/velocity",
-        views.velocity_performance,
-        name="velocity_performance",
-    ),
-    path(
-        "performance/time",
-        views.time_performance,
-        name="time_performance",
-    ),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

@@ -3,22 +3,15 @@ from django.contrib import admin
 from .models import (
     PlyoDrillVelocity,
     Pulldown,
-    VelocityType,
     Velocity,
 )
 
 
-class VelocityTypeAdmin(admin.ModelAdmin):
-    list_display = ["name", "order"]
-
-    fields = ["name", "order"]
-
-
 class VelocityAdmin(admin.ModelAdmin):
-    list_display = ["date", "player", "ttype", "velocity"]
-    list_filter = ["player", "date", "ttype"]
+    list_display = ["date", "player", "position", "velocity"]
+    list_filter = ["player", "date", "position"]
 
-    fields = ["player", "date", "ttype", "velocity"]
+    fields = ["player", "date", "position", "velocity"]
     autocomplete_fields = ["player"]
 
 
@@ -38,8 +31,6 @@ class PlyoDrillVelocityAdmin(admin.ModelAdmin):
     autocomplete_fields = ["player"]
 
 
-admin.site.register(VelocityType, VelocityTypeAdmin)
 admin.site.register(Velocity, VelocityAdmin)
-
 admin.site.register(Pulldown, PulldownAdmin)
 admin.site.register(PlyoDrillVelocity, PlyoDrillVelocityAdmin)

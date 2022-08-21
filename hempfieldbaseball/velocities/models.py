@@ -3,11 +3,6 @@ from django.db import models
 from hempfieldbaseball.core.models import PlayerDateModel
 
 
-class VelocityWithTypeManager(models.Manager):
-    def get_queryset(self):
-        return super().get_queryset().select_related("ttype")
-
-
 class BaseVelocityModel(PlayerDateModel):
     velocity = models.PositiveSmallIntegerField()
 
@@ -15,35 +10,18 @@ class BaseVelocityModel(PlayerDateModel):
         abstract = True
 
 
-class VelocityType(models.Model):
-    velocity_type_id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=25, unique=True)
-    order = models.PositiveSmallIntegerField(default=0)
-
-    objects = models.Manager()
-
-    class Meta:
-        db_table = "VelocityType"
-        verbose_name = "Velocity Type"
-        verbose_name_plural = "Velocity Types"
-        ordering = ["order"]
-
-    def __str__(self):
-        return self.name
-
-
 class Velocity(BaseVelocityModel):
+    class Position(models.TextChoices):
+        EXIT = "E", "Exit"
+        PITCHING = "P", "Pitching"
+        OUTFIELD = "OF", "Outfield"
+        INFIELD = "IF", "Infield"
+        CATCHING = "C", "Catching"
+
     velocity_id = models.AutoField(primary_key=True)
-    ttype = models.ForeignKey(
-        "VelocityType",
-        db_column="velocity_type_id",
-        verbose_name="Velocity Type",
-        related_name="velocities",
-        on_delete=models.CASCADE,
-    )
+    position = models.CharField(max_length=2, choices=Position.choices)
 
     objects = models.Manager()
-    velocities_with_types = VelocityWithTypeManager()
 
     class Meta:
         db_table = "Velocity"
@@ -51,7 +29,7 @@ class Velocity(BaseVelocityModel):
         ordering = ["date"]
 
     def __str__(self):
-        return f"{self.player} {self.date} {self.ttype} Velocity"
+        return f"{self.player} {self.date} {self.get_position_display()} Velocity"
 
 
 class Pulldown(BaseVelocityModel):
