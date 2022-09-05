@@ -6,17 +6,26 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('velocities', '0006_auto_20220821_1719'),
+        ("velocities", "0006_auto_20220821_1719"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='velocity',
-            name='ttype',
+            model_name="velocity",
+            name="ttype",
         ),
         migrations.AlterField(
-            model_name='velocity',
-            name='position',
-            field=models.CharField(choices=[('E', 'Exit'), ('P', 'Pitching'), ('OF', 'Outfield'), ('IF', 'Infield'), ('C', 'Catching')], max_length=2),
+            model_name="velocity",
+            name="position",
+            field=models.CharField(
+                choices=[
+                    ("E", "Exit"),
+                    ("P", "Pitching"),
+                    ("OF", "Outfield"),
+                    ("IF", "Infield"),
+                    ("C", "Catching"),
+                ],
+                max_length=2,
+            ),
         ),
     ]

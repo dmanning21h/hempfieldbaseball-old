@@ -6,3 +6,4 @@ env/
 *.pyc
 assets/
 node_modules/
+.docker/
