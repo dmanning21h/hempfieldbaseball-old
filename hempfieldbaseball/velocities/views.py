@@ -2,7 +2,8 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 
 from hempfieldbaseball.teammanagement.models import Player
-from .models import Velocity, Pulldown, PlyoDrillVelocity
+
+from .models import Velocity, WeightedBallVelocity, PlyoDrillVelocity
 
 
 def get_player_velocities_with_dates(request):
@@ -61,14 +62,16 @@ def get_player_pulldowns_with_dates(request):
         [] for _ in range(6)
     )
     list_map = {
-        Pulldown.BallWeights.THREE_OUNCE: three_ounce,
-        Pulldown.BallWeights.FOUR_OUNCE: four_ounce,
-        Pulldown.BallWeights.FIVE_OUNCE: five_ounce,
-        Pulldown.BallWeights.SIX_OUNCE: six_ounce,
-        Pulldown.BallWeights.SEVEN_OUNCE: seven_ounce,
+        WeightedBallVelocity.BallWeight.THREE_OUNCE: three_ounce,
+        WeightedBallVelocity.BallWeight.FOUR_OUNCE: four_ounce,
+        WeightedBallVelocity.BallWeight.FIVE_OUNCE: five_ounce,
+        WeightedBallVelocity.BallWeight.SIX_OUNCE: six_ounce,
+        WeightedBallVelocity.BallWeight.SEVEN_OUNCE: seven_ounce,
     }
 
-    for pulldown in player.pulldown_records.all():
+    for pulldown in player.weightedballvelocity_records.filter(
+        drill=WeightedBallVelocity.Drill.PULLDOWN
+    ).all():
         weight = pulldown.ball_weight
         date = pulldown.date.strftime("%m/%d/%y")
         velo = pulldown.velocity

@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 
 from hempfieldbaseball.playerprogress.enums import TimeTypes
+from hempfieldbaseball.velocities.models import WeightedBallVelocity
 from .models import Team, Player
 
 
@@ -23,7 +24,9 @@ def player(request, player_link):
 
     has_body_weights = player.bodyweight_records.exists()
     has_velocities = player.velocity_records.exists()
-    has_pulldowns = player.pulldown_records.exists()
+    has_pulldowns = player.weightedballvelocity_records.filter(
+        drill=WeightedBallVelocity.Drill.PULLDOWN
+    ).exists()
     has_plyo_drill_velocities = player.plyodrillvelocity_records.exists()
     has_times = player.time_records.filter(
         ttype__name=TimeTypes.SIXTY_YARD_DASH

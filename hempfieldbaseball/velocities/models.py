@@ -32,8 +32,12 @@ class Velocity(BaseVelocityModel):
         return f"{self.player} {self.date} {self.get_position_display()} Velocity"
 
 
-class Pulldown(BaseVelocityModel):
-    class BallWeights(models.TextChoices):
+class WeightedBallVelocity(BaseVelocityModel):
+    class Drill(models.TextChoices):
+        MOUND = "M", ("Mound")
+        PULLDOWN = "P", ("Pulldown")
+
+    class BallWeight(models.TextChoices):
         THREE_OUNCE = "3", "3oz"
         FOUR_OUNCE = "4", "4oz"
         FIVE_OUNCE = "5", "5oz"
@@ -41,12 +45,15 @@ class Pulldown(BaseVelocityModel):
         SEVEN_OUNCE = "7", "7oz"
 
     pulldown_id = models.AutoField(primary_key=True)
-    ball_weight = models.CharField(max_length=1, choices=BallWeights.choices)
+    drill = models.CharField(max_length=1, choices=Drill.choices, default="P")
+    ball_weight = models.CharField(max_length=1, choices=BallWeight.choices)
 
     objects = models.Manager()
 
     class Meta:
-        db_table = "Pulldown"
+        db_table = "WeightedBallVelocity"
+        verbose_name = "Weighted Ball Velocity"
+        verbose_name_plural = "Weighted Ball Velocities"
         ordering = ["date"]
 
     def __str__(self):
