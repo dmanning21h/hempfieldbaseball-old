@@ -85,6 +85,7 @@
 			</div>
 		</div>
 	{% endif %}
+	
 	{% if has_velocities %}
 		<div id="velocityData" class="accordion-item">
 			<div id="velocityHeading" class="accordion-header text-center">
@@ -113,6 +114,7 @@
 			</div>
 		</div>
 	{% endif %}
+
 	{% if has_pulldowns %}
 		<div id="pulldownData" class="accordion-item">
 			<div id="pulldownHeading" class="accordion-header text-center">
@@ -135,6 +137,35 @@
 					<div id="pulldownTabContent" class="tab-content">
 						<div id="pulldownChartContainer" class="tab-pane fade show active" style="height: 50vh; width: 100%" role="tabpanel" aria-labelledby="pulldownChartTab">
 							<canvas id="pulldownChart"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	{% endif %}
+
+	{% if has_weighted_mound_velocities %}
+		<div id="weightedMoundData" class="accordion-item">
+			<div id="weightedMoundHeading" class="accordion-header text-center">
+				<button id="weightedMoundButton" class="accordion-button collapsed text-center" type="button" data-bs-toggle="collapse" data-bs-target="#weightedMoundContent" aria-expanded="false" aria-controls="weightedMoundContent">
+					<h3>
+						<span class="text-shadow-md">Weighted Mound</span>
+						<span><i class="fa fa-plus-square"></i></span>
+					</h3>
+				</button>
+			</div>
+
+			<div id="weightedMoundContent" class="accordion-collapse collapse" aria-labelledby="weightedMoundHeading" data-bs-parent="#accordion">
+				<div id="weightedMoundDataBody" class="accordion-body">
+					<ul id="weightedMoundTabs" class="nav nav-tabs justify-content-center" role="tablist">
+						<li class="nav-item" role="presentation">
+							<a id="weightedMoundChartTab" class="nav-link active" data-bs-toggle="tab" href="#weightedMoundChartContainer" role="tab" aria-controls="weightedMoundChartContainer" aria-selected="true">Graph</a>
+						</li>
+					</ul>
+					<br>
+					<div id="weightedMoundTabContent" class="tab-content">
+						<div id="weightedMoundChartContainer" class="tab-pane fade show active" style="height: 50vh; width: 100%" role="tabpanel" aria-labelledby="weightedMoundChartTab">
+							<canvas id="weightedMoundChart"></canvas>
 						</div>
 					</div>
 				</div>
@@ -188,27 +219,6 @@
 			</div>
 		</div>
 	{% endif %}
-
-	{% if has_times %}
-		<div id="timeData" class="accordion-item">
-			<div id="timeHeading" class="accordion-header text-center">
-				<button id="timeButton" class="accordion-button collapsed text-center" type="button" data-bs-toggle="collapse" data-bs-target="#timeContent" aria-expanded="false" aria-controls="timeContent">
-					<h3>
-						<span class="text-shadow-md">Times</span>
-						<span><i class="fa fa-plus-square"></i></span>
-					</h3>
-				</button>
-			</div>
-
-			<div id="timeContent" class="accordion-collapse collapse" aria-labelledby="timeHeading" data-bs-parent="#accordion">
-				<div id="timeDataBody" class="accordion-body">
-					<ul id="timeTabs" class="nav nav-tabs justify-content-center" role="tablist"></ul>
-					<br>
-					<div id="timeTabContent" class="tab-content"></div>
-				</div>
-			</div>
-		</div>
-	{% endif %}
 	</div>
 </div>
 {% endif %}
@@ -231,16 +241,14 @@
 		let bodyWeightsRequest = fetchBodyWeightDataAsync(playerId);
 		let velocitiesRequest = fetchVelocityDataAsync(playerId);
 		let pulldownsRequest = fetchPulldownDataAsync(playerId);
+		let weightedMoundVelocitiesRequest = fetchWeightedMoundVelocitiesDataAsync(playerId);
 		let plyoDrillVelocitiesRequest = fetchPlyoDrillVelocitiesDataAsync(playerId);
-		let timesRequest = fetchTimeDataAsync(playerId);
+		//let timesRequest = fetchTimeDataAsync(playerId);
 		//var liftsRequest = fetchLiftingDataAsync(playerId);
 
 		// Fetch All Data async and await together
 		$.when(bodyWeightsRequest).done(function(bodyWeightsResponse) {
 				populateBodyWeightTab(bodyWeightsResponse);
-
-				//$.when(liftsRequest).done(function (liftsResponse) {
-					//populateLiftingTab(liftsResponse);
 
 				$.when(velocitiesRequest).done(function (velocitiesResponse) {
 					populateVelocityTab(velocitiesResponse);
@@ -248,18 +256,15 @@
 					$.when(pulldownsRequest).done(function (pulldownsResponse) {
 						populatePulldownTab(pulldownsResponse);
 
-						$.when(plyoDrillVelocitiesRequest).done(function (plyoDrillVelocitiesResponse) {
-							populatePlyoDrillsTab(plyoDrillVelocitiesResponse);
-							
-							$.when(timesRequest).done(function (timesResponse) {
-								populateTimesTab(timesResponse);
-		
+						$.when(weightedMoundVelocitiesRequest).done(function (weightedMoundVelocitiesResponse) {
+							populateWeightedMoundTab(weightedMoundVelocitiesResponse);
+	
+							$.when(plyoDrillVelocitiesRequest).done(function (plyoDrillVelocitiesResponse) {
+								populatePlyoDrillsTab(plyoDrillVelocitiesResponse);
 							});
 						});
 					});
 				});
-
-				//});
 			});
 	}
 
@@ -280,6 +285,11 @@
 
 	function fetchPulldownDataAsync(playerId) {
 		url = "{% url 'velocities:get_player_pulldowns_with_dates' %}";
+		return fetchDataWithDatesAsync(url, playerId);
+	}
+
+	function fetchWeightedMoundVelocitiesDataAsync(playerId) {
+		url = "{% url 'velocities:get_player_weighted_mound_velocities_with_dates' %}";
 		return fetchDataWithDatesAsync(url, playerId);
 	}
 

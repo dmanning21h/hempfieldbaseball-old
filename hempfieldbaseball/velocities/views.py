@@ -51,6 +51,18 @@ def get_player_velocities_with_dates(request):
 
 
 def get_player_pulldowns_with_dates(request):
+    return get_player_weighted_ball_velocities_with_dates(
+        request, WeightedBallVelocity.Drill.PULLDOWN
+    )
+
+
+def get_player_weighted_mound_velocities_with_dates(request):
+    return get_player_weighted_ball_velocities_with_dates(
+        request, WeightedBallVelocity.Drill.MOUND
+    )
+
+
+def get_player_weighted_ball_velocities_with_dates(request, weighted_ball_drill):
     """
     Returns all pulldowns (date, velocity) of each type for a given player.
     Also returns a list of all dates for velocities for use with Chart.js.
@@ -70,7 +82,7 @@ def get_player_pulldowns_with_dates(request):
     }
 
     for pulldown in player.weightedballvelocity_records.filter(
-        drill=WeightedBallVelocity.Drill.PULLDOWN
+        drill=weighted_ball_drill
     ).all():
         weight = pulldown.ball_weight
         date = pulldown.date.strftime("%m/%d/%y")

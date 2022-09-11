@@ -18,6 +18,11 @@ urlpatterns = [
         name="get_player_pulldowns_with_dates",
     ),
     path(
+        "ajax/get-player-weighted-mound-velocities-with-dates",
+        views.get_player_weighted_mound_velocities_with_dates,
+        name="get_player_weighted_mound_velocities_with_dates",
+    ),
+    path(
         "ajax/get-player-plyo-drill-velocities-with-dates",
         views.get_player_plyo_drill_velocities_with_dates,
         name="get_player_plyo_drill_velocities_with_dates",

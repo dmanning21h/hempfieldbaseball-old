@@ -1,6 +1,5 @@
 from django.shortcuts import render, get_object_or_404
 
-from hempfieldbaseball.playerprogress.enums import TimeTypes
 from hempfieldbaseball.velocities.models import WeightedBallVelocity
 from .models import Team, Player
 
@@ -27,11 +26,14 @@ def player(request, player_link):
     has_pulldowns = player.weightedballvelocity_records.filter(
         drill=WeightedBallVelocity.Drill.PULLDOWN
     ).exists()
-    has_plyo_drill_velocities = player.plyodrillvelocity_records.exists()
-    has_times = player.time_records.filter(
-        ttype__name=TimeTypes.SIXTY_YARD_DASH
+    has_weighted_mound_velocities = player.weightedballvelocity_records.filter(
+        drill=WeightedBallVelocity.Drill.MOUND
     ).exists()
-    has_data = has_body_weights or has_velocities or has_times
+    has_plyo_drill_velocities = player.plyodrillvelocity_records.exists()
+    # has_times = player.time_records.filter(
+    #    ttype__name=TimeTypes.SIXTY_YARD_DASH
+    # ).exists()
+    has_data = has_body_weights or has_velocities
 
     context = {
         "player": player,
@@ -39,8 +41,9 @@ def player(request, player_link):
         "has_body_weights": has_body_weights,
         "has_velocities": has_velocities,
         "has_pulldowns": has_pulldowns,
+        "has_weighted_mound_velocities": has_weighted_mound_velocities,
         "has_plyo_drill_velocities": has_plyo_drill_velocities,
-        "has_times": has_times,
+        # "has_times": has_times,
         "has_data": has_data,
     }
 

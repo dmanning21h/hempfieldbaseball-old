@@ -78,19 +78,27 @@ function populateVelocityTab(dataResponse) {
   }
 }
 
+function populateWeightedMoundTab(dataResponse) {
+  populateWeightedBallVelocityTab(dataResponse, "weightedMound", "Mound Velocity");
+}
+
 function populatePulldownTab(dataResponse) {
-  var pulldownSectionData = getPulldownSectionData();
+  populateWeightedBallVelocityTab(dataResponse, "pulldown", "Pulldown");
+}
 
-  pulldownSectionData.dataToDisplay.threeOunce.data = dataResponse.three;
-  pulldownSectionData.dataToDisplay.fourOunce.data = dataResponse.four;
-  pulldownSectionData.dataToDisplay.fiveOunce.data = dataResponse.five;
-  pulldownSectionData.dataToDisplay.sixOunce.data = dataResponse.six;
-  pulldownSectionData.dataToDisplay.sevenOunce.data = dataResponse.seven;
-  pulldownSectionData.allDates = dataResponse.allDates;
+function populateWeightedBallVelocityTab(dataResponse, lowerName, upperName) {
+  let sectionData = getWeightedBallVelocitySectionData(lowerName, upperName);
 
-  if (pulldownSectionData.allDates.length > 0) {
-    generateChart(pulldownSectionData);
-    generateTables(pulldownSectionData);
+  sectionData.dataToDisplay[`${lowerName}ThreeOunce`].data = dataResponse.three;
+  sectionData.dataToDisplay[`${lowerName}FourOunce`].data = dataResponse.four;
+  sectionData.dataToDisplay[`${lowerName}FiveOunce`].data = dataResponse.five;
+  sectionData.dataToDisplay[`${lowerName}SixOunce`].data = dataResponse.six;
+  sectionData.dataToDisplay[`${lowerName}SevenOunce`].data = dataResponse.seven;
+  sectionData.allDates = dataResponse.allDates;
+
+  if (sectionData.allDates.length > 0) {
+    generateChart(sectionData);
+    generateTables(sectionData);
   }
 }
 
@@ -158,17 +166,17 @@ function getVelocitySectionData() {
   return createMetricSectionDataObject(velocityMeta);
 }
 
-function getPulldownSectionData() {
-  const threeMeta = createMetricTypeMetaDataObject("lightskyblue", "threeOunce", "3oz", "3oz");
-  const fourMeta = createMetricTypeMetaDataObject("royalblue", "fourOunce", "4oz", "4oz");
-  const fiveMeta = createMetricTypeMetaDataObject("black", "fiveOunce", "5oz", "5oz");
-  const sixMeta = createMetricTypeMetaDataObject("orange", "sixOunce", "6oz", "6oz");
-  const sevenMeta = createMetricTypeMetaDataObject("red", "sevenOunce", "7oz", "7oz");
+function getWeightedBallVelocitySectionData(lowerName, upperName) {
+  const threeMeta = createMetricTypeMetaDataObject("lightskyblue", `${lowerName}ThreeOunce`, "3oz", "3oz");
+  const fourMeta = createMetricTypeMetaDataObject("royalblue", `${lowerName}FourOunce`, "4oz", "4oz");
+  const fiveMeta = createMetricTypeMetaDataObject("black", `${lowerName}FiveOunce`, "5oz", "5oz");
+  const sixMeta = createMetricTypeMetaDataObject("orange", `${lowerName}SixOunce`, "6oz", "6oz");
+  const sevenMeta = createMetricTypeMetaDataObject("red", `${lowerName}SevenOunce`, "7oz", "7oz");
 
-  const pulldownTypeMetas = [threeMeta, fourMeta, fiveMeta, sixMeta, sevenMeta];
-  const pulldownMeta = createMetricMetaDataObject("pulldown", "Pulldown", "MPH", true, pulldownTypeMetas);
+  const weightedBallVelocityTypeMetas = [threeMeta, fourMeta, fiveMeta, sixMeta, sevenMeta];
+  const weightedBallVelocityMeta = createMetricMetaDataObject(lowerName, upperName, "MPH", true, weightedBallVelocityTypeMetas);
 
-  return createMetricSectionDataObject(pulldownMeta);
+  return createMetricSectionDataObject(weightedBallVelocityMeta);
 }
 
 function getPlyoDrillSectionData(htmlName, graphTitle) {
