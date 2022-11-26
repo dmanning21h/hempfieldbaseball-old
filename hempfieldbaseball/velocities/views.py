@@ -64,7 +64,7 @@ def get_player_weighted_mound_velocities_with_dates(request):
 
 def get_player_weighted_ball_velocities_with_dates(request, weighted_ball_drill):
     """
-    Returns all pulldowns (date, velocity) of each type for a given player.
+    Returns all weighted ball velocities (date, velocity) of each weight for a given player.
     Also returns a list of all dates for velocities for use with Chart.js.
     """
     player_id = request.GET.get("player_id")
